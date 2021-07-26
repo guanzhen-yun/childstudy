@@ -1,17 +1,17 @@
 package com.inke.childstudy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.inke.childstudy.routers.RouterConstants;
+import com.ziroom.base.BaseActivity;
 
 /**
  * 主页面
  */
-public class MainActivity extends AppCompatActivity {
+@Route(path = RouterConstants.App.Main)
+public class MainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
 }
