@@ -1,6 +1,9 @@
 package com.inke.childstudy;
 
+import com.inke.childstudy.routers.RouterConstants;
+import com.inke.childstudy.utils.BmobUtils;
 import com.ziroom.base.BaseActivity;
+import com.ziroom.base.RouterUtils;
 
 /**
  * 启动页
@@ -13,6 +16,10 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-//        RouterUtils.jumpWithFinish(this, RouterConstants.App.Main);
+        if(BmobUtils.getInstance().getCurrentLoginChild() != null) {
+            RouterUtils.jumpWithFinish(this, RouterConstants.App.Home);
+        } else {
+            RouterUtils.jumpWithFinish(this, RouterConstants.App.Main);
+        }
     }
 }

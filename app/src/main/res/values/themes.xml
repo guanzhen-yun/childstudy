@@ -11,5 +11,9 @@
 <!--        <item name="android:windowFullscreen">true</item>-->
     </style>
 
+    <style name="Splash" parent="Theme.ChildStudy">
+        <item name="android:windowBackground">@mipmap/splash</item>
+    </style>
+
 
 </resources>

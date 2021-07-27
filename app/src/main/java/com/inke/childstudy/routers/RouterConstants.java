@@ -9,5 +9,8 @@ public interface RouterConstants {
     interface App {
         String Root = "/app/";
         String Main = Root + "main";
+        String Regist = Root + "regist";
+        String Login = Root + "login";
+        String Home = Root + "home";
     }
 }

@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:name=".App"
         android:theme="@style/Theme.ChildStudy">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity" android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,6 +30,10 @@
         </activity>
 
         <activity android:name=".MainActivity"/>
+
+        <activity android:name=".regist.RegistActivity"/>
+        <activity android:name=".home.HomeActivity" />
+        <activity android:name=".login.LoginActivity" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
