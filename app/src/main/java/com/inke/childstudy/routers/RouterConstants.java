@@ -12,5 +12,7 @@ public interface RouterConstants {
         String Regist = Root + "regist";
         String Login = Root + "login";
         String Home = Root + "home";
+        String Set = Root + "set";
+        String UserInfo = Root + "userinfo";
     }
 }

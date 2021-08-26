@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:name=".App"
         android:theme="@style/Theme.ChildStudy">
-        <activity android:name=".SplashActivity" android:theme="@style/Splash">
+        <activity android:name=".SplashActivity" android:theme="@style/Splash" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,11 +29,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
 
-        <activity android:name=".regist.RegistActivity"/>
-        <activity android:name=".home.HomeActivity" />
-        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".regist.RegistActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".home.HomeActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".login.LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".set.SetActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".userinfo.UserInfoActivity" android:screenOrientation="portrait"/>
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 public class SharedPrefUtils {
     private static final String SPFILE = "sp-file";
     private static final String SP_ISFIRSTLOGIN = "sp-firstlogin";
+    private static final String LOGIN_TOKEN = "login-token";
     private SharedPreferences mSharedPreferences;
 
     private SharedPrefUtils(){}
@@ -42,6 +43,20 @@ public class SharedPrefUtils {
      */
     public boolean isFirstLogin() {
         return mSharedPreferences.getBoolean(SP_ISFIRSTLOGIN, true);
+    }
+
+    /**
+     * 保存登录Token ObjectId
+     */
+    public void saveLoginToken(String tokenId) {
+        mSharedPreferences.edit().putString(LOGIN_TOKEN, tokenId).apply();
+    }
+
+    /**
+     * 获取TokenId
+     */
+    public String getLoginToken() {
+        return mSharedPreferences.getString(LOGIN_TOKEN, "");
     }
 
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_num"
+        android:text="0"
+        android:textColor="@color/black"
+        android:layout_centerInParent="true"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        />
+
+    <com.inke.childstudy.view.numview.NumberParentView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/num_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tv_add"
+        android:text="增加"
+        android:textColor="@color/black"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/tv_minus"
+        android:text="减少"
+        android:textColor="#999999"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tv_auto_add"
+        android:text="自动增加"
+        android:layout_above="@+id/tv_add"
+        android:textColor="@color/black"
+        android:padding="20dp"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/tv_auto_minus"
+        android:text="自动减少"
+        android:layout_above="@+id/tv_minus"
+        android:textColor="#999999"
+        android:padding="20dp"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        />
+
+</RelativeLayout>
