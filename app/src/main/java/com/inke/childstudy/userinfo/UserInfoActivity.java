@@ -6,7 +6,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
 import com.inke.childstudy.routers.RouterConstants;
 import com.ziroom.base.BaseActivity;
-import com.ziroom.base.RouterUtils;
 
 import butterknife.OnClick;
 
