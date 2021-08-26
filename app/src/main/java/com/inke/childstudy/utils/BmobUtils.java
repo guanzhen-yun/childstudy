@@ -13,6 +13,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -92,6 +93,22 @@ public class BmobUtils<T extends BmobObject> {
                 }
             });
         }
+    }
+
+    /**
+     * 更新数据
+     */
+    public void updateBmobDate(String objectId, BmobObject bmobObject, OnBmobListener onBmobListener) {
+        bmobObject.update(objectId, new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e == null) {
+                    onBmobListener.onSuccess("");
+                } else {
+                    onBmobListener.onError(e.getMessage());
+                }
+            }
+        });
     }
 
     /**

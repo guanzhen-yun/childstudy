@@ -59,4 +59,12 @@ public class SharedPrefUtils {
         return mSharedPreferences.getString(LOGIN_TOKEN, "");
     }
 
+    public void saveString(String key, String value) {
+        mSharedPreferences.edit().putString(key, value).apply();
+    }
+
+    public String getString(String key) {
+        return mSharedPreferences.getString(key, "");
+    }
+
 }

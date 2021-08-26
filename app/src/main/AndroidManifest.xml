@@ -14,6 +14,10 @@
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera2"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -41,6 +45,16 @@
             android:name="cn.bmob.v3.util.BmobContentProvider"
             android:authorities="com.inke.childstudy.BmobContentProvider">
         </provider>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.inke.childstudy.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths"/>
+    </provider>
 
     </application>
 
