@@ -3,6 +3,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/guanzhen/AndroidStudioProjects/ChildStudy/child.jks')
+            storePassword '123456'
+            keyAlias 'childstudy'
+            keyPassword '123456'
+        }
+        debug {
+            storeFile file('/Users/guanzhen/AndroidStudioProjects/ChildStudy/child.jks')
+            storePassword '123456'
+            keyAlias 'childstudy'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -25,26 +39,12 @@ android {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
-
-        signingConfigs {
-            debug {
-                storeFile file('../child.jks')//签名文件路径
-                storePassword "123456"
-                keyAlias "childstudy"
-                keyPassword "123456"  //签名密码
-            }
-            release {
-                storeFile file('../child.jks')//签名文件路径
-                storePassword "123456"
-                keyAlias "childstudy"
-                keyPassword "123456"  //签名密码
-            }
-        }
     }
 
     buildTypes {
         debug {
             debuggable = true
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->
@@ -59,7 +59,10 @@ android {
             }
         }
         release {
-            minifyEnabled false
+            zipAlignEnabled true     //Zipalign优化
+            shrinkResources true    // 移除无用的resource文件
+            minifyEnabled true     //混淆
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

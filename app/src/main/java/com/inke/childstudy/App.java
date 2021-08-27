@@ -1,16 +1,13 @@
 package com.inke.childstudy;
 
 import android.app.Application;
-import android.util.DebugUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
 import com.ziroom.net.LogUtils;
-import com.ziroom.net.RetrofitManager;
 
 import cn.bmob.v3.Bmob;
-import leakcanary.LeakCanary;
 
 public class App extends Application {
     @Override
