@@ -1,7 +1,11 @@
 package com.inke.childstudy.home;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,6 +19,7 @@ import com.inke.childstudy.entity.Child;
 import com.inke.childstudy.entity.event.FinishHomeEvent;
 import com.inke.childstudy.routers.RouterConstants;
 import com.inke.childstudy.utils.BmobUtils;
+import com.inke.childstudy.utils.ToastUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 import com.ziroom.base.StatusBarUtil;
@@ -55,6 +60,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     public void initViews() {
         StatusBarUtil.setStatusFrontColorDark(this);
+//        ToastUtils.showToast(getMetaDataValue("channel"));
         if (BmobUtils.getInstance().getCurrentLoginChild() != null) {
             Child child = BmobUtils.getInstance().getCurrentLoginChild();
             tvNickname.setText("你好" + child.getNickname() + "小朋友");
@@ -62,6 +68,21 @@ public class HomeActivity extends BaseActivity {
         mStudyNumFragment = StudyNumFragment.getInstance();
         mFragmentTransaction = getSupportFragmentManager().beginTransaction();
         mFragmentTransaction.add(R.id.fl_body, mStudyNumFragment).show(mStudyNumFragment).commitAllowingStateLoss();
+    }
+
+    public String getMetaDataValue(String metaDataName) {
+        PackageManager pm = getPackageManager();
+        ApplicationInfo appinfo;
+        String metaDataValue = "";
+        try {
+            appinfo = pm.getApplicationInfo(getPackageName(),PackageManager.GET_META_DATA);
+            Bundle metaData = appinfo.metaData;
+            metaDataValue = metaData.getString(metaDataName);
+            return metaDataValue;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return metaDataValue;
     }
 
     @OnClick({R.id.tv_studynum, R.id.tv_studypic, R.id.tv_set})

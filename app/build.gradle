@@ -25,6 +25,21 @@ android {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
+
+        signingConfigs {
+            debug {
+                storeFile file('../child.jks')//签名文件路径
+                storePassword "123456"
+                keyAlias "childstudy"
+                keyPassword "123456"  //签名密码
+            }
+            release {
+                storeFile file('../child.jks')//签名文件路径
+                storePassword "123456"
+                keyAlias "childstudy"
+                keyPassword "123456"  //签名密码
+            }
+        }
     }
 
     buildTypes {
@@ -48,12 +63,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "version"
+
+    productFlavors{
+        qa{
+            manifestPlaceholders = [APP_CHANNEL_VALUE:"qa"]
+        }
+        xiaomi{
+            manifestPlaceholders = [APP_CHANNEL_VALUE:"xiaomi"]
+        }
+        baidu{
+            manifestPlaceholders = [APP_CHANNEL_VALUE:"baidu"]
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-
 }
 
 dependencies {
