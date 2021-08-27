@@ -9,7 +9,7 @@ import cn.bmob.v3.BmobObject;
  */
 public class UserInfo extends BmobObject {
     private String token;
-    private Bitmap bitmap;
+    private String headPath;
 
     public String getSex() {
         return sex;
@@ -39,11 +39,11 @@ public class UserInfo extends BmobObject {
         this.token = token;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public String getHeadPath() {
+        return headPath;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setHeadPath(String headPath) {
+        this.headPath = headPath;
     }
 }

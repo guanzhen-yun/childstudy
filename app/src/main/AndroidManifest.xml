@@ -24,6 +24,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:name=".App"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.ChildStudy">
         <activity android:name=".SplashActivity" android:theme="@style/Splash" android:screenOrientation="portrait">
             <intent-filter>
@@ -40,6 +41,7 @@
         <activity android:name=".login.LoginActivity" android:screenOrientation="portrait"/>
         <activity android:name=".set.SetActivity" android:screenOrientation="portrait"/>
         <activity android:name=".userinfo.UserInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".userinfo.BigHeadActivity" android:screenOrientation="portrait"/>
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"

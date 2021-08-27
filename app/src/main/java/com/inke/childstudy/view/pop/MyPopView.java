@@ -3,7 +3,6 @@ package com.inke.childstudy.view.pop;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import androidx.core.content.FileProvider;
 
 import com.inke.childstudy.R;
-import com.inke.childstudy.userinfo.UserInfoActivity.Type;
 import com.inke.childstudy.utils.ScreenUtils;
 
 import java.io.File;
@@ -29,7 +27,6 @@ import java.util.Date;
 
 public class MyPopView extends PopupWindow implements View.OnClickListener {
     public Context mContext;
-    private Type type;
 
     public Activity mActivity;
 
@@ -66,6 +63,7 @@ public class MyPopView extends PopupWindow implements View.OnClickListener {
         this.setTouchable(true);
         this.setFocusable(true);
         this.setOutsideTouchable(true);
+        this.setClippingEnabled(false);
 
         this.update();
         // 设置SelectPicPopupWindow弹出窗体动画效果
@@ -105,10 +103,8 @@ public class MyPopView extends PopupWindow implements View.OnClickListener {
                         mActivity.startActivityForResult(takePhotoIntent, 1);//打开相机
                     }
                 }
-                type = Type.CAMERA;
                 if (listener != null) {
-                    listener.getType(type);
-                    listener.getImgUri(ImgUri, file);
+                    listener.getImgUri(file);
                 }
                 this.dismiss();
                 break;
@@ -116,10 +112,6 @@ public class MyPopView extends PopupWindow implements View.OnClickListener {
                 Intent intent2 = new Intent("android.intent.action.PICK");
                 intent2.setType("image/*");
                 mActivity.startActivityForResult(intent2, 2);
-                type = Type.PHONE;
-                if (listener != null) {
-                    listener.getType(type);
-                }
                 this.dismiss();
                 break;
             case R.id.photo_cancel:
@@ -143,50 +135,8 @@ public class MyPopView extends PopupWindow implements View.OnClickListener {
         return imageFile;
     }
 
-    public void onPhoto(Uri uri, int outputX, int outputY) {
-        Intent intent = null;
-
-        intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", outputX);
-        intent.putExtra("outputY", outputY);
-        intent.putExtra("scale", true);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        intent.putExtra("return-data", true);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        intent.putExtra("noFaceDetection", true); // no face detection
-        mActivity.startActivityForResult(intent, 3);
-    }
-
-    public void onPhotoNew(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //添加这一句表示对目标应用临时授权该Uri所代表的文件
-        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION); //添加这一句表示对目标应用临时授权该Uri所代表的文件
-        intent.putExtra("scale", true);
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        //输出的宽高
-        intent.putExtra("outputX", 300);
-        intent.putExtra("outputY", 300);
-//7.0之后 data 限制大小为1M  所以不能为true 7.0 之前还是以前的方式获取 数据
-        intent.putExtra("return-data", false);
-        // 此处的URI必须和 原来的URI 一致 不能为新的URI  否则 系统提示 图片无效 或者 无效连接
-        // 只需要和数据源URI 一致即可
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        intent.putExtra("noFaceDetection", true); // no face detection
-        mActivity.startActivityForResult(intent, 3);//这里的RESULT_REQUEST_CODE是在startActivityForResult里使用的返回值。
-    }
-
     public interface onGetTypeClckListener {
-        void getType(Type type);
-
-        void getImgUri(Uri ImgUri, File file);
+        void getImgUri(File file);
     }
 
     private onGetTypeClckListener listener;

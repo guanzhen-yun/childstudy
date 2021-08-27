@@ -14,5 +14,6 @@ public interface RouterConstants {
         String Home = Root + "home";
         String Set = Root + "set";
         String UserInfo = Root + "userinfo";
+        String BigHead = Root + "bighead";
     }
 }

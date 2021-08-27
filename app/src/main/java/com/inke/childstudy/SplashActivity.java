@@ -1,5 +1,6 @@
 package com.inke.childstudy;
 
+import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.text.TextUtils;
@@ -25,16 +26,17 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void initViews() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{"android.permission.CAMERA"}, 100);
+            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, "android.permission.CAMERA"};
+            this.requestPermissions(permissions, 100);
         } else {
             jump();
         }
     }
 
     private void jump() {
-        if(TextUtils.isEmpty(SharedPrefUtils.getInstance().getLoginToken())) {
+        if (TextUtils.isEmpty(SharedPrefUtils.getInstance().getLoginToken())) {
             RouterUtils.jumpWithFinish(this, RouterConstants.App.Main);
-        } else if(BmobUtils.getInstance().getCurrentLoginChild() != null) {
+        } else if (BmobUtils.getInstance().getCurrentLoginChild() != null) {
             RouterUtils.jumpWithFinish(this, RouterConstants.App.Home);
         } else {
             RouterUtils.jumpWithFinish(this, RouterConstants.App.Main);
@@ -44,7 +46,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             jump();
         } else {
             ToastUtils.showToast("请开启拍照权限");

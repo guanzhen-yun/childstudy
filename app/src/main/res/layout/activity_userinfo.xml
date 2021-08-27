@@ -77,4 +77,11 @@
         android:layout_below="@id/tv_photo"
         />
 
+    <TextView
+        android:id="@+id/tv_sex"
+        android:text="性别"
+        style="@style/style_set"
+        android:layout_below="@id/view_head"
+        />
+
 </RelativeLayout>
