@@ -11,22 +11,30 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.inke.childstudy.R;
+import com.inke.childstudy.adapter.SexAdapter;
 import com.inke.childstudy.entity.UserInfo;
 import com.inke.childstudy.routers.RouterConstants;
 import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
+import com.inke.childstudy.view.dialog.BottomDialog;
 import com.inke.childstudy.view.pop.MyPopView;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,14 +55,37 @@ public class UserInfoActivity extends BaseActivity {
 
     @BindView(R.id.iv_head)
     ImageView mIvHead;
+    @BindView(R.id.tv_addphoto)
+    TextView mTAddphoto;
+    @BindView(R.id.tv_nickname)
+    TextView mTvNickname;
+    @BindView(R.id.rv_sex)
+    RecyclerView mRvSex;
 
     private String mObjectId;
     private UserInfo mUserInfo;
     private String mPath;
+    private SexAdapter mSexAdapter;
+    private String mSelectSex;
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_userinfo;
+    }
+
+    @Override
+    public void initViews() {
+        List<String> sexList = new ArrayList<>();
+        sexList.add("男");
+        sexList.add("女");
+        mSexAdapter = new SexAdapter(sexList);
+        mSexAdapter.setOnItemClickListener((adapter, view, position) -> {
+            String s = sexList.get(position);
+            if(!s.equals(mSelectSex)) {
+                changeSex(s);
+            }
+        });
+        mRvSex.setAdapter(mSexAdapter);
     }
 
     @Override
@@ -72,6 +103,7 @@ public class UserInfoActivity extends BaseActivity {
                         mUserInfo.setToken(loginToken);
                         mUserInfo.setHeadPath("");
                         mUserInfo.setSex("");
+                        mUserInfo.setNick("");
                         BmobUtils.getInstance().addData(mUserInfo, new BmobUtils.OnBmobListener() {
                             @Override
                             public void onSuccess(String objectId) {
@@ -90,10 +122,24 @@ public class UserInfoActivity extends BaseActivity {
                     mUserInfo = list.get(0);
                     mObjectId = mUserInfo.getObjectId();
                     String head = mUserInfo.getHeadPath();
-                    mPath = head;
-                    Bitmap bitmap = BitmapFactory.decodeFile(head);
-                    if (bitmap != null) {
-                        mIvHead.setImageBitmap(bitmap);
+                    if(!TextUtils.isEmpty(head)) {
+                        mTAddphoto.setText("修改头像");
+                        mPath = head;
+                        mIvHead.setVisibility(View.VISIBLE);
+                        Bitmap bitmap = BitmapFactory.decodeFile(head);
+                        if (bitmap != null) {
+                            mIvHead.setImageBitmap(bitmap);
+                        }
+                    } else {
+                        mIvHead.setVisibility(View.GONE);
+                    }
+                    mSelectSex = mUserInfo.getSex();
+                    if(!TextUtils.isEmpty(mSelectSex)) {
+                        mSexAdapter.setSelectSex(mSelectSex);
+                        mSexAdapter.notifyDataSetChanged();
+                    }
+                    if(!TextUtils.isEmpty(mUserInfo.getNick())) {
+                        mTvNickname.setText(mUserInfo.getNick());
                     }
                 } else {
                     mIvHead.setVisibility(View.GONE);
@@ -101,6 +147,7 @@ public class UserInfoActivity extends BaseActivity {
                     mUserInfo.setToken(loginToken);
                     mUserInfo.setHeadPath("");
                     mUserInfo.setSex("");
+                    mUserInfo.setNick("");
                     BmobUtils.getInstance().addData(mUserInfo, new BmobUtils.OnBmobListener() {
                         @Override
                         public void onSuccess(String objectId) {
@@ -117,7 +164,7 @@ public class UserInfoActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tv_addphoto, R.id.iv_head})
+    @OnClick({R.id.tv_addphoto, R.id.iv_head, R.id.tv_nickname})
     public void onClickView(View v) {
         switch (v.getId()) {
             case R.id.tv_addphoto:
@@ -128,9 +175,23 @@ public class UserInfoActivity extends BaseActivity {
                 bundle.putString("imagePath", mPath);
                 RouterUtils.jump(RouterConstants.App.BigHead, bundle);
                 break;
+            case R.id.tv_nickname:
+                setNickName();
+                break;
             default:
                 break;
         }
+    }
+
+    private void setNickName() {
+        BottomDialog bottomDialog = new BottomDialog(this);
+        bottomDialog.setOnChangeListener(new BottomDialog.OnChangeListener() {
+            @Override
+            public void onChange(String nick) {
+                changeNick(nick);
+            }
+        });
+        bottomDialog.show();
     }
 
     private void addPhoto() {
@@ -229,6 +290,40 @@ public class UserInfoActivity extends BaseActivity {
             @Override
             public void onSuccess(String objectId) {
                 displayImage(headPath);
+            }
+
+            @Override
+            public void onError(String err) {
+                ToastUtils.showToast(err + "修改失败");
+            }
+        });
+    }
+
+    private void changeSex(String sex) {
+        mUserInfo.setSex(sex);
+        mSelectSex = sex;
+        BmobUtils.getInstance().updateBmobDate(mObjectId, mUserInfo, new BmobUtils.OnBmobListener() {
+
+            @Override
+            public void onSuccess(String objectId) {
+                mSexAdapter.setSelectSex(sex);
+                mSexAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String err) {
+                ToastUtils.showToast(err + "修改失败");
+            }
+        });
+    }
+
+    private void changeNick(String nick) {
+        mUserInfo.setNick(nick);
+        BmobUtils.getInstance().updateBmobDate(mObjectId, mUserInfo, new BmobUtils.OnBmobListener() {
+
+            @Override
+            public void onSuccess(String objectId) {
+                mTvNickname.setText(nick);
             }
 
             @Override

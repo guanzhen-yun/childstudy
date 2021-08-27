@@ -10,6 +10,7 @@ import cn.bmob.v3.BmobObject;
 public class UserInfo extends BmobObject {
     private String token;
     private String headPath;
+    private String nick;
 
     public String getSex() {
         return sex;
@@ -45,5 +46,13 @@ public class UserInfo extends BmobObject {
 
     public void setHeadPath(String headPath) {
         this.headPath = headPath;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 }

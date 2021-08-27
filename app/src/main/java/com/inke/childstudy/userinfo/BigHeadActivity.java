@@ -33,6 +33,7 @@ public class BigHeadActivity extends BaseActivity {
     @Override
     public void initViews() {
         displayImage(imagePath);
+
     }
 
     private void displayImage(String imagePath) {

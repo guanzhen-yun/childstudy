@@ -10,6 +10,7 @@ import com.ziroom.net.LogUtils;
 import com.ziroom.net.RetrofitManager;
 
 import cn.bmob.v3.Bmob;
+import leakcanary.LeakCanary;
 
 public class App extends Application {
     @Override

@@ -1,9 +1,12 @@
 package com.inke.childstudy.home;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -18,6 +21,8 @@ import com.ziroom.base.StatusBarUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -104,5 +109,21 @@ public class HomeActivity extends BaseActivity {
     @Override
     public boolean registEventBus() {
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        ActivityCompat.finishAfterTransition(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFragmentTransaction = getSupportFragmentManager().beginTransaction();
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment fragment : fragments) {
+            mFragmentTransaction.remove(fragment).commitAllowingStateLoss();
+        }
+        mFragmentTransaction.commitAllowingStateLoss();
     }
 }
