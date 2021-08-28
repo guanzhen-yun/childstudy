@@ -99,5 +99,7 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
-    implementation 'me.samlss:broccoli:1.0.0'
+    implementation 'me.samlss:broccoli:1.0.0' //骨架屏
+    //wheelView
+    implementation 'com.contrarywind:wheelview:4.1.0'
 }

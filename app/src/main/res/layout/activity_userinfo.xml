@@ -125,5 +125,29 @@
         android:layout_below="@id/tv_sex"
         android:background="@color/black" />
 
+    <TextView
+        android:id="@+id/tv_age"
+        style="@style/style_set"
+        android:layout_below="@id/view_sex"
+        android:text="年龄" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_age_value"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/view_sex"
+        android:gravity="right"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textColorHint="#999999"
+        android:padding="20dp"
+        android:hint="请选择年龄"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_age"
+        android:background="@color/black" />
 </RelativeLayout>

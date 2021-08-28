@@ -30,6 +30,7 @@ import com.inke.childstudy.routers.RouterConstants;
 import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
+import com.inke.childstudy.view.dialog.BottomAgeDialog;
 import com.inke.childstudy.view.dialog.BottomDialog;
 import com.inke.childstudy.view.pop.MyPopView;
 import com.ziroom.base.BaseActivity;
@@ -64,6 +65,8 @@ public class UserInfoActivity extends BaseActivity {
     TextView mTAddphoto;
     @BindView(R.id.tv_nickname)
     TextView mTvNickname;
+    @BindView(R.id.tv_age_value)
+    TextView mTvAgeValue;
     @BindView(R.id.rv_sex)
     RecyclerView mRvSex;
 
@@ -180,7 +183,7 @@ public class UserInfoActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tv_addphoto, R.id.iv_head, R.id.tv_nickname})
+    @OnClick({R.id.tv_addphoto, R.id.iv_head, R.id.tv_nickname, R.id.tv_age_value})
     public void onClickView(View v) {
         switch (v.getId()) {
             case R.id.tv_addphoto:
@@ -193,6 +196,17 @@ public class UserInfoActivity extends BaseActivity {
                 break;
             case R.id.tv_nickname:
                 setNickName();
+                break;
+            case R.id.tv_age_value:
+                BottomAgeDialog dialog = new BottomAgeDialog(UserInfoActivity.this);
+                dialog.setOnSelectListener(new BottomAgeDialog.OnSelectListener() {
+                    @Override
+                    public void onSelect(String age) {
+                        if(!TextUtils.isEmpty(age)) {
+                            changeAge(age);
+                        }
+                    }
+                });
                 break;
             default:
                 break;
@@ -342,6 +356,22 @@ public class UserInfoActivity extends BaseActivity {
             @Override
             public void onSuccess(String objectId) {
                 mTvNickname.setText(nick);
+            }
+
+            @Override
+            public void onError(String err) {
+                ToastUtils.showToast(err + "修改失败");
+            }
+        });
+    }
+
+    private void changeAge(String age) {
+        mUserInfo.setAge(Integer.parseInt(age.replace("岁", "")));
+        BmobUtils.getInstance().updateBmobDate(mObjectId, mUserInfo, new BmobUtils.OnBmobListener() {
+
+            @Override
+            public void onSuccess(String objectId) {
+                mTvAgeValue.setText(age);
             }
 
             @Override
