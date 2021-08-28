@@ -207,6 +207,7 @@ public class UserInfoActivity extends BaseActivity {
                         }
                     }
                 });
+                dialog.show();
                 break;
             default:
                 break;
