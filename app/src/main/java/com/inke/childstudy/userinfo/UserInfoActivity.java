@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +44,9 @@ import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import me.samlss.broccoli.Broccoli;
+import me.samlss.broccoli.BroccoliGradientDrawable;
+import me.samlss.broccoli.PlaceholderParameter;
 
 /**
  * 个人信息页
@@ -67,6 +72,7 @@ public class UserInfoActivity extends BaseActivity {
     private String mPath;
     private SexAdapter mSexAdapter;
     private String mSelectSex;
+    private Broccoli broccoli;
 
     @Override
     public int getLayoutId() {
@@ -75,6 +81,11 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        broccoli = new Broccoli();
+        broccoli.addPlaceholders(new PlaceholderParameter.Builder().setView(mTvNickname).setDrawable(new BroccoliGradientDrawable(Color.parseColor("#ffffff"),
+                Color.parseColor("#ffffff"), 0, 1000, new LinearInterpolator())
+                ).build());
+        broccoli.show();
         List<String> sexList = new ArrayList<>();
         sexList.add("男");
         sexList.add("女");
@@ -108,11 +119,13 @@ public class UserInfoActivity extends BaseActivity {
                             @Override
                             public void onSuccess(String objectId) {
                                 mObjectId = objectId;
+                                broccoli.clearAllPlaceholders();
                             }
 
                             @Override
                             public void onError(String err) {
                                 ToastUtils.showToast(err);
+                                broccoli.clearAllPlaceholders();
                             }
                         });
                     } else {
@@ -141,6 +154,7 @@ public class UserInfoActivity extends BaseActivity {
                     if(!TextUtils.isEmpty(mUserInfo.getNick())) {
                         mTvNickname.setText(mUserInfo.getNick());
                     }
+                    broccoli.clearAllPlaceholders();
                 } else {
                     mIvHead.setVisibility(View.GONE);
                     mUserInfo = new UserInfo();
@@ -152,11 +166,13 @@ public class UserInfoActivity extends BaseActivity {
                         @Override
                         public void onSuccess(String objectId) {
                             mObjectId = objectId;
+                            broccoli.clearAllPlaceholders();
                         }
 
                         @Override
                         public void onError(String err) {
                             ToastUtils.showToast(err);
+                            broccoli.clearAllPlaceholders();
                         }
                     });
                 }
@@ -209,16 +225,18 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            changeHeadPhoto(file.getPath());
-        } else if (requestCode == 2) {
-            if (data != null) {
-                if (Build.VERSION.SDK_INT >= 19) {
-                    // 4.4及以上系统使用这个方法处理图片
-                    handleImageOnKitKat(data);
-                } else {
-                    // 4.4以下系统使用这个方法处理图片
-                    handleImageBeforeKitKat(data);
+        if(resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                changeHeadPhoto(file.getPath());
+            } else if (requestCode == 2) {
+                if (data != null) {
+                    if (Build.VERSION.SDK_INT >= 19) {
+                        // 4.4及以上系统使用这个方法处理图片
+                        handleImageOnKitKat(data);
+                    } else {
+                        // 4.4以下系统使用这个方法处理图片
+                        handleImageBeforeKitKat(data);
+                    }
                 }
             }
         }
@@ -331,5 +349,11 @@ public class UserInfoActivity extends BaseActivity {
                 ToastUtils.showToast(err + "修改失败");
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        broccoli.removeAllPlaceholders();
     }
 }
