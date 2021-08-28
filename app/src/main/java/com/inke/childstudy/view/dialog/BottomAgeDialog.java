@@ -42,6 +42,7 @@ public class BottomAgeDialog extends Dialog implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_age_dialog);
         wheelview = findViewById(R.id.wheelview);
+        wheelview.setCyclic(false);
         findViewById(R.id.tv_cancel).setOnClickListener(this);
         findViewById(R.id.tv_ok).setOnClickListener(this);
         initDatas();

@@ -157,6 +157,9 @@ public class UserInfoActivity extends BaseActivity {
                     if(!TextUtils.isEmpty(mUserInfo.getNick())) {
                         mTvNickname.setText(mUserInfo.getNick());
                     }
+                    if(mUserInfo.getAge() != 0) {
+                        mTvAgeValue.setText(mUserInfo.getAge() + "岁");
+                    }
                     broccoli.clearAllPlaceholders();
                 } else {
                     mIvHead.setVisibility(View.GONE);
