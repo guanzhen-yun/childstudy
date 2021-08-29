@@ -122,7 +122,7 @@ public class StudyColorActivity extends BaseActivity {
         });
     }
 
-    public interface OnExistListener {
+    private interface OnExistListener {
         void isExist(boolean isExist);
     }
 

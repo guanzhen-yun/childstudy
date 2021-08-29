@@ -26,9 +26,23 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:padding="20dp"
-            android:text="学习单词"
+            tools:text="认识动物"
+            android:id="@+id/tv_title"
             android:textColor="@color/black"
             android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加"
+            android:layout_alignParentRight="true"
+            android:padding="20dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:id="@+id/tv_insert"
+            android:visibility="gone"
+            />
 
     </RelativeLayout>
 
@@ -41,12 +55,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_word"
+        android:id="@+id/rv_object"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:itemCount="4"
         android:orientation="vertical"
         app:spanCount="2"
-        tools:listitem="@layout/item_word"
+        tools:listitem="@layout/item_object"
         />
 
 </LinearLayout>

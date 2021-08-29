@@ -17,5 +17,7 @@ public interface RouterConstants {
         String BigHead = Root + "bighead";
         String StudyColor = Root + "studycolor";
         String StudyWord = Root + "studyword";
+        String StudyObject = Root + "studyobject";
+        String BigPic = Root + "bigpic";
     }
 }

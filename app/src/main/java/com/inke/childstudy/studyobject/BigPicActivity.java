@@ -1,13 +1,10 @@
-package com.inke.childstudy.userinfo;
+package com.inke.childstudy.studyobject;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
+import com.inke.childstudy.GlideApp;
 import com.inke.childstudy.R;
 import com.inke.childstudy.routers.RouterConstants;
 import com.ziroom.base.BaseActivity;
@@ -18,8 +15,8 @@ import butterknife.OnClick;
 /**
  * 查看大图页
  */
-@Route(path = RouterConstants.App.BigHead)
-public class BigHeadActivity extends BaseActivity {
+@Route(path = RouterConstants.App.BigPic)
+public class BigPicActivity extends BaseActivity {
     @BindView(R.id.iv_pic)
     ImageView mIvPic;
 
@@ -37,12 +34,7 @@ public class BigHeadActivity extends BaseActivity {
     }
 
     private void displayImage(String imagePath) {
-        if (imagePath != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            mIvPic.setImageBitmap(bitmap);
-        } else {
-            Toast.makeText(this, "获取相册图片失败", Toast.LENGTH_SHORT).show();
-        }
+        GlideApp.with(BigPicActivity.this).load(imagePath).into(mIvPic);
     }
 
     @OnClick(R.id.iv_pic)

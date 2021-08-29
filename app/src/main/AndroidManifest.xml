@@ -44,6 +44,8 @@
         <activity android:name=".userinfo.BigHeadActivity" android:screenOrientation="portrait"/>
         <activity android:name=".studycolor.StudyColorActivity" android:screenOrientation="portrait"/>
         <activity android:name=".word.StudyWordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".studyobject.StudyObjectActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".studyobject.BigPicActivity" android:screenOrientation="portrait"/>
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
