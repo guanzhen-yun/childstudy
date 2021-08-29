@@ -133,6 +133,7 @@ public class StudyObjectActivity extends BaseActivity {
                     studyObject.setToken(loginToken);
                     studyObject.setObjName(objectName);
                     studyObject.setObjUrl(objectUrl);
+                    studyObject.setType(type);
                     studyObject.setObjWord(objectWord);
                     BmobUtils.getInstance().addData(studyObject, new BmobUtils.OnBmobListener() {
                         @Override
