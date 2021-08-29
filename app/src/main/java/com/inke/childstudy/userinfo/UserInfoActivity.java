@@ -86,7 +86,7 @@ public class UserInfoActivity extends BaseActivity {
     public void initViews() {
         broccoli = new Broccoli();
         broccoli.addPlaceholders(new PlaceholderParameter.Builder().setView(mTvNickname).setDrawable(new BroccoliGradientDrawable(Color.parseColor("#ffffff"),
-                Color.parseColor("#ffffff"), 0, 1000, new LinearInterpolator())
+                Color.parseColor("#ffffff"), 0, 2000, new LinearInterpolator())
                 ).build());
         broccoli.show();
         List<String> sexList = new ArrayList<>();

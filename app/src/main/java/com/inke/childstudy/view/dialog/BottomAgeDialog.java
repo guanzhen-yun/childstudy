@@ -23,6 +23,7 @@ public class BottomAgeDialog extends Dialog implements View.OnClickListener {
     private OnSelectListener onSelectListener;
     private WheelView wheelview;
     private String mSelectAge;
+    private List<String> ageItems;
 
     public BottomAgeDialog(@NonNull Context context) {
         super(context, R.style.BottomDialogStyle);
@@ -49,7 +50,7 @@ public class BottomAgeDialog extends Dialog implements View.OnClickListener {
     }
 
     private void initDatas() {
-        List<String> ageItems = new ArrayList<>();
+        ageItems = new ArrayList<>();
         for (int i = 2; i < 101; i++) {
             ageItems.add(i + "岁");
         }
@@ -73,6 +74,9 @@ public class BottomAgeDialog extends Dialog implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.tv_ok:
+                if(TextUtils.isEmpty(mSelectAge)) {
+                    mSelectAge = ageItems.get(0);
+                }
                 if (!TextUtils.isEmpty(mSelectAge) && onSelectListener != null) {
                     onSelectListener.onSelect(mSelectAge);
                 }

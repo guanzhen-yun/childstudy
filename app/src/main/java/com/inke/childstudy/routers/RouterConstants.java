@@ -15,5 +15,7 @@ public interface RouterConstants {
         String Set = Root + "set";
         String UserInfo = Root + "userinfo";
         String BigHead = Root + "bighead";
+        String StudyColor = Root + "studycolor";
+        String StudyWord = Root + "studyword";
     }
 }

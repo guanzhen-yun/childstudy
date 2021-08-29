@@ -28,7 +28,6 @@ public class UserInfo extends BmobObject {
         this.age = age;
     }
 
-    private String headPhoto;//头像
     private String sex;
     private int age;
 
