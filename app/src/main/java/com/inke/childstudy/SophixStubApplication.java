@@ -42,7 +42,7 @@ public class SophixStubApplication extends SophixApplication {
         final SophixManager instance = SophixManager.getInstance();
         instance.setContext(this)
                 .setAppVersion(appVersion)
-                .setSecretMetaData(null, null, null)
+                .setSecretMetaData("null", null, null)
                 .setEnableDebug(true)
                 .setEnableFullLog()
                 .setPatchLoadStatusStub(new PatchLoadStatusListener() {
