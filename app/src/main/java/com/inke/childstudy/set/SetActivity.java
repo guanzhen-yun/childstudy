@@ -51,7 +51,7 @@ public class SetActivity extends BaseActivity {
             case R.id.tv_change:
                 isChange = !isChange;
                 if(isChange) {//该状态为修改
-                    mTvChange.setText("切换查看");
+                    mTvChange.setText("切换查看1");
                 } else {//该状态为查看
                     mTvChange.setText("切换修改");
                 }
@@ -73,6 +73,7 @@ public class SetActivity extends BaseActivity {
             case R.id.tv_fruit:
                 jumpObject(StudyObjectActivity.TYPE_FRUIT);
                 break;
+
             default:
                 break;
         }
