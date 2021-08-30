@@ -111,7 +111,7 @@ public class UserInfoActivity extends BaseActivity {
             @Override
             public void done(List<UserInfo> list, BmobException e) {
                 if (e != null) {
-                    if (e.getErrorCode() == 101) {
+                    if (e.getErrorCode() == 101 && !TextUtils.isEmpty(loginToken)) {
                         mIvHead.setVisibility(View.GONE);
                         mUserInfo = new UserInfo();
                         mUserInfo.setToken(loginToken);
@@ -161,7 +161,7 @@ public class UserInfoActivity extends BaseActivity {
                         mTvAgeValue.setText(mUserInfo.getAge() + "岁");
                     }
                     broccoli.clearAllPlaceholders();
-                } else {
+                } else if(!TextUtils.isEmpty(loginToken)){
                     mIvHead.setVisibility(View.GONE);
                     mUserInfo = new UserInfo();
                     mUserInfo.setToken(loginToken);

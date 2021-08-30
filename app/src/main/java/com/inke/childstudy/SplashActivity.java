@@ -16,8 +16,10 @@ import androidx.annotation.NonNull;
 
 import com.inke.childstudy.routers.RouterConstants;
 import com.inke.childstudy.utils.BmobUtils;
+import com.inke.childstudy.utils.NotificationUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
+import com.inke.childstudy.view.dialog.BottomTwoButtonDialog;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 
@@ -35,6 +37,7 @@ public class SplashActivity extends BaseActivity {
 
     private ValueAnimator mAnim;
     private AnimatorSet animSet;
+    private boolean isFirst = true;
 
     @Override
     public int getLayoutId() {
@@ -51,13 +54,33 @@ public class SplashActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isFirst) {
+            jump();
+        }
+    }
+
     private void jump() {
-        if (TextUtils.isEmpty(SharedPrefUtils.getInstance().getLoginToken())) {
-            toMain();
-        } else if (BmobUtils.getInstance().getCurrentLoginChild() != null) {
-            toHome();
+        if (NotificationUtils.isNotificationEnabled(this)) {
+            if (TextUtils.isEmpty(SharedPrefUtils.getInstance().getLoginToken())) {
+                toMain();
+            } else if (BmobUtils.getInstance().getCurrentLoginChild() != null) {
+                toHome();
+            } else {
+                toMain();
+            }
         } else {
-            toMain();
+            BottomTwoButtonDialog dialog = new BottomTwoButtonDialog(this);
+            dialog.setOnOpenListener(new BottomTwoButtonDialog.OnOpenListener() {
+                @Override
+                public void onOpen() {
+                    isFirst = false;
+                    NotificationUtils.toSetting(SplashActivity.this);
+                }
+            });
+            dialog.show();
         }
     }
 
@@ -75,15 +98,15 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //倒计时3秒进入主页面
-                if(mTvJump != null) {
+                if (mTvJump != null) {
                     mTvJump.setVisibility(View.VISIBLE);
                     mTvJump.setText("跳过(3)");
                     mAnim = ValueAnimator.ofFloat(3f, 0f);
                     mAnim.setDuration(3000);
                     mAnim.addUpdateListener(animation1 -> {
-                        if(mTvJump != null) {
+                        if (mTvJump != null) {
                             float currentValue = (Float) animation1.getAnimatedValue();
-                            if(currentValue < 1) {
+                            if (currentValue < 1) {
                                 jumpHome();
                             } else {
                                 mTvJump.setText("跳过(" + Math.round(currentValue) + ")");
@@ -105,18 +128,18 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(animSet != null && animSet.isRunning()) {
+        if (animSet != null && animSet.isRunning()) {
             animSet.cancel();
             animSet = null;
         }
-        if(mAnim != null && mAnim.isRunning()) {
+        if (mAnim != null && mAnim.isRunning()) {
             mAnim.cancel();
             mAnim = null;
         }
     }
 
     private void jumpHome() {
-        if(mAnim != null && mAnim.isRunning()) {
+        if (mAnim != null && mAnim.isRunning()) {
             mAnim.cancel();
             mAnim = null;
         }
@@ -125,7 +148,7 @@ public class SplashActivity extends BaseActivity {
 
     @OnClick(R.id.tv_jump)
     public void clickView(View v) {
-        if(v.getId() == R.id.tv_jump) {
+        if (v.getId() == R.id.tv_jump) {
             jumpHome();
         }
     }

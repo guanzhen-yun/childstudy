@@ -9,6 +9,7 @@ import com.taobao.sophix.SophixManager;
 import com.ziroom.net.LogUtils;
 
 import cn.bmob.v3.Bmob;
+import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
     @Override
@@ -22,5 +23,8 @@ public class App extends Application {
         // queryAndLoadNewPatch为拉取控制台补丁
         //不可放在attachBaseContext 中，否则无网络权限，建议放在主进程任意时刻，如Application的onCreate中
         SophixManager.getInstance().queryAndLoadNewPatch();
+
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 }

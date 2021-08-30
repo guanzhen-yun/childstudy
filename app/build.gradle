@@ -35,6 +35,21 @@ android {
 //            abiFilters 'arm64-v8a', 'armeabi', 'armeabi-v7a', 'x86', 'x86_64'
 //        }
 
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "2e953bb3a1655832ae4e22cd", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                MEIZU_APPKEY : "MZ-魅族的APPKEY",
+                MEIZU_APPID : "MZ-魅族的APPID",
+                XIAOMI_APPID : "MI-小米的APPID",
+                XIAOMI_APPKEY : "MI-小米的APPKEY",
+                OPPO_APPKEY : "OP-oppo的APPKEY",
+                OPPO_APPID : "OP-oppo的APPID",
+                OPPO_APPSECRET : "OP-oppo的APPSECRET",
+                VIVO_APPKEY : "vivo的APPKEY",
+                VIVO_APPID : "vivo的APPID"
+        ]
+
         javaCompileOptions {
             annotationProcessorOptions {
                 //注解处理器需要的模块名，作为路径映射的前缀
@@ -109,4 +124,21 @@ dependencies {
     implementation 'me.samlss:broccoli:1.0.0' //骨架屏
     //wheelView
     implementation 'com.contrarywind:wheelview:4.1.0'
+
+    implementation 'cn.jiguang.sdk:jcore:2.7.2'  // 此处以JCore 2.7.2 版本为例。
+    implementation 'cn.jiguang.sdk:jpush:4.0.0'  // 此处以JPush 4.0.0 版本为例
+//    // 接入华为厂商
+//    implementation 'com.huawei.hms:push:4.0.2.300'
+//    implementation 'cn.jiguang.sdk.plugin:huawei:4.0.0'// 极光厂商插件版本与接入 JPush 版本保持一致，下同
+//    // 接入 FCM 厂商
+//    implementation 'com.google.firebase:firebase-messaging:21.0.1'
+//    implementation 'cn.jiguang.sdk.plugin:fcm:4.0.0'
+//    // 接入魅族厂商
+//    implementation 'cn.jiguang.sdk.plugin:meizu:4.0.0'
+//    // 接入 VIVO 厂商
+//    implementation 'cn.jiguang.sdk.plugin:vivo:4.0.0'
+//    // 接入 OPPO 厂商
+//    implementation 'cn.jiguang.sdk.plugin:oppo:4.0.0'
+//    // 接入小米厂商
+//    implementation 'cn.jiguang.sdk.plugin:xiaomi:4.0.0'
 }
