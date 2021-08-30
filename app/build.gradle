@@ -109,6 +109,4 @@ dependencies {
     implementation 'me.samlss:broccoli:1.0.0' //骨架屏
     //wheelView
     implementation 'com.contrarywind:wheelview:4.1.0'
-    //热更新
-//    implementation 'com.aliyun.ams:alicloud-android-hotfix:3.3.0'
 }
