@@ -3,6 +3,8 @@ package com.inke.childstudy;
 import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.inke.childstudy.entity.Child;
+import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
 import com.netease.nimlib.sdk.NIMClient;
@@ -45,6 +47,10 @@ public class App extends Application {
 
     // 如果提供，将同时进行自动登录。如果当前还没有登录用户，请传入null。详见自动登录章节。
     private LoginInfo loginInfo() {
+        Child currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
+        if (currentLoginChild != null) {
+            return new LoginInfo(currentLoginChild.getUsername(), "123456");
+        }
         return null;
     }
 

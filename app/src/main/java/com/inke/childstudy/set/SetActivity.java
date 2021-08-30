@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
+import com.inke.childstudy.entity.Child;
 import com.inke.childstudy.entity.event.FinishHomeEvent;
 import com.inke.childstudy.routers.RouterConstants;
 import com.inke.childstudy.studyobject.StudyObjectActivity;
@@ -29,6 +30,8 @@ import butterknife.OnClick;
 public class SetActivity extends BaseActivity {
     @BindView(R.id.tv_change)
     TextView mTvChange;
+    @BindView(R.id.tv_im)
+    TextView mTvIm;
 
     private boolean isChange;
 
@@ -37,8 +40,17 @@ public class SetActivity extends BaseActivity {
         return R.layout.activity_set;
     }
 
+    @Override
+    public void initViews() {
+        Child currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
+        String myAccount = currentLoginChild.getUsername();
+        if (!myAccount.equals("15711175963")) {
+            mTvIm.setText("和淼淼聊天");
+        }
+    }
+
     @OnClick({R.id.tv_loginout, R.id.tv_back, R.id.tv_changeinfo, R.id.tv_change, R.id.tv_color, R.id.tv_word,
-    R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit, R.id.tv_im})
+            R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit, R.id.tv_im})
     public void onClickView(View v) {
         switch (v.getId()) {
             case R.id.tv_loginout:
@@ -52,7 +64,7 @@ public class SetActivity extends BaseActivity {
                 break;
             case R.id.tv_change:
                 isChange = !isChange;
-                if(isChange) {//该状态为修改
+                if (isChange) {//该状态为修改
                     mTvChange.setText("切换查看");
                 } else {//该状态为查看
                     mTvChange.setText("切换修改");
