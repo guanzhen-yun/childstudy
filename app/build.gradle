@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.aliyun.ams.emas-services'
 }
 
 android {
@@ -24,9 +25,15 @@ android {
         applicationId "com.inke.childstudy"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         multiDexEnabled true
+
+//        ndk {
+//            //选择要添加的对应cpu类型的.so库。
+//            //热修复支持五种
+//            abiFilters 'arm64-v8a', 'armeabi', 'armeabi-v7a', 'x86', 'x86_64'
+//        }
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -102,4 +109,6 @@ dependencies {
     implementation 'me.samlss:broccoli:1.0.0' //骨架屏
     //wheelView
     implementation 'com.contrarywind:wheelview:4.1.0'
+    //热更新
+//    implementation 'com.aliyun.ams:alicloud-android-hotfix:3.3.0'
 }
