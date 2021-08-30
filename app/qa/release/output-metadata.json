@@ -5,13 +5,13 @@
     "kind": "Directory"
   },
   "applicationId": "com.inke.childstudy",
-  "variantName": "processQaDebugResources",
+  "variantName": "processQaReleaseResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "versionCode": 2,
-      "versionName": "1.0.1",
+      "versionName": "1.1",
       "outputFile": "childstudy.apk"
     }
   ]
