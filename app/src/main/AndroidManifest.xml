@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--获取wifi网络状态的信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!--获取sd卡写的权限，用于文件上传和下载-->
@@ -14,12 +15,22 @@
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 <!--    &lt;!&ndash; 外部存储读权限，调试工具从SD卡加载本地补丁需要。&ndash;&gt;-->
-<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 8.0+系统需要-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-feature android:name="android.hardware.camera2" />
+    <!-- 下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
+    <permission
+        android:name="com.netease.nim.demo.permission.RECEIVE_MSG"
+        android:protectionLevel="signature"/>
 
+    <uses-permission android:name="com.netease.nim.demo.permission.RECEIVE_MSG"/>
     <application
         android:name=".SophixStubApplication"
         android:allowBackup="true"
@@ -73,10 +84,13 @@
         <activity
             android:name=".studyobject.BigPicActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".im.ChatActivity"
+            android:screenOrientation="portrait"
+            />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.inke.childstudy.BmobContentProvider"></provider>
+            android:authorities="com.inke.childstudy.BmobContentProvider"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -125,6 +139,59 @@
                 <category android:name="com.inke.childstudy" />
             </intent-filter>
         </receiver>
+
+        <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
+            如果 SDKOptions 中提供了，则取 SDKOptions 中的值。 -->
+        <meta-data
+            android:name="com.netease.nim.appKey"
+            android:value="f4481d270285a25163d1933600fe70b3" />
+
+        <!-- 云信后台服务，请使用独立进程。 -->
+        <service
+            android:name="com.netease.nimlib.service.NimService"
+            android:process=":core"/>
+
+        <!-- 云信后台辅助服务 -->
+        <service
+            android:name="com.netease.nimlib.service.NimService$Aux"
+            android:process=":core"/>
+
+        <!-- 云信后台辅助服务 -->
+        <service
+            android:name="com.netease.nimlib.job.NIMJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":core"/>
+
+        <!-- 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 -->
+        <receiver android:name="com.netease.nimlib.service.NimReceiver"
+            android:process=":core"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- 云信进程间通信 Receiver -->
+        <receiver android:name="com.netease.nimlib.service.ResponseReceiver"/>
+
+        <!-- 云信进程间通信service -->
+        <service android:name="com.netease.nimlib.service.ResponseService"/>
+
+        <!-- 云信进程间通信provider -->
+        <provider
+            android:name="com.netease.nimlib.ipc.NIMContentProvider"
+            android:authorities="com.inke.childstudy.ipc.provider"
+            android:exported="false"
+            android:process=":core" />
+
+        <!-- 云信内部使用的进程间通信provider -->
+        <!-- SDK启动时会强制检测该组件的声明是否配置正确，如果检测到该声明不正确，SDK会主动抛出异常引发崩溃 -->
+        <provider
+            android:name="com.netease.nimlib.ipc.cp.provider.PreferenceContentProvider"
+            android:authorities="com.inke.childstudy.ipc.provider.preference"
+            android:exported="false" />
     </application>
 
 </manifest>

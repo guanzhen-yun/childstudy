@@ -145,6 +145,5 @@ public class HomeActivity extends BaseActivity {
         for (Fragment fragment : fragments) {
             mFragmentTransaction.remove(fragment).commitAllowingStateLoss();
         }
-        mFragmentTransaction.commitAllowingStateLoss();
     }
 }

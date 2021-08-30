@@ -23,7 +23,7 @@ android {
 
     defaultConfig {
         applicationId "com.inke.childstudy"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 2
         versionName "1.0.1"
@@ -141,4 +141,7 @@ dependencies {
 //    implementation 'cn.jiguang.sdk.plugin:oppo:4.0.0'
 //    // 接入小米厂商
 //    implementation 'cn.jiguang.sdk.plugin:xiaomi:4.0.0'
+
+    // 基础功能 (必需)
+    implementation 'com.netease.nimlib:basesdk:8.7.0'
 }

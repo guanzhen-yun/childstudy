@@ -128,7 +128,21 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
+                android:id="@+id/view_fruit"
                 android:layout_below="@id/tv_fruit"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_im"
+                android:layout_below="@id/view_fruit"
+                android:text="和妈妈聊天"
+                style="@style/style_set"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/tv_im"
                 android:background="@color/black" />
         </RelativeLayout>
     </ScrollView>

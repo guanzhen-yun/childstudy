@@ -10,6 +10,7 @@ public class SharedPrefUtils {
     private static final String SPFILE = "sp-file";
     private static final String SP_ISFIRSTLOGIN = "sp-firstlogin";
     private static final String LOGIN_TOKEN = "login-token";
+    private static final String IM_TOKEN = "im-token";
     private SharedPreferences mSharedPreferences;
 
     private SharedPrefUtils(){}
@@ -57,6 +58,20 @@ public class SharedPrefUtils {
      */
     public String getLoginToken() {
         return mSharedPreferences.getString(LOGIN_TOKEN, "");
+    }
+
+    /**
+     * 保存ImToken
+     */
+    public void saveImToken(String token) {
+        mSharedPreferences.edit().putString(IM_TOKEN, token).apply();
+    }
+
+    /**
+     * 获取ImToken
+     */
+    public String getImToken() {
+        return mSharedPreferences.getString(IM_TOKEN, "");
     }
 
     public void saveString(String key, String value) {

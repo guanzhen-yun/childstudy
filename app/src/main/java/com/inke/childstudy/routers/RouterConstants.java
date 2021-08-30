@@ -19,5 +19,6 @@ public interface RouterConstants {
         String StudyWord = Root + "studyword";
         String StudyObject = Root + "studyobject";
         String BigPic = Root + "bigpic";
+        String Chat = Root + "chat";
     }
 }

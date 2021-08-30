@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.sdk.android.tbrest.utils.LogUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import com.inke.childstudy.R;
 import com.inke.childstudy.entity.Child;
@@ -15,6 +16,10 @@ import com.inke.childstudy.set.SetActivity;
 import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 import com.ziroom.base.StatusBarUtil;
@@ -130,9 +135,7 @@ public class LoginActivity extends BaseActivity {
         BmobUtils.getInstance().updateLoginState(true, new BmobUtils.OnBmobListener() {
             @Override
             public void onSuccess(String oId) {
-                ToastUtils.showToast("登录成功");
-                EventBus.getDefault().post(new FinishMainEvent());
-                RouterUtils.jumpWithFinish(LoginActivity.this, RouterConstants.App.Home);
+                loginIm();
             }
 
             @Override
@@ -140,5 +143,34 @@ public class LoginActivity extends BaseActivity {
                 ToastUtils.showToast("登录失败" + err);
             }
         });
+    }
+
+    private void loginIm() {
+        LoginInfo info = new LoginInfo(etUsername.getText().toString(), "123456");
+        RequestCallback<LoginInfo> callback =
+                new RequestCallback<LoginInfo>() {
+                    @Override
+                    public void onSuccess(LoginInfo param) {
+                        ToastUtils.showToast("登录成功");
+                        SharedPrefUtils.getInstance().saveImToken(param.getToken());
+                        EventBus.getDefault().post(new FinishMainEvent());
+                        RouterUtils.jumpWithFinish(LoginActivity.this, RouterConstants.App.Home);
+                    }
+
+                    @Override
+                    public void onFailed(int code) {
+                        if (code == 302) {
+                            ToastUtils.showToast("账号密码错误");
+                        } else {
+                            ToastUtils.showToast("登录失败");
+                        }
+                    }
+
+                    @Override
+                    public void onException(Throwable exception) {
+                        ToastUtils.showToast(exception.getMessage());
+                    }
+                };
+        NIMClient.getService(AuthService.class).login(info).setCallback(callback);
     }
 }

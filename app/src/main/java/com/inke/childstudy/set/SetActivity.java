@@ -12,6 +12,8 @@ import com.inke.childstudy.studyobject.StudyObjectActivity;
 import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 
@@ -36,7 +38,7 @@ public class SetActivity extends BaseActivity {
     }
 
     @OnClick({R.id.tv_loginout, R.id.tv_back, R.id.tv_changeinfo, R.id.tv_change, R.id.tv_color, R.id.tv_word,
-    R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit})
+    R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit, R.id.tv_im})
     public void onClickView(View v) {
         switch (v.getId()) {
             case R.id.tv_loginout:
@@ -73,7 +75,9 @@ public class SetActivity extends BaseActivity {
             case R.id.tv_fruit:
                 jumpObject(StudyObjectActivity.TYPE_FRUIT);
                 break;
-
+            case R.id.tv_im:
+                RouterUtils.jump(RouterConstants.App.Chat);
+                break;
             default:
                 break;
         }
@@ -90,6 +94,7 @@ public class SetActivity extends BaseActivity {
         BmobUtils.getInstance().updateLoginState(false, new BmobUtils.OnBmobListener() {
             @Override
             public void onSuccess(String objectId) {
+                NIMClient.getService(AuthService.class).logout();
                 SharedPrefUtils.getInstance().saveLoginToken("");
                 EventBus.getDefault().post(new FinishHomeEvent());
                 RouterUtils.jumpWithFinish(SetActivity.this, RouterConstants.App.Main);
