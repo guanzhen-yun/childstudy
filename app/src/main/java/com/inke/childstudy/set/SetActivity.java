@@ -15,6 +15,7 @@ import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.auth.AuthService;
+import com.umeng.analytics.MobclickAgent;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 
@@ -106,6 +107,7 @@ public class SetActivity extends BaseActivity {
         BmobUtils.getInstance().updateLoginState(false, new BmobUtils.OnBmobListener() {
             @Override
             public void onSuccess(String objectId) {
+                MobclickAgent.onProfileSignOff();
                 NIMClient.getService(AuthService.class).logout();
                 SharedPrefUtils.getInstance().saveLoginToken("");
                 EventBus.getDefault().post(new FinishHomeEvent());

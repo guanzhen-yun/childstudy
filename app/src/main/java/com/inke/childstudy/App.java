@@ -1,6 +1,9 @@
 package com.inke.childstudy;
 
 import android.app.Application;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.inke.childstudy.entity.Child;
@@ -12,15 +15,19 @@ import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.taobao.sophix.SophixManager;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 import com.ziroom.net.LogUtils;
 
 import cn.bmob.v3.Bmob;
 import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
+    private App mApp;
     @Override
     public void onCreate() {
         super.onCreate();
+        mApp = this;
         ARouter.init(this);
         ToastUtils.init(this);
         Bmob.initialize(this, "2b7ef1eda2b02905fa9334a15b60492a");
@@ -30,7 +37,7 @@ public class App extends Application {
         //不可放在attachBaseContext 中，否则无网络权限，建议放在主进程任意时刻，如Application的onCreate中
         SophixManager.getInstance().queryAndLoadNewPatch();
 
-        JPushInterface.setDebugMode(true);
+        JPushInterface.setDebugMode(LogUtils.debug);
         JPushInterface.init(this);
 
         // SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将进行自动登录）。不能对初始化语句添加进程判断逻辑。
@@ -43,6 +50,34 @@ public class App extends Application {
             // 2、相关Service调用
         }
 
+        //设置LOG开关，默认为false
+        UMConfigure.setLogEnabled(LogUtils.debug);
+
+        UMConfigure.preInit(this, "612cc46a4bede245d9f06944", getMetaDataValue("channel"));
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                UMConfigure.init(mApp, "612cc46a4bede245d9f06944", getMetaDataValue("channel"), UMConfigure.DEVICE_TYPE_PHONE, "");
+                // 选用AUTO页面采集模式
+                MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
+            }
+        }).start();
+    }
+
+    private String getMetaDataValue(String metaDataName) {
+        PackageManager pm = getPackageManager();
+        ApplicationInfo appinfo;
+        String metaDataValue = "";
+        try {
+            appinfo = pm.getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+            Bundle metaData = appinfo.metaData;
+            metaDataValue = metaData.getString(metaDataName);
+            return metaDataValue;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return metaDataValue;
     }
 
     // 如果提供，将同时进行自动登录。如果当前还没有登录用户，请传入null。详见自动登录章节。

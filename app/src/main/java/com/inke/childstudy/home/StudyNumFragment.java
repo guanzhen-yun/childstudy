@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.inke.childstudy.R;
 import com.inke.childstudy.view.numview.NumberParentView;
+import com.umeng.analytics.MobclickAgent;
 import com.ziroom.base.BaseFragment;
 
 import butterknife.BindView;
@@ -52,6 +53,18 @@ public class StudyNumFragment extends BaseFragment {
     public void initViews(View mView) {
         super.initViews(mView);
         mNumParent.init();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("StudyNum"); //统计页面
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("StudyNum");
     }
 
     @OnClick({R.id.tv_add, R.id.tv_minus, R.id.tv_auto_add, R.id.tv_auto_minus})

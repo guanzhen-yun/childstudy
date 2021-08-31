@@ -107,6 +107,13 @@ android {
     }
 }
 
+repositories {
+    flatDir{
+        dirs 'libs'
+    }
+}
+
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.3.0'
@@ -144,4 +151,8 @@ dependencies {
 
     // 基础功能 (必需)
     implementation 'com.netease.nimlib:basesdk:8.7.0'
+
+    // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
+    implementation "com.umeng.umsdk:common:9.4.2" //（必选）
+    implementation "com.umeng.umsdk:asms:1.4.1" // asms包依赖(必选)
 }

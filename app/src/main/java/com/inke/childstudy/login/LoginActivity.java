@@ -20,6 +20,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.umeng.analytics.MobclickAgent;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 import com.ziroom.base.StatusBarUtil;
@@ -152,6 +153,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onSuccess(LoginInfo param) {
                         ToastUtils.showToast("登录成功");
+                        MobclickAgent.onProfileSignIn(param.getAccount());
                         SharedPrefUtils.getInstance().saveImToken(param.getToken());
                         EventBus.getDefault().post(new FinishMainEvent());
                         RouterUtils.jumpWithFinish(LoginActivity.this, RouterConstants.App.Home);

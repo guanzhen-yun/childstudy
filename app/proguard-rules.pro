@@ -243,3 +243,14 @@
 
 #如果你开启数据库功能，需要加入
 -keep class net.sqlcipher.** {*;}
+
+-keep class com.umeng.** {*;}
+
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
