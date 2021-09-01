@@ -65,6 +65,7 @@ android {
 
     buildTypes {
         debug {
+            zipAlignEnabled true     //Zipalign优化
             debuggable = true
             signingConfig signingConfigs.debug
             minifyEnabled false
@@ -86,6 +87,16 @@ android {
             minifyEnabled true     //混淆
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "childstudy.apk"
+                        outputFileName = fileName
+                    }
+
+                }
+            }
         }
     }
     flavorDimensions "version"
@@ -155,4 +166,6 @@ dependencies {
     // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
     implementation "com.umeng.umsdk:common:9.4.2" //（必选）
     implementation "com.umeng.umsdk:asms:1.4.1" // asms包依赖(必选)
+
+    implementation(name: 'BaiduLBS_AndroidSDK_Lib', ext: 'aar')
 }

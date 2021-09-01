@@ -17,6 +17,8 @@ import com.inke.childstudy.adapter.ChatAdapter;
 import com.inke.childstudy.entity.Child;
 import com.inke.childstudy.routers.RouterConstants;
 import com.inke.childstudy.utils.BmobUtils;
+import com.inke.childstudy.utils.SharedPrefUtils;
+import com.inke.childstudy.utils.SoftInputUtils;
 import com.inke.childstudy.utils.ToastUtils;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
@@ -31,6 +33,7 @@ import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.ziroom.base.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,10 +47,10 @@ public class ChatActivity extends BaseActivity {
     @BindView(R.id.et_msg)
     EditText mEtMsg;
 
-    private String myAccount;
     private String otherAccount;
     private ChatAdapter chatAdapter;
     private List<IMMessage> mChatList = new ArrayList<>();
+    private Observer<List<IMMessage>> mIncomingMessageObserver;
 
     @Override
     public int getLayoutId() {
@@ -56,6 +59,7 @@ public class ChatActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        boolean isMother = SharedPrefUtils.getInstance().isMother();
         WindowManager mWindow = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         View titleView = View.inflate(this, R.layout.view_title, null);
@@ -69,14 +73,12 @@ public class ChatActivity extends BaseActivity {
         if (titleView.getRootView().getParent() == null){
             mWindow.addView(titleView.getRootView(),lp);
         }
-        Child currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
-        myAccount = currentLoginChild.getUsername();
-        if (myAccount.equals("15711175963")) {
-            otherAccount = "18324602696";
-            mTvTitle.setText("和妈妈聊天");
-        } else {
+        if (isMother) {
             otherAccount = "15711175963";
             mTvTitle.setText("和淼淼聊天");
+        } else {
+            otherAccount = "18324602696";
+            mTvTitle.setText("和妈妈聊天");
         }
         chatAdapter = new ChatAdapter(mChatList);
         mRvIm.setAdapter(chatAdapter);
@@ -86,7 +88,7 @@ public class ChatActivity extends BaseActivity {
     public void initDatas() {
         getMsgList();
 
-        Observer<List<IMMessage>> incomingMessageObserver =
+        mIncomingMessageObserver =
                 new Observer<List<IMMessage>>() {
                     @Override
                     public void onEvent(List<IMMessage> messages) {
@@ -95,7 +97,13 @@ public class ChatActivity extends BaseActivity {
                     }
                 };
         NIMClient.getService(MsgServiceObserve.class)
-                .observeReceiveMessage(incomingMessageObserver, true);
+                .observeReceiveMessage(mIncomingMessageObserver, true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        NIMClient.getService(MsgServiceObserve.class).observeReceiveMessage(mIncomingMessageObserver, false);
     }
 
     private void getMsgList() {
@@ -103,9 +111,14 @@ public class ChatActivity extends BaseActivity {
                 20).setCallback(new RequestCallbackWrapper<List<IMMessage>>() {
             @Override
             public void onResult(int code, List<IMMessage> result, Throwable exception) {
-                if(result != null) {
+                if(result != null && mRvIm != null) {
                     mChatList.clear();
-                    mChatList.addAll(result);
+                    Collections.reverse(result);
+                    for (IMMessage imMessage : result) {
+                        if(!TextUtils.isEmpty(imMessage.getContent())) {
+                            mChatList.add(imMessage);
+                        }
+                    }
                     chatAdapter.notifyDataSetChanged();
                 }
             }
@@ -132,6 +145,7 @@ public class ChatActivity extends BaseActivity {
             @Override
             public void onSuccess(Void param) {
                 ToastUtils.showToast("发送成功");
+                SoftInputUtils.hintKeyBoard(ChatActivity.this);
                 getMsgList();
             }
 
@@ -146,6 +160,4 @@ public class ChatActivity extends BaseActivity {
             }
         });
     }
-
-
 }

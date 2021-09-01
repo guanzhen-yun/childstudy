@@ -11,6 +11,7 @@ public class SharedPrefUtils {
     private static final String SP_ISFIRSTLOGIN = "sp-firstlogin";
     private static final String LOGIN_TOKEN = "login-token";
     private static final String IM_TOKEN = "im-token";
+    private static final String ISMOTHER = "ismother";
     private SharedPreferences mSharedPreferences;
 
     private SharedPrefUtils(){}
@@ -80,6 +81,14 @@ public class SharedPrefUtils {
 
     public String getString(String key) {
         return mSharedPreferences.getString(key, "");
+    }
+
+    public void saveMotherAccount(boolean isMother) {
+        mSharedPreferences.edit().putBoolean(ISMOTHER, isMother).apply();
+    }
+
+    public boolean isMother() {
+        return mSharedPreferences.getBoolean(ISMOTHER, false);
     }
 
 }

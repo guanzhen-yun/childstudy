@@ -41,6 +41,16 @@
         android:hint="输入密码"
         style="@style/et_normal" />
 
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_ismother"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:text="是否是妈妈"
+        app:layout_constraintTop_toBottomOf="@id/et_password"
+        />
+
     <View
         style="@style/style_line_ver"
         app:layout_constraintBottom_toTopOf="@+id/tv_login"

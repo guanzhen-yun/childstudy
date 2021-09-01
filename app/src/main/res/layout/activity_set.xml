@@ -61,6 +61,7 @@
                 style="@style/style_set" />
 
             <View
+                android:id="@+id/view_info"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_below="@id/tv_changeinfo"
@@ -74,6 +75,7 @@
                 />
 
             <View
+                android:id="@+id/view_color"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_below="@id/tv_color"
@@ -87,6 +89,7 @@
                 />
 
             <View
+                android:id="@+id/view_animal"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_below="@id/tv_animal"
@@ -100,6 +103,7 @@
                 />
 
             <View
+                android:id="@+id/view_word"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_below="@id/tv_word"
@@ -113,6 +117,7 @@
                 />
 
             <View
+                android:id="@+id/view_tool"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_below="@id/tv_tool"
@@ -143,6 +148,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_below="@id/tv_im"
+                android:id="@+id/view_im"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_below="@id/view_im"
+                android:text="定位追踪"
+                style="@style/style_set"
+                android:visibility="gone"
+                />
+
+            <View
+                android:id="@+id/view_address"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/tv_address"
+                android:visibility="gone"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_address_toplay"
+                android:layout_below="@id/view_address"
+                android:text="去哪玩"
+                style="@style/style_set"
+                />
+
+            <View
+                android:id="@+id/view_address_toplay"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/tv_address_toplay"
                 android:background="@color/black" />
         </RelativeLayout>
     </ScrollView>

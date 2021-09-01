@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.app.ActivityCompat;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
 import com.inke.childstudy.entity.Child;
@@ -13,6 +16,7 @@ import com.inke.childstudy.studyobject.StudyObjectActivity;
 import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
+import com.inke.childstudy.utils.ViewUtils;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.umeng.analytics.MobclickAgent;
@@ -33,6 +37,40 @@ public class SetActivity extends BaseActivity {
     TextView mTvChange;
     @BindView(R.id.tv_im)
     TextView mTvIm;
+    @BindView(R.id.tv_back)
+    TextView mTvBack;
+    @BindView(R.id.view_info)
+    View mViewInfo;
+    @BindView(R.id.tv_changeinfo)
+    TextView mTvChangeinfo;
+    @BindView(R.id.tv_color)
+    TextView mTvColor;
+    @BindView(R.id.view_color)
+    View mViewColor;
+    @BindView(R.id.tv_animal)
+    TextView mTvAnimal;
+    @BindView(R.id.view_animal)
+    View mViewAnimal;
+    @BindView(R.id.tv_word)
+    TextView mTvWord;
+    @BindView(R.id.view_word)
+    View mViewWord;
+    @BindView(R.id.tv_tool)
+    TextView mTvTool;
+    @BindView(R.id.view_tool)
+    View mViewTool;
+    @BindView(R.id.tv_fruit)
+    TextView mTvFruit;
+    @BindView(R.id.view_fruit)
+    View mViewFruit;
+    @BindView(R.id.tv_address)
+    TextView mTvAddress;
+    @BindView(R.id.view_address)
+    View mViewAddress;
+    @BindView(R.id.tv_address_toplay)
+    TextView mTvAddressToplay;
+    @BindView(R.id.view_address_toplay)
+    View mViewAddressToplay;
 
     private boolean isChange;
 
@@ -43,22 +81,25 @@ public class SetActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        Child currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
-        String myAccount = currentLoginChild.getUsername();
-        if (!myAccount.equals("15711175963")) {
-            mTvIm.setText("和淼淼聊天");
+        boolean isMother = SharedPrefUtils.getInstance().isMother();
+        if(isMother) {
+            ViewUtils.setViewsGone(mTvBack, mTvChange, mViewInfo, mTvChangeinfo, mTvColor, mViewColor,
+                    mTvAnimal, mViewAnimal, mTvWord, mViewWord, mTvTool, mViewTool, mTvFruit, mViewFruit, mTvAddressToplay, mViewAddressToplay);
+            mTvIm.setText("和宝宝聊天");
+            mTvAddress.setVisibility(View.VISIBLE);
+            mViewAddress.setVisibility(View.VISIBLE);
         }
     }
 
     @OnClick({R.id.tv_loginout, R.id.tv_back, R.id.tv_changeinfo, R.id.tv_change, R.id.tv_color, R.id.tv_word,
-            R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit, R.id.tv_im})
+            R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit, R.id.tv_im, R.id.tv_address, R.id.tv_address_toplay})
     public void onClickView(View v) {
         switch (v.getId()) {
             case R.id.tv_loginout:
                 loginout();
                 break;
             case R.id.tv_back:
-                finish();
+                onBackPressed();
                 break;
             case R.id.tv_changeinfo:
                 RouterUtils.jump(RouterConstants.App.UserInfo);
@@ -91,6 +132,12 @@ public class SetActivity extends BaseActivity {
             case R.id.tv_im:
                 RouterUtils.jump(RouterConstants.App.Chat);
                 break;
+            case R.id.tv_address:
+                RouterUtils.jump(RouterConstants.App.AddressTrace);
+                break;
+            case R.id.tv_address_toplay:
+                RouterUtils.jump(RouterConstants.App.MyAddress);
+                break;
             default:
                 break;
         }
@@ -119,5 +166,10 @@ public class SetActivity extends BaseActivity {
                 ToastUtils.showToast("退出失败");
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        ActivityCompat.finishAfterTransition(this);
     }
 }

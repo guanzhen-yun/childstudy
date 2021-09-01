@@ -5,23 +5,25 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.inke.childstudy.R;
-import com.inke.childstudy.entity.Child;
-import com.inke.childstudy.utils.BmobUtils;
+import com.inke.childstudy.utils.DateUtils;
+import com.inke.childstudy.utils.SharedPrefUtils;
 import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 
 import java.util.List;
 
 public class ChatAdapter extends BaseQuickAdapter<IMMessage, BaseViewHolder> {
-    private String username;
+    private boolean isMother;
     public ChatAdapter(@Nullable List<IMMessage> data) {
         super(R.layout.item_im, data);
-        Child currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
-        username = currentLoginChild.getUsername();
+        isMother = SharedPrefUtils.getInstance().isMother();
     }
 
     @Override
     protected void convert(BaseViewHolder helper, IMMessage item) {
+        long time = item.getTime();
+        String stampToDate = DateUtils.stampToDate(time);
+        helper.setText(R.id.tv_time, stampToDate);
         helper.setText(R.id.tv_msg, item.getContent());
         if(item.getDirect() == MsgDirectionEnum.In) {//接收的消息
             helper.setGone(R.id.tv_receiver, true);
@@ -30,7 +32,7 @@ public class ChatAdapter extends BaseQuickAdapter<IMMessage, BaseViewHolder> {
             helper.setGone(R.id.tv_receiver, false);
             helper.setGone(R.id.tv_sender, true);
         }
-        if(username.equals("15711175963")) {
+        if(!isMother) {
             helper.setText(R.id.tv_receiver, "妈妈");
             helper.setText(R.id.tv_sender, "淼淼");
         } else {

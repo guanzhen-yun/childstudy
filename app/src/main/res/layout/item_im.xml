@@ -7,9 +7,17 @@
     >
 
     <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
         android:id="@+id/tv_receiver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_time"
         android:text="妈妈"
         android:visibility="gone"
         android:layout_marginLeft="@dimen/dp_10"
@@ -21,6 +29,7 @@
         android:layout_height="wrap_content"
         tools:text="消息"
         android:gravity="right"
+        android:layout_below="@id/tv_time"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_toLeftOf="@+id/tv_sender"
@@ -35,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/dp_10"
+        android:layout_below="@id/tv_time"
         android:text="淼淼"
         />
 </RelativeLayout>

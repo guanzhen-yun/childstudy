@@ -1,25 +1,28 @@
 package com.inke.childstudy.home;
 
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
+import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
+import com.inke.childstudy.address.MyAddressActivity;
 import com.inke.childstudy.entity.Child;
 import com.inke.childstudy.entity.event.FinishHomeEvent;
 import com.inke.childstudy.routers.RouterConstants;
+import com.inke.childstudy.service.LocationService;
 import com.inke.childstudy.utils.BmobUtils;
-import com.inke.childstudy.utils.ToastUtils;
+import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.TrackUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
@@ -28,6 +31,7 @@ import com.ziroom.base.StatusBarUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -60,6 +64,10 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        if(SharedPrefUtils.getInstance().isMother()) {
+            RouterUtils.jumpWithFinish(this, RouterConstants.App.Set);
+            return;
+        }
         StatusBarUtil.setStatusFrontColorDark(this);
         if (BmobUtils.getInstance().getCurrentLoginChild() != null) {
             Child child = BmobUtils.getInstance().getCurrentLoginChild();
@@ -68,6 +76,28 @@ public class HomeActivity extends BaseActivity {
         mStudyNumFragment = StudyNumFragment.getInstance();
         mFragmentTransaction = getSupportFragmentManager().beginTransaction();
         mFragmentTransaction.add(R.id.fl_body, mStudyNumFragment).show(mStudyNumFragment).commitAllowingStateLoss();
+
+        List<String> permissionList = new ArrayList<>();
+        //如果没有启动下面权限，就询问用户让用户打开
+        if(ContextCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED)
+        {
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if(ContextCompat.checkSelfPermission(HomeActivity.this,Manifest.permission.READ_PHONE_STATE)!= PackageManager.PERMISSION_GRANTED)
+        {
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(HomeActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!permissionList.isEmpty()) {
+            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(HomeActivity.this, permissions, 1);
+        }
+        else {
+            startService(new Intent(this, LocationService.class));
+        }
     }
 
     @OnClick({R.id.tv_studynum, R.id.tv_studypic, R.id.tv_set})
@@ -130,6 +160,30 @@ public class HomeActivity extends BaseActivity {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         for (Fragment fragment : fragments) {
             mFragmentTransaction.remove(fragment).commitAllowingStateLoss();
+        }
+    }
+
+    /*只有同意打开相关权限才可以开启本程序*/
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0) {
+                    for (int result : grantResults) {
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            Toast.makeText(this, "必须同意所有权限才能使用本程序", Toast.LENGTH_SHORT).show();
+                            finish();
+                            return;
+                        }
+                    }
+                    startService(new Intent(this, LocationService.class));
+                } else {
+                    Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+            default:
         }
     }
 }

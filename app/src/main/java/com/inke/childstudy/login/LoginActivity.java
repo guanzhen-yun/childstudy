@@ -1,6 +1,8 @@
 package com.inke.childstudy.login;
 
 import android.text.TextUtils;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -39,6 +41,10 @@ public class LoginActivity extends BaseActivity {
     EditText etUsername;
     @BindView(R.id.et_password)
     EditText etPassword;
+    @BindView(R.id.cb_ismother)
+    CheckBox mCbIsmother;
+
+    private boolean mIsMother = false;
 
     @Override
     public int getLayoutId() {
@@ -48,6 +54,12 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void initViews() {
         StatusBarUtil.setStatusFrontColorDark(this);
+        mCbIsmother.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mIsMother = isChecked;
+            }
+        });
     }
 
     @OnClick(R.id.tv_login)
@@ -154,6 +166,7 @@ public class LoginActivity extends BaseActivity {
                     public void onSuccess(LoginInfo param) {
                         ToastUtils.showToast("登录成功");
                         MobclickAgent.onProfileSignIn(param.getAccount());
+                        SharedPrefUtils.getInstance().saveMotherAccount(mIsMother);
                         SharedPrefUtils.getInstance().saveImToken(param.getToken());
                         EventBus.getDefault().post(new FinishMainEvent());
                         RouterUtils.jumpWithFinish(LoginActivity.this, RouterConstants.App.Home);

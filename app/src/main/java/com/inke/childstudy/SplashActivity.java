@@ -85,40 +85,44 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void toHome() {
-        //播放动画 放大 平移 渐变效果
-        mTvContent.setTranslationY(300f);
-        mTvContent.setVisibility(View.VISIBLE);
-        ObjectAnimator animator1 = ObjectAnimator.ofFloat(mTvContent, "alpha", 0f, 1f);
-        float curTranslationY = mTvContent.getTranslationY();
-        ObjectAnimator animator2 = ObjectAnimator.ofFloat(mTvContent, "translationY", curTranslationY, 0f);
-        ObjectAnimator animator3 = ObjectAnimator.ofFloat(mTvContent, "scaleY", 1f, 3f, 1f);
-        animSet = new AnimatorSet();
-        animSet.play(animator1).with(animator3).after(animator2);
-        animSet.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                //倒计时3秒进入主页面
-                if (mTvJump != null) {
-                    mTvJump.setVisibility(View.VISIBLE);
-                    mTvJump.setText("跳过(3)");
-                    mAnim = ValueAnimator.ofFloat(3f, 0f);
-                    mAnim.setDuration(3000);
-                    mAnim.addUpdateListener(animation1 -> {
-                        if (mTvJump != null) {
-                            float currentValue = (Float) animation1.getAnimatedValue();
-                            if (currentValue < 1) {
-                                jumpHome();
-                            } else {
-                                mTvJump.setText("跳过(" + Math.round(currentValue) + ")");
+        if(!BuildConfig.DEBUG) {
+            //播放动画 放大 平移 渐变效果
+            mTvContent.setTranslationY(300f);
+            mTvContent.setVisibility(View.VISIBLE);
+            ObjectAnimator animator1 = ObjectAnimator.ofFloat(mTvContent, "alpha", 0f, 1f);
+            float curTranslationY = mTvContent.getTranslationY();
+            ObjectAnimator animator2 = ObjectAnimator.ofFloat(mTvContent, "translationY", curTranslationY, 0f);
+            ObjectAnimator animator3 = ObjectAnimator.ofFloat(mTvContent, "scaleY", 1f, 3f, 1f);
+            animSet = new AnimatorSet();
+            animSet.play(animator1).with(animator3).after(animator2);
+            animSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    //倒计时3秒进入主页面
+                    if (mTvJump != null) {
+                        mTvJump.setVisibility(View.VISIBLE);
+                        mTvJump.setText("跳过(3)");
+                        mAnim = ValueAnimator.ofFloat(3f, 0f);
+                        mAnim.setDuration(3000);
+                        mAnim.addUpdateListener(animation1 -> {
+                            if (mTvJump != null) {
+                                float currentValue = (Float) animation1.getAnimatedValue();
+                                if (currentValue < 1) {
+                                    jumpHome();
+                                } else {
+                                    mTvJump.setText("跳过(" + Math.round(currentValue) + ")");
+                                }
                             }
-                        }
-                    });
-                    mAnim.start();
+                        });
+                        mAnim.start();
+                    }
                 }
-            }
-        });
-        animSet.setDuration(2000);
-        animSet.start();
+            });
+            animSet.setDuration(2000);
+            animSet.start();
+        } else {
+            jumpHome();
+        }
     }
 
     private void toMain() {

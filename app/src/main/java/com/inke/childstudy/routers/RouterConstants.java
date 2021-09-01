@@ -20,5 +20,7 @@ public interface RouterConstants {
         String StudyObject = Root + "studyobject";
         String BigPic = Root + "bigpic";
         String Chat = Root + "chat";
+        String AddressTrace = Root + "addresstrace";
+        String MyAddress = Root + "myaddress";
     }
 }
