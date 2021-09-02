@@ -1,6 +1,7 @@
 package com.inke.childstudy.im;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -9,9 +10,11 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.inke.childstudy.R;
 import com.inke.childstudy.adapter.ChatAdapter;
 import com.inke.childstudy.entity.Child;
@@ -31,6 +34,7 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.ziroom.base.BaseActivity;
+import com.ziroom.base.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,6 +55,7 @@ public class ChatActivity extends BaseActivity {
     private ChatAdapter chatAdapter;
     private List<IMMessage> mChatList = new ArrayList<>();
     private Observer<List<IMMessage>> mIncomingMessageObserver;
+    private int offset = 0;
 
     @Override
     public int getLayoutId() {
@@ -58,7 +63,13 @@ public class ChatActivity extends BaseActivity {
     }
 
     @Override
+    public boolean isNotFitStatus() {
+        return true;
+    }
+
+    @Override
     public void initViews() {
+        StatusBarUtil.with(this).setColor(Color.parseColor("#eeeeee")).init();
         boolean isMother = SharedPrefUtils.getInstance().isMother();
         WindowManager mWindow = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -81,19 +92,27 @@ public class ChatActivity extends BaseActivity {
             mTvTitle.setText("和妈妈聊天");
         }
         chatAdapter = new ChatAdapter(mChatList);
+        chatAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+
+            @Override
+            public void onLoadMoreRequested() {
+                offset = offset + 10;
+                getMsgList(offset);
+            }
+        }, mRvIm);
         mRvIm.setAdapter(chatAdapter);
     }
 
     @Override
     public void initDatas() {
-        getMsgList();
+        getMsgList(0);
 
         mIncomingMessageObserver =
                 new Observer<List<IMMessage>>() {
                     @Override
                     public void onEvent(List<IMMessage> messages) {
                         // 处理新收到的消息，为了上传处理方便，SDK 保证参数 messages 全部来自同一个聊天对象。
-                        getMsgList();
+                        getMsgList(0);
                     }
                 };
         NIMClient.getService(MsgServiceObserve.class)
@@ -106,20 +125,28 @@ public class ChatActivity extends BaseActivity {
         NIMClient.getService(MsgServiceObserve.class).observeReceiveMessage(mIncomingMessageObserver, false);
     }
 
-    private void getMsgList() {
-        NIMClient.getService(MsgService.class).queryMessageList(otherAccount, SessionTypeEnum.P2P, 0,
-                20).setCallback(new RequestCallbackWrapper<List<IMMessage>>() {
+    private void getMsgList(int offset) {
+        NIMClient.getService(MsgService.class).queryMessageList(otherAccount, SessionTypeEnum.P2P, offset,
+                10).setCallback(new RequestCallbackWrapper<List<IMMessage>>() {
             @Override
             public void onResult(int code, List<IMMessage> result, Throwable exception) {
                 if(result != null && mRvIm != null) {
-                    mChatList.clear();
+                    if(offset == 0) {
+                        mChatList.clear();
+                    }
                     Collections.reverse(result);
+                    if(result.size() == 10) {
+                        chatAdapter.setEnableLoadMore(true);
+                    } else {
+                        chatAdapter.setEnableLoadMore(false);
+                    }
                     for (IMMessage imMessage : result) {
                         if(!TextUtils.isEmpty(imMessage.getContent())) {
                             mChatList.add(imMessage);
                         }
                     }
                     chatAdapter.notifyDataSetChanged();
+                    chatAdapter.loadMoreComplete();
                 }
             }
         });
@@ -145,8 +172,9 @@ public class ChatActivity extends BaseActivity {
             @Override
             public void onSuccess(Void param) {
                 ToastUtils.showToast("发送成功");
+                mEtMsg.setText("");
                 SoftInputUtils.hintKeyBoard(ChatActivity.this);
-                getMsgList();
+                getMsgList(0);
             }
 
             @Override

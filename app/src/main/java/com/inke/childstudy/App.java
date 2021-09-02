@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.baidu.mapapi.SDKInitializer;
 import com.inke.childstudy.entity.Child;
 import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
@@ -63,6 +64,7 @@ public class App extends Application {
                 MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
             }
         }).start();
+        SDKInitializer.initialize(getApplicationContext());
     }
 
     private String getMetaDataValue(String metaDataName) {
