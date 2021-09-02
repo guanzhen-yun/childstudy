@@ -26,15 +26,21 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.inke.childstudy.R;
 import com.inke.childstudy.adapter.SexAdapter;
 import com.inke.childstudy.entity.UserInfo;
+import com.inke.childstudy.greendao.DbBean;
+import com.inke.childstudy.greendao.UserInfoEntity;
+import com.inke.childstudy.greendao.UserInfoEntityDao;
 import com.inke.childstudy.routers.RouterConstants;
 import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
+import com.inke.childstudy.utils.greendao.DaoSessionUtils;
 import com.inke.childstudy.view.dialog.BottomAgeDialog;
 import com.inke.childstudy.view.dialog.BottomDialog;
 import com.inke.childstudy.view.pop.MyPopView;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
+
+import org.greenrobot.greendao.query.WhereCondition;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -104,6 +110,8 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     public void initDatas() {
+        queryLocalUserInfo();
+
         BmobQuery<UserInfo> bmobQuery = new BmobQuery<>();
         String loginToken = SharedPrefUtils.getInstance().getLoginToken();
         bmobQuery.addWhereEqualTo("token", loginToken);
@@ -161,6 +169,7 @@ public class UserInfoActivity extends BaseActivity {
                         mTvAgeValue.setText(mUserInfo.getAge() + "岁");
                     }
                     broccoli.clearAllPlaceholders();
+                    saveData();
                 } else if(!TextUtils.isEmpty(loginToken)){
                     mIvHead.setVisibility(View.GONE);
                     mUserInfo = new UserInfo();
@@ -184,6 +193,67 @@ public class UserInfoActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void queryLocalUserInfo() {
+        String loginToken = SharedPrefUtils.getInstance().getLoginToken();
+        UserInfoEntity entity = new UserInfoEntity();
+        List<WhereCondition> whereConditions = new ArrayList<>();
+        whereConditions.add(UserInfoEntityDao.Properties.Token.eq(loginToken));
+        List<? extends DbBean> dbBeans = DaoSessionUtils.queryConditionAll(entity, whereConditions);
+        if(dbBeans != null && dbBeans.size() > 0) {
+            DbBean dbBean = dbBeans.get(0);
+            if(dbBean instanceof UserInfoEntity) {
+                UserInfoEntity userInfoEntity = (UserInfoEntity) dbBean;
+                mObjectId = userInfoEntity.getObjectId();
+                String head = userInfoEntity.getHeadPath();
+                if(!TextUtils.isEmpty(head)) {
+                    mTAddphoto.setText("修改头像");
+                    mPath = head;
+                    mIvHead.setVisibility(View.VISIBLE);
+                    Bitmap bitmap = BitmapFactory.decodeFile(head);
+                    if (bitmap != null) {
+                        mIvHead.setImageBitmap(bitmap);
+                    }
+                } else {
+                    mIvHead.setVisibility(View.GONE);
+                }
+                mSelectSex = userInfoEntity.getSex();
+                if(!TextUtils.isEmpty(mSelectSex)) {
+                    mSexAdapter.setSelectSex(mSelectSex);
+                    mSexAdapter.notifyDataSetChanged();
+                }
+                if(!TextUtils.isEmpty(userInfoEntity.getNick())) {
+                    mTvNickname.setText(userInfoEntity.getNick());
+                }
+                if(userInfoEntity.getAge() != 0) {
+                    mTvAgeValue.setText(userInfoEntity.getAge() + "岁");
+                }
+                broccoli.clearAllPlaceholders();
+            }
+        }
+    }
+
+    private void saveData() {
+        UserInfoEntity entity = new UserInfoEntity();
+        entity.setAge(mUserInfo.getAge());
+        entity.setToken(mUserInfo.getToken());
+        entity.setHeadPath(mUserInfo.getHeadPath());
+        entity.setNick(mUserInfo.getNick());
+        entity.setSex(mUserInfo.getSex());
+        entity.setObjectId(mUserInfo.getObjectId());
+        List<WhereCondition> whereConditions = new ArrayList<>();
+        whereConditions.add(UserInfoEntityDao.Properties.Token.eq(mUserInfo.getToken()));
+        List<? extends DbBean> dbBeans = DaoSessionUtils.queryConditionAll(entity, whereConditions);
+        if(dbBeans == null || dbBeans.size() == 0) {
+            DaoSessionUtils.insertDbBean(entity);
+        } else {
+            DbBean dbBean = dbBeans.get(0);
+            if(dbBean instanceof UserInfoEntity) {
+                entity.setId(((UserInfoEntity) dbBean).getId());
+            }
+            DaoSessionUtils.updateDbBean(entity);
+        }
     }
 
     @OnClick({R.id.tv_addphoto, R.id.iv_head, R.id.tv_nickname, R.id.tv_age_value})

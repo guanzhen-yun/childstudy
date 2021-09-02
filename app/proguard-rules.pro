@@ -262,3 +262,17 @@
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
 
+-keep class org.greenrobot.greendao.**{*;}
+-keep public class * extends org.greenrobot.greendao.AbstractDao
+-keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
+    public static java.lang.String TABLENAME;
+}
+-keep class **$Properties
+-keepclassmembers class **$Properties {*;}
+
+#optional
+-keep class net.sqlcipher.database.**{*;}
+-keep public interface net.sqlcipher.database.**
+-dontwarn net.sqlcipher.database.**
+-dontwarn org.greenrobot.greendao.**
+

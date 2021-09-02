@@ -3,12 +3,17 @@ package com.inke.childstudy;
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.mapapi.SDKInitializer;
+import com.github.yuweiguocn.library.greendao.MigrationHelper;
 import com.inke.childstudy.entity.Child;
+import com.inke.childstudy.greendao.DaoMaster;
+import com.inke.childstudy.greendao.DaoSession;
 import com.inke.childstudy.utils.BmobUtils;
+import com.inke.childstudy.utils.greendao.MySqliteOpenHelper;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
 import com.netease.nimlib.sdk.NIMClient;
@@ -26,6 +31,36 @@ import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
     private App mApp;
+    /**
+     * 初始化GreenDao,直接在Application中进行初始化操作
+     */
+    private static DaoSession daoSession;
+
+    private void initGreenDao() {
+        // 初始化//如果你想查看日志信息，请将 DEBUG 设置为 true
+        if (BuildConfig.DEBUG){
+            MigrationHelper.DEBUG = true;
+        }else {
+            MigrationHelper.DEBUG = false;
+        }
+
+        //数据库名字
+        MySqliteOpenHelper mySqliteOpenHelper = new MySqliteOpenHelper(mApp, "greenDaoTest.db",null);
+
+        SQLiteDatabase db = mySqliteOpenHelper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+
+        daoSession = daoMaster.newSession();
+    }
+
+    /**
+     * 提供一个全局的会话
+     * @return
+     */
+    public static DaoSession getDaoSession() {
+        return daoSession;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -67,6 +102,7 @@ public class App extends Application {
         }).start();
         SDKInitializer.initialize(getApplicationContext());
         CrashReport.initCrashReport(getApplicationContext(), "b2bbfcd40a", LogUtils.debug);
+        initGreenDao();
     }
 
     private String getMetaDataValue(String metaDataName) {

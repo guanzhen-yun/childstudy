@@ -1,7 +1,5 @@
 package com.inke.childstudy.entity;
 
-import android.graphics.Bitmap;
-
 import cn.bmob.v3.BmobObject;
 
 /**
@@ -11,6 +9,8 @@ public class UserInfo extends BmobObject {
     private String token;
     private String headPath;
     private String nick;
+    private String sex;
+    private int age;
 
     public String getSex() {
         return sex;
@@ -27,9 +27,6 @@ public class UserInfo extends BmobObject {
     public void setAge(int age) {
         this.age = age;
     }
-
-    private String sex;
-    private int age;
 
     public String getToken() {
         return token;
