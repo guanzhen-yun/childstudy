@@ -16,6 +16,7 @@ import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.taobao.sophix.SophixManager;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.ziroom.net.LogUtils;
@@ -65,6 +66,7 @@ public class App extends Application {
             }
         }).start();
         SDKInitializer.initialize(getApplicationContext());
+        CrashReport.initCrashReport(getApplicationContext(), "b2bbfcd40a", LogUtils.debug);
     }
 
     private String getMetaDataValue(String metaDataName) {

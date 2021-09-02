@@ -254,3 +254,11 @@
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
+
+-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}
+-dontwarn com.baidu.**
+
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+

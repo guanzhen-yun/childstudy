@@ -47,7 +47,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void initViews() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, "android.permission.CAMERA"};
+            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, "android.permission.CAMERA", Manifest.permission.WRITE_SETTINGS};
             this.requestPermissions(permissions, 100);
         } else {
             jump();

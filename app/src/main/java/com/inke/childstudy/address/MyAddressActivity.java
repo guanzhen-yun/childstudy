@@ -16,6 +16,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -133,7 +134,7 @@ public class MyAddressActivity extends BaseActivity {
 
         //初始化图标,BitmapDescriptorFactory是bitmap 描述信息工厂类.
         mIconLocation = BitmapDescriptorFactory
-                .fromResource(R.mipmap.ic_launcher);
+                .fromResource(R.mipmap.icon_loc);
     }
 
     @Override
@@ -236,7 +237,7 @@ public class MyAddressActivity extends BaseActivity {
     /**
      * 所有的定位信息都通过接口回调来实现
      */
-    public class MylocationListener implements BDLocationListener {
+    public class MylocationListener extends BDAbstractLocationListener {
         //定位请求回调接口
         private boolean isFirstIn = true;
 
@@ -270,10 +271,10 @@ public class MyAddressActivity extends BaseActivity {
              * 2.是否允许显示方向信息
              * 3.用户自定义定位图标
              * */
-//            MyLocationConfiguration configuration
-//                    = new MyLocationConfiguration(locationMode, true, mIconLocation);
-//            //设置定位图层配置信息，只有先允许定位图层后设置定位图层配置信息才会生效，参见 setMyLocationEnabled(boolean)
-//            mBaiduMap.setMyLocationConfigeration(configuration);
+            MyLocationConfiguration configuration
+                    = new MyLocationConfiguration(locationMode, true, mIconLocation);
+            //设置定位图层配置信息，只有先允许定位图层后设置定位图层配置信息才会生效，参见 setMyLocationEnabled(boolean)
+            mBaiduMap.setMyLocationConfigeration(configuration);
             //判断是否为第一次定位,是的话需要定位到用户当前位置
             if (isFirstIn) {
                 //地理坐标基本数据结构
