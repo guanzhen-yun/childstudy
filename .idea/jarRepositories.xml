@@ -41,5 +41,15 @@
       <option name="name" value="maven4" />
       <option name="url" value="https://repo1.maven.org/maven2/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="http://127.0.0.1:8081/#browse/browse:maven-releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="http://127.0.0.1:8081/repository/maven-releases" />
+    </remote-repository>
   </component>
 </project>

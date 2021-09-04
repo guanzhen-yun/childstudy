@@ -1,2 +1,3 @@
+include ':playgame'
 include ':app'
 rootProject.name = "ChildStudy"
