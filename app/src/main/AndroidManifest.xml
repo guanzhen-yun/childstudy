@@ -103,6 +103,7 @@
             />
         <activity android:name=".address.AddressTraceActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".address.MyAddressActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".web.WebActivity" android:screenOrientation="portrait"/>
 
         <service android:name=".service.LocationService"/>
 

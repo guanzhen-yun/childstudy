@@ -17,6 +17,7 @@ import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;
 import com.inke.childstudy.utils.ViewUtils;
+import com.inke.childstudy.view.dialog.ExitDialog;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.umeng.analytics.MobclickAgent;
@@ -71,6 +72,10 @@ public class SetActivity extends BaseActivity {
     TextView mTvAddressToplay;
     @BindView(R.id.view_address_toplay)
     View mViewAddressToplay;
+    @BindView(R.id.tv_info)
+    TextView mTvInfo;
+    @BindView(R.id.view_useinfo)
+    View mViewUseinfo;
 
     private boolean isChange;
 
@@ -88,15 +93,19 @@ public class SetActivity extends BaseActivity {
             mTvIm.setText("和宝宝聊天");
             mTvAddress.setVisibility(View.VISIBLE);
             mViewAddress.setVisibility(View.VISIBLE);
+            mTvInfo.setVisibility(View.VISIBLE);
+            mViewUseinfo.setVisibility(View.VISIBLE);
         }
     }
 
     @OnClick({R.id.tv_loginout, R.id.tv_back, R.id.tv_changeinfo, R.id.tv_change, R.id.tv_color, R.id.tv_word,
-            R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit, R.id.tv_im, R.id.tv_address, R.id.tv_address_toplay})
+            R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit, R.id.tv_im, R.id.tv_address, R.id.tv_address_toplay, R.id.tv_info})
     public void onClickView(View v) {
         switch (v.getId()) {
             case R.id.tv_loginout:
-                loginout();
+                ExitDialog exitDialog = new ExitDialog(this);
+                exitDialog.setOnExitListener(this::loginout);
+                exitDialog.show();
                 break;
             case R.id.tv_back:
                 onBackPressed();
@@ -137,6 +146,9 @@ public class SetActivity extends BaseActivity {
                 break;
             case R.id.tv_address_toplay:
                 RouterUtils.jump(RouterConstants.App.MyAddress);
+                break;
+            case R.id.tv_info:
+                RouterUtils.jump(RouterConstants.App.Web);
                 break;
             default:
                 break;

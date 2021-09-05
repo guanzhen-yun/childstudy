@@ -22,5 +22,6 @@ public interface RouterConstants {
         String Chat = Root + "chat";
         String AddressTrace = Root + "addresstrace";
         String MyAddress = Root + "myaddress";
+        String Web = Root + "web";
     }
 }

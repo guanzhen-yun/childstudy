@@ -180,6 +180,22 @@
                 android:layout_height="0.5dp"
                 android:layout_below="@id/tv_address_toplay"
                 android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_below="@id/view_address_toplay"
+                android:text="使用说明"
+                style="@style/style_set"
+                android:visibility="gone"
+                />
+
+            <View
+                android:id="@+id/view_useinfo"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/tv_info"
+                android:visibility="gone"
+                android:background="@color/black" />
         </RelativeLayout>
     </ScrollView>
 
