@@ -1,6 +1,8 @@
 package com.inke.childstudy.web;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -75,5 +77,29 @@ public class MyJavascriptInterface {
             }
         });
         Log.e("startFunction", "----有参" + data);
+    }
+
+    @JavascriptInterface
+    public void callPhone(String phone) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                callPhone1(phone);
+            }
+        });
+    }
+
+    public void callPhone1(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        context.startActivity(intent);
+    }
+
+    public void callPhone2(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        context.startActivity(intent);
     }
 }
