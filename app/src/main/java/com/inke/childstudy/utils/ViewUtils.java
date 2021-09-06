@@ -8,4 +8,10 @@ public class ViewUtils {
             view.setVisibility(View.GONE);
         }
     }
+
+    public static void setViewsVisible(View... views) {
+        for (View view : views) {
+            view.setVisibility(View.VISIBLE);
+        }
+    }
 }

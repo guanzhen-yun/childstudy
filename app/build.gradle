@@ -30,10 +30,16 @@ android {
         versionName "1.0.1"
         multiDexEnabled true
 
-        ndk {
-            //选择要添加的对应cpu类型的.so库。
-            //热修复支持五种 , 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
-            abiFilters 'armeabi'
+//        ndk {
+////            //选择要添加的对应cpu类型的.so库。
+////            //热修复支持五种 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+//            abiFilters 'armeabi-v7a'
+//        }
+
+        ndk{
+            //模块名称，即编译的.so文件名
+            moduleName "JniLibName"
+            abiFilters 'armeabi-v7a'
         }
 
         manifestPlaceholders = [
@@ -113,6 +119,7 @@ android {
             manifestPlaceholders = [APP_CHANNEL_VALUE:"baidu"]
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -129,6 +136,12 @@ android {
         generateTests false
         //应存储生成的单元测试的基本目录。默认为 src / androidTest / java。
         targetGenDirTests 'src/main/java'
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
 }
 

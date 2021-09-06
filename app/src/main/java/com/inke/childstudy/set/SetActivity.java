@@ -76,6 +76,10 @@ public class SetActivity extends BaseActivity {
     TextView mTvInfo;
     @BindView(R.id.view_useinfo)
     View mViewUseinfo;
+    @BindView(R.id.tv_tostudy)
+    TextView mTvTostudy;
+    @BindView(R.id.view_study)
+    View mViewStudy;
 
     private boolean isChange;
 
@@ -91,15 +95,12 @@ public class SetActivity extends BaseActivity {
             ViewUtils.setViewsGone(mTvBack, mTvChange, mViewInfo, mTvChangeinfo, mTvColor, mViewColor,
                     mTvAnimal, mViewAnimal, mTvWord, mViewWord, mTvTool, mViewTool, mTvFruit, mViewFruit, mTvAddressToplay, mViewAddressToplay);
             mTvIm.setText("和宝宝聊天");
-            mTvAddress.setVisibility(View.VISIBLE);
-            mViewAddress.setVisibility(View.VISIBLE);
-            mTvInfo.setVisibility(View.VISIBLE);
-            mViewUseinfo.setVisibility(View.VISIBLE);
+            ViewUtils.setViewsVisible(mTvAddress, mViewAddress, mTvInfo, mViewUseinfo, mTvTostudy, mViewStudy);
         }
     }
 
     @OnClick({R.id.tv_loginout, R.id.tv_back, R.id.tv_changeinfo, R.id.tv_change, R.id.tv_color, R.id.tv_word,
-            R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit, R.id.tv_im, R.id.tv_address, R.id.tv_address_toplay, R.id.tv_info})
+            R.id.tv_animal, R.id.tv_tool, R.id.tv_fruit, R.id.tv_im, R.id.tv_address, R.id.tv_address_toplay, R.id.tv_info, R.id.tv_tostudy})
     public void onClickView(View v) {
         switch (v.getId()) {
             case R.id.tv_loginout:
@@ -149,6 +150,9 @@ public class SetActivity extends BaseActivity {
                 break;
             case R.id.tv_info:
                 RouterUtils.jump(RouterConstants.App.Web);
+                break;
+            case R.id.tv_tostudy:
+                RouterUtils.jump(RouterConstants.App.Native);
                 break;
             default:
                 break;

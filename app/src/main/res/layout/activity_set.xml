@@ -196,6 +196,22 @@
                 android:layout_below="@id/tv_info"
                 android:visibility="gone"
                 android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_tostudy"
+                android:layout_below="@id/view_useinfo"
+                android:text="学习课程"
+                style="@style/style_set"
+                android:visibility="gone"
+                />
+
+            <View
+                android:id="@+id/view_study"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/tv_tostudy"
+                android:visibility="gone"
+                android:background="@color/black" />
         </RelativeLayout>
     </ScrollView>
 

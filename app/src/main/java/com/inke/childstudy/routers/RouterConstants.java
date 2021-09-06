@@ -23,5 +23,6 @@ public interface RouterConstants {
         String AddressTrace = Root + "addresstrace";
         String MyAddress = Root + "myaddress";
         String Web = Root + "web";
+        String Native = Root + "native";
     }
 }
