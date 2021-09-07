@@ -205,7 +205,13 @@ dependencies {
     //数据库升级防止丢失数据
     implementation 'io.github.yuweiguocn:GreenDaoUpgradeHelper:v2.2.1'
 
-    implementation 'childstudy.inke.com:playgame:1.0.1'  //groupId:artifactId:version
+    if(playgameModuleType.toInteger() == 0) {
+        implementation 'childstudy.inke.com:playgame:1.0.1'  //groupId:artifactId:version
+    } else if(playgameModuleType.toInteger() == 1) {
+        implementation project(":playgame")
+    } else {
+        implementation 'childstudy.inke.com:playgame:1.0.1'  //groupId:artifactId:version
+    }
 }
 
 repositories {

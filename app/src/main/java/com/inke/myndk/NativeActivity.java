@@ -5,9 +5,11 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
 import com.inke.childstudy.routers.RouterConstants;
+import com.inke.playgame.PlayGameUtils;
 import com.ziroom.base.BaseActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Ndk开发
@@ -26,5 +28,10 @@ public class NativeActivity extends BaseActivity {
     public void initViews() {
         JniUtils jniUtils = new JniUtils();
         mTvStudy.setText(jniUtils.getString());
+    }
+
+    @OnClick(R.id.tv_play)
+    public void onClickView() {
+        PlayGameUtils.playGame(this, "游戏");
     }
 }

@@ -3,10 +3,8 @@ package com.inke.childstudy;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.inke.childstudy.entity.event.FinishHomeEvent;
 import com.inke.childstudy.entity.event.FinishMainEvent;
 import com.inke.childstudy.routers.RouterConstants;
-import com.inke.playgame.PlayGameUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 import com.ziroom.base.StatusBarUtil;
