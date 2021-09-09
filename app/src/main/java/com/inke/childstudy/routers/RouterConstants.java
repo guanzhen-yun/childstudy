@@ -24,5 +24,7 @@ public interface RouterConstants {
         String MyAddress = Root + "myaddress";
         String Web = Root + "web";
         String Native = Root + "native";
+        String Video = Root + "video";
+        String Png = Root + "png";
     }
 }

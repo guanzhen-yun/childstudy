@@ -45,7 +45,7 @@ public class BigHeadActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.iv_pic)
+    @OnClick(R.id.tv_back)
     public void onClickView() {
         finish();
     }

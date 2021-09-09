@@ -212,6 +212,8 @@ dependencies {
     } else {
         implementation 'childstudy.inke.com:playgame:1.0.1'  //groupId:artifactId:version
     }
+
+    implementation 'fm.jiecao:jiecaovideoplayer:4.8.3'
 }
 
 repositories {

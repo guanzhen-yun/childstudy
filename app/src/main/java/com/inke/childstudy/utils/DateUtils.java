@@ -23,4 +23,14 @@ public class DateUtils {
         Date date = new Date(timeMillis);
         return simpleDateFormat.format(date);
     }
+
+    /*
+     * 将时间戳转换为时间
+     */
+    public static String timeToStr(long timeMillis){
+        long s = timeMillis / 1000;
+        long minus = s / 60;
+        long second = s % 60;
+        return (minus < 10 ? "0" + minus : minus)  + "." + (second < 10 ? "0" + second : second);
+    }
 }
