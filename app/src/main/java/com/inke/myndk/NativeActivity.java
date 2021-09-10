@@ -50,7 +50,7 @@ public class NativeActivity extends BaseActivity {
                 RouterUtils.jump(RouterConstants.App.Video);
                 break;
             case R.id.tv_png:
-
+                RouterUtils.jump(RouterConstants.App.Png);
                 break;
         }
     }

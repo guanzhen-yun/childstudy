@@ -3,9 +3,11 @@ package com.inke.childstudy.view.picview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
@@ -39,6 +41,13 @@ public class ZhengFangView extends PicChildView {
         mPaint.setStrokeWidth(4);
         mPaint.setColor(Color.parseColor("#000000"));
         mPaint.setAntiAlias(true);//抗锯齿
+        // 为Paint设置渐变器
+        Shader mShader = new LinearGradient(0, 0, 40, 60
+                , new int[] {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW }
+                , null , Shader.TileMode.REPEAT);
+        mPaint.setShader(mShader);
+        //设置阴影
+        mPaint.setShadowLayer(25 , 20 , 20 , Color.GRAY);
 
         mTextPaint = new Paint();
         mTextPaint.setStyle(Paint.Style.FILL);

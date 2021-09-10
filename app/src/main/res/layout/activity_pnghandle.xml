@@ -1,6 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:scaleType="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_daoying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="倒影"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+
+        <Button
+            android:id="@+id/btn_water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="水印"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+
+        <Button
+            android:id="@+id/btn_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="view转bitmap"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_bo2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_reback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="还原"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+
+        <Button
+            android:id="@+id/btn_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="灰图"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+
+        <Button
+            android:id="@+id/btn_roundimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="圆角图"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bo2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_bo1"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="颜色处理"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:id="@+id/btn_color_handle"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="镜像"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:id="@+id/btn_mirror"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="倒影"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:id="@+id/btn_invertedimage"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_bo1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_copy"
+            android:text="复制图像"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_reverse"
+            android:text="图片旋转"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_changepic"
+            android:text="改变图片"
+            android:layout_marginLeft="@dimen/dp_10"
+            />
+    </LinearLayout>
+</RelativeLayout>
