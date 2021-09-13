@@ -276,3 +276,6 @@
 -dontwarn net.sqlcipher.database.**
 -dontwarn org.greenrobot.greendao.**
 
+ -keep class me.jessyan.progressmanager.** { *; }
+ -keep interface me.jessyan.progressmanager.** { *; }
+

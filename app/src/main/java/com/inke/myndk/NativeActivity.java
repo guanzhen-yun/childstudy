@@ -52,7 +52,7 @@ public class NativeActivity extends BaseActivity {
                 RouterUtils.jump(RouterConstants.App.Png);
                 break;
             case R.id.tv_filesave:
-                RouterUtils.jump(RouterConstants.App.Native);
+                RouterUtils.jump(RouterConstants.App.FileSave);
                 break;
         }
     }

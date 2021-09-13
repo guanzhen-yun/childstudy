@@ -214,6 +214,8 @@ dependencies {
     }
 
     implementation 'fm.jiecao:jiecaovideoplayer:4.8.3'
+
+    implementation 'me.jessyan:progressmanager:1.5.0'
 }
 
 repositories {

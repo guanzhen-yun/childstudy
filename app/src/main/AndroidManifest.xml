@@ -46,6 +46,9 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.netease.nim.demo.permission.RECEIVE_MSG" />
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
     <application
         android:name=".SophixStubApplication"
         android:allowBackup="true"

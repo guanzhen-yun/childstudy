@@ -26,6 +26,6 @@ public interface RouterConstants {
         String Native = Root + "native";
         String Video = Root + "video";
         String Png = Root + "png";
-        String FileSave = Root + "png";
+        String FileSave = Root + "filesave";
     }
 }

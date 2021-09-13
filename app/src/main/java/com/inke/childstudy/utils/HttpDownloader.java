@@ -24,7 +24,6 @@ public class HttpDownloader {
                     return -1;
                 }
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -38,8 +37,10 @@ public class HttpDownloader {
         try {
             url = new URL(urlStr);
             HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+            urlConn.setConnectTimeout(6000); //超时设置
+            urlConn.setDoInput(true);
+            urlConn.setUseCaches(false); //设置不使用缓存
             is = urlConn.getInputStream();
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

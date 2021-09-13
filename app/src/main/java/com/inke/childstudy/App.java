@@ -30,7 +30,7 @@ import cn.bmob.v3.Bmob;
 import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
-    private App mApp;
+    private static App mApp;
     /**
      * 初始化GreenDao,直接在Application中进行初始化操作
      */
@@ -59,6 +59,10 @@ public class App extends Application {
      */
     public static DaoSession getDaoSession() {
         return daoSession;
+    }
+
+    public static App getApp() {
+        return mApp;
     }
 
     @Override
