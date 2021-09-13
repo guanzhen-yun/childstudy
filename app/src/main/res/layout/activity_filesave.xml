@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_top"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:padding="20dp"
-            android:text="学习广角"
+            android:text="文件保存"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -36,12 +36,13 @@
         android:background="@color/black" />
 
     <TextView
+        android:id="@+id/tv_downloadapk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_study"
         android:padding="20dp"
-        tools:text="学习"
-        />
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="下载最新包" />
 
     <View
         android:layout_width="match_parent"
@@ -49,49 +50,14 @@
         android:background="@color/black" />
 
     <TextView
+        android:id="@+id/tv_downloadpng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_play"
         android:padding="20dp"
-        android:text="玩游戏"
-        />
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="下载图片" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/black" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_video"
-        android:padding="20dp"
-        android:text="视频开发"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/black" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_png"
-        android:padding="20dp"
-        android:text="图片处理"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/black" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_filesave"
-        android:padding="20dp"
-        android:text="文件保存"
-        />
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"

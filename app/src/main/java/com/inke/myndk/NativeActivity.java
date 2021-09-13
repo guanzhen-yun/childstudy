@@ -1,6 +1,5 @@
 package com.inke.myndk;
 
-import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -35,7 +34,7 @@ public class NativeActivity extends BaseActivity {
         mTvStudy.setText(jniUtils.getString());
     }
 
-    @OnClick({R.id.tv_play, R.id.tv_video, R.id.tv_back, R.id.tv_png})
+    @OnClick({R.id.tv_play, R.id.tv_video, R.id.tv_back, R.id.tv_png, R.id.tv_filesave})
     public void onClickView(View v) {
         if(ClickEventUtils.isFastDoubleClick(v)) return;
         switch (v.getId()) {
@@ -51,6 +50,9 @@ public class NativeActivity extends BaseActivity {
                 break;
             case R.id.tv_png:
                 RouterUtils.jump(RouterConstants.App.Png);
+                break;
+            case R.id.tv_filesave:
+                RouterUtils.jump(RouterConstants.App.Native);
                 break;
         }
     }

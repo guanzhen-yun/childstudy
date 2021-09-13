@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--获取wifi网络状态的信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_GPS" />
     <!-- 获取精确gps位置 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -22,37 +22,39 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-<!--    &lt;!&ndash; 外部存储读权限，调试工具从SD卡加载本地补丁需要。&ndash;&gt;-->
+    <!--    &lt;!&ndash; 外部存储读权限，调试工具从SD卡加载本地补丁需要。&ndash;&gt;-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.READ_LOGS"
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <uses-feature android:name="android.hardware.camera2" />
     <!-- 下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
     <permission
         android:name="com.netease.nim.demo.permission.RECEIVE_MSG"
-        android:protectionLevel="signature"/>
+        android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.netease.nim.demo.permission.RECEIVE_MSG"/>
+    <uses-permission android:name="com.netease.nim.demo.permission.RECEIVE_MSG" />
     <application
         android:name=".SophixStubApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ChildStudy"
-        android:networkSecurityConfig="@xml/network_security_config"
-        >
+        android:theme="@style/Theme.ChildStudy">
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -98,22 +100,37 @@
         <activity
             android:name=".studyobject.BigPicActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".im.ChatActivity"
+        <activity
+            android:name=".im.ChatActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            />
-        <activity android:name=".address.AddressTraceActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".address.MyAddressActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".web.WebActivity" android:screenOrientation="portrait"/>
-        <activity android:name="com.inke.myndk.NativeActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".video.MyVideoActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".png.PngHandleActivity" android:screenOrientation="portrait"/>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".address.AddressTraceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".address.MyAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".web.WebActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.inke.myndk.NativeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".video.MyVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".png.PngHandleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".filesave.FileSaveActivity"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".service.LocationService"/>
+        <service android:name=".service.LocationService" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.inke.childstudy.BmobContentProvider"/>
+            android:authorities="com.inke.childstudy.BmobContentProvider" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -141,7 +158,8 @@
         <!-- Since JCore2.0.0 Required SDK核心功能-->
         <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
         <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
-        <service android:name=".jiguang.MyJgService"
+        <service
+            android:name=".jiguang.MyJgService"
             android:enabled="true"
             android:exported="false"
             android:process=":pushcore">
@@ -156,7 +174,7 @@
         <receiver
             android:name=".jiguang.MyJgReceiver"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
                 <category android:name="com.inke.childstudy" />
@@ -172,35 +190,36 @@
         <!-- 云信后台服务，请使用独立进程。 -->
         <service
             android:name="com.netease.nimlib.service.NimService"
-            android:process=":core"/>
+            android:process=":core" />
 
         <!-- 云信后台辅助服务 -->
         <service
             android:name="com.netease.nimlib.service.NimService$Aux"
-            android:process=":core"/>
+            android:process=":core" />
 
         <!-- 云信后台辅助服务 -->
         <service
             android:name="com.netease.nimlib.job.NIMJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE"
-            android:process=":core"/>
+            android:process=":core" />
 
         <!-- 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 -->
-        <receiver android:name="com.netease.nimlib.service.NimReceiver"
-            android:process=":core"
-            android:exported="false">
+        <receiver
+            android:name="com.netease.nimlib.service.NimReceiver"
+            android:exported="false"
+            android:process=":core">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
         <!-- 云信进程间通信 Receiver -->
-        <receiver android:name="com.netease.nimlib.service.ResponseReceiver"/>
+        <receiver android:name="com.netease.nimlib.service.ResponseReceiver" />
 
         <!-- 云信进程间通信service -->
-        <service android:name="com.netease.nimlib.service.ResponseService"/>
+        <service android:name="com.netease.nimlib.service.ResponseService" />
 
         <!-- 云信进程间通信provider -->
         <provider
@@ -220,9 +239,10 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="m8zUBffetZFq11CPwfeFC4KYiwtiOXFZ" />
         <!--定义百度地图的服务，用于定位-->
-        <service android:name="com.baidu.location.f"
+        <service
+            android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/>
+            android:process=":remote" />
     </application>
 
 </manifest>

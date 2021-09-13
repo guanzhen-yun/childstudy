@@ -53,9 +53,12 @@ public class PngHandleActivity extends BaseActivity {
     int i = 0;
 
     @OnClick({R.id.btn_copy, R.id.btn_reverse, R.id.btn_changepic, R.id.btn_mirror, R.id.btn_reback, R.id.btn_invertedimage, R.id.btn_color_handle
-    ,R.id.btn_grey, R.id.btn_roundimg, R.id.btn_daoying, R.id.btn_water, R.id.btn_view})
+    ,R.id.btn_grey, R.id.btn_roundimg, R.id.btn_daoying, R.id.btn_water, R.id.btn_view, R.id.tv_back})
     public void OnClickView(View v) {
         switch (v.getId()) {
+            case R.id.tv_back:
+                finish();
+                break;
             case R.id.btn_reback:
                 showPng();
                 break;
