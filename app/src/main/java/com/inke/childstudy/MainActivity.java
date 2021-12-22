@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity {
   @Subscribe(threadMode = ThreadMode.MAIN)
   public void finishPage(FinishMainEvent finishEvent) {
     finish();
+    // 测试hook
   }
 
   @Override
