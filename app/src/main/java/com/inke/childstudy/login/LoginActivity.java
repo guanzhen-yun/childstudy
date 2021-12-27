@@ -6,15 +6,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.sdk.android.tbrest.utils.LogUtil;
-import com.google.android.material.textfield.TextInputEditText;
 import com.inke.childstudy.R;
 import com.inke.childstudy.entity.Child;
 import com.inke.childstudy.entity.LoginToken;
-import com.inke.childstudy.entity.event.FinishHomeEvent;
 import com.inke.childstudy.entity.event.FinishMainEvent;
 import com.inke.childstudy.routers.RouterConstants;
-import com.inke.childstudy.set.SetActivity;
 import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.ToastUtils;

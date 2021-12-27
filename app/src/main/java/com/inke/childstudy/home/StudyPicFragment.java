@@ -1,7 +1,6 @@
 package com.inke.childstudy.home;
 
 import android.view.View;
-import android.widget.TextView;
 
 import com.inke.childstudy.R;
 import com.inke.childstudy.view.picview.PicParentView;

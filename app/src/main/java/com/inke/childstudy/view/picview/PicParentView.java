@@ -6,8 +6,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inke.childstudy.view.numview.NumberHorView;
-
 public class PicParentView extends ViewGroup {
     private int mCurrentView = PicViewFactory.PIC_CF;
     private int measureWidth;

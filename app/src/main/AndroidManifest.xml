@@ -50,7 +50,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 
     <application
-        android:name=".SophixStubApplication"
+        android:name="com.inke.childstudy.SophixStubApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -59,7 +59,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChildStudy">
         <activity
-            android:name=".SplashActivity"
+            android:name="com.inke.childstudy.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
             <intent-filter>
@@ -70,66 +70,66 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.inke.childstudy.MainActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".regist.RegistActivity"
+            android:name="com.inke.childstudy.regist.RegistActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.HomeActivity"
+            android:name="com.inke.childstudy.home.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name="com.inke.childstudy.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".set.SetActivity"
+            android:name="com.inke.childstudy.set.SetActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".userinfo.UserInfoActivity"
+            android:name="com.inke.childstudy.userinfo.UserInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".userinfo.BigHeadActivity"
+            android:name="com.inke.childstudy.userinfo.BigHeadActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".studycolor.StudyColorActivity"
+            android:name="com.inke.childstudy.studycolor.StudyColorActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".word.StudyWordActivity"
+            android:name="com.inke.childstudy.word.StudyWordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".studyobject.StudyObjectActivity"
+            android:name="com.inke.childstudy.studyobject.StudyObjectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".studyobject.BigPicActivity"
+            android:name="com.inke.childstudy.studyobject.BigPicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".im.ChatActivity"
+            android:name="com.inke.childstudy.im.ChatActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".address.AddressTraceActivity"
+            android:name="com.inke.childstudy.address.AddressTraceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".address.MyAddressActivity"
+            android:name="com.inke.childstudy.address.MyAddressActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".web.WebActivity"
+            android:name="com.inke.childstudy.web.WebActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.inke.myndk.NativeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".video.MyVideoActivity"
+            android:name="com.inke.childstudy.video.MyVideoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".png.PngHandleActivity"
+            android:name="com.inke.childstudy.png.PngHandleActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".filesave.FileSaveActivity"
+            android:name="com.inke.childstudy.filesave.FileSaveActivity"
             android:screenOrientation="portrait" />
 
-        <service android:name=".service.LocationService" />
+        <service android:name="com.inke.childstudy.service.LocationService" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
@@ -162,7 +162,7 @@
         <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
         <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
         <service
-            android:name=".jiguang.MyJgService"
+            android:name="com.inke.childstudy.jiguang.MyJgService"
             android:enabled="true"
             android:exported="false"
             android:process=":pushcore">
@@ -175,7 +175,7 @@
         <!-- 3.3.0开始所有事件将通过该类回调 -->
         <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
         <receiver
-            android:name=".jiguang.MyJgReceiver"
+            android:name="com.inke.childstudy.jiguang.MyJgReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

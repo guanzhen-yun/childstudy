@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'com.aliyun.ams.emas-services'
     id 'org.greenrobot.greendao'
+    id 'com.child.plugins.myplugin'
 }
 
 android {

@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.inke.childstudy.R;
 import com.inke.childstudy.routers.RouterConstants;
 import com.ziroom.base.BaseActivity;

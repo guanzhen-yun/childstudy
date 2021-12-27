@@ -22,7 +22,6 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.inke.childstudy.R;
 import com.inke.childstudy.adapter.SexAdapter;
 import com.inke.childstudy.entity.UserInfo;

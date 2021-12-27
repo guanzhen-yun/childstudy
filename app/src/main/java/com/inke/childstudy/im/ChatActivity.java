@@ -10,16 +10,13 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.inke.childstudy.R;
 import com.inke.childstudy.adapter.ChatAdapter;
-import com.inke.childstudy.entity.Child;
 import com.inke.childstudy.routers.RouterConstants;
-import com.inke.childstudy.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.SoftInputUtils;
 import com.inke.childstudy.utils.ToastUtils;
@@ -32,7 +29,6 @@ import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
-import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.StatusBarUtil;
 
