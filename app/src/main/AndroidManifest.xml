@@ -1,251 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.inke.childstudy">
-    <!--允许联网 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--获取wifi网络状态的信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_GPS" />
-    <!-- 获取精确gps位置 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- 获取粗略位置 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- 允许程序访问额外的定位提供者指令获取模拟定位信息 -->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!--获取sd卡写的权限，用于文件上传和下载-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--允许读取手机状态 用于创建BmobInstallation-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--    &lt;!&ndash; 外部存储读权限，调试工具从SD卡加载本地补丁需要。&ndash;&gt;-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.inke.childstudy">
+  <!--允许联网 -->
+  <application
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:name=".SophixStubApplication"
+    android:networkSecurityConfig="@xml/network_security_config"
+    android:requestLegacyExternalStorage="true"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.ChildStudy">
+    <activity
+      android:exported="true"
+      android:name="com.inke.childstudy.SplashActivity"
+      android:screenOrientation="portrait"
+      android:theme="@style/Splash">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+    </activity>
 
-    <uses-feature android:name="android.hardware.camera2" />
-    <!-- 下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
-    <permission
-        android:name="com.netease.nim.demo.permission.RECEIVE_MSG"
-        android:protectionLevel="signature" />
+    <activity
+      android:name="com.inke.childstudy.MainActivity"
+      android:screenOrientation="portrait" />
 
-    <uses-permission android:name="com.netease.nim.demo.permission.RECEIVE_MSG" />
+    <activity
+      android:name="com.inke.childstudy.regist.RegistActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.home.HomeActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.login.LoginActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.set.SetActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.userinfo.UserInfoActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.userinfo.BigHeadActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.studycolor.StudyColorActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.word.StudyWordActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.studyobject.StudyObjectActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.studyobject.BigPicActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.im.ChatActivity"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="adjustPan" />
+    <activity
+      android:name="com.inke.childstudy.address.AddressTraceActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.address.MyAddressActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.web.WebActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.myndk.NativeActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.video.MyVideoActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.png.PngHandleActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name="com.inke.childstudy.filesave.FileSaveActivity"
+      android:screenOrientation="portrait" />
 
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <meta-data
+      android:name="channel"
+      android:value="${APP_CHANNEL_VALUE}" />
 
-    <application
-        android:name="com.inke.childstudy.SophixStubApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:requestLegacyExternalStorage="true"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.ChildStudy">
-        <activity
-            android:name="com.inke.childstudy.SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    <meta-data
+      android:name="com.netease.nim.appKey"
+      android:value="f4481d270285a25163d1933600fe70b3" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    <meta-data
+      android:name="com.baidu.lbsapi.API_KEY"
+      android:value="m8zUBffetZFq11CPwfeFC4KYiwtiOXFZ" />
 
-        <activity
-            android:name="com.inke.childstudy.MainActivity"
-            android:screenOrientation="portrait" />
+    <provider
+      android:authorities="com.inke.childstudy.BmobContentProvider"
+      android:name="cn.bmob.v3.util.BmobContentProvider" />
 
-        <activity
-            android:name="com.inke.childstudy.regist.RegistActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.home.HomeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.login.LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.set.SetActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.userinfo.UserInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.userinfo.BigHeadActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.studycolor.StudyColorActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.word.StudyWordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.studyobject.StudyObjectActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.studyobject.BigPicActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.im.ChatActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.inke.childstudy.address.AddressTraceActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.address.MyAddressActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.web.WebActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.myndk.NativeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.video.MyVideoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.png.PngHandleActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.inke.childstudy.filesave.FileSaveActivity"
-            android:screenOrientation="portrait" />
+    <!-- Since JCore2.0.0 Required SDK核心功能-->
+    <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
+    <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
+    <provider
+      android:authorities="com.inke.childstudy.fileprovider"
+      android:exported="false"
+      android:grantUriPermissions="true"
+      android:name="androidx.core.content.FileProvider">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+      <meta-data
+        android:name="com.taobao.android.hotfix.IDSECRET"
+        android:value="333518348" />
+      <meta-data
+        android:name="com.taobao.android.hotfix.APPSECRET"
+        android:value="9f4ffbfa7f9d42ab9da3c9ea59c0465c" />
+      <meta-data
+        android:name="com.taobao.android.hotfix.RSASECRET"
+        android:value="MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCrz8j5wmVN3uAwtyk8PCQ7bYaAQJfA5TG1UrRJW1gW5HxAGHBbuPw4aI/A7c/NGFsI4+mo5+Gs8o2CSni9g3Ys8B2Gb6G2j5YDV7jLuKSfphfYqbq8zziov24PPfhS6gc9EJiUQHUE1x7XkVCOhL/l0t1c0rqlorDlCpSFZpP+IKIzSJzIWCthuT5/4suHYAi+4sB7FD/XDHixlioOa56Qm1LzgtN/Aer+57tjDSgvcHUd8KYYFUF4k/x5wSQDAVx4qXUlpL/Yd8zUrjr1zSE+UXZAC08UAdwnV8vvAu+W6oLjTfTK/H9DHcUIWq/TDuFhl+g+XmhuBCuxRZf/dUJ1AgMBAAECggEAIYJfIkdF1tA3TYkLo9HfBzAvYWg3sMmCzmiY/Q2xupVJnn6lu13y41WRZAF92/R6HNvGwMio/UA5VUYNEnlHXTBfsc6n7aFHktNTGXijsveEAx/nadfIpzDe2F4vxowaaVCJUbDYod8LBuQyn/lILBzaS7ZV7OQ0OBe+K9570r5cuAcWGV0zeToYBPXUMgRHJBXhl5h7717tF8EWz24xlk7rttXImJ2GcHTMPBnjLHsUUNetKgqHxJ+rTo603c7pmfODf5/hMYUzPZSn5xalbceuYzJaiA4K8f50YKpL3nNZnuzfhSXaFtm/lGvoVi0HkC3flQP9Cz0kC67jLBv7AQKBgQDdInPiEUEp93ZMzucVnKDr/VnL6m9qplJUPcgNfICMeA/dCwu4sSbKDBtMCbxQBg7vVPruP+KDLNSizgYkX5MHVvP6O4wZlgstQbfAyXoQUisZRlsr+Qahu+TIUQDawq3KLvlJg2ECkq6LiEHTmpAmw9SvqEn0ttr+uVNjGQC61QKBgQDG5okPdyJI3fPtlaC4NApGXgO8BBWuTG3JJn4l2kepGSKsOrYBKPtQGFi9Ckg/Ldy4TC89KFtngsGOBRiKqeJtd/fIzRujJafueCrNGEkKqkZnpx36Hp1vsaPV2bf3aam2nbBjnleG2XSVYt3DEEqKccCAgnX87IMdz4z3mBT5IQKBgG6xnlyd0obVbwyHzblNzGgVTGv9EITMeQ3eV1QY7KhkOVym+NkdJJOjd86aWP+d6L/5RBsbM6ICQPa2NvDiPtE/v6WVRU5Rg4rGCNuif03IM/bU9zKN17oCOkXj9o+LQD+jP/qCn38QOfty27C3AE3HXaIIley/0+QKlSlYDLt5AoGAe5wgB915ECHoC3oW9QNac1rQJVPAiZ70B7OFaE7chCmb0791BwmKDb/jvjAasDD3YA3wuahQDedEFNfz5ZEop/GLq15U07J+SASkTOvP0PH7aUWBqsTGAPk8IZX576faEiSzz2VDbgnMm15jBWwldx60jOkHHJV78tXe/KymNCECgYBpVYOjV6zU8ScJZlskkJ6Dqepvxn1zDeccCqYbkgSLrHA/JBxyJWeSJWyzldnevbU35R6r0LfKO2UUj0/8vc1nHt7GNrZFppV7G5YnkjUaNFZDsjJWnwFDBVC+qYRffWff9uNVshBT8gtvsSPix9T+R2FqD9ofEf5BtOHJ25HoGw==" />
+    </provider>
+    <!-- Required since 3.0.7 -->
+    <!-- 新的 tag/alias 接口结果返回需要开发者配置一个自定的广播 -->
+    <!-- 3.3.0开始所有事件将通过该类回调 -->
+    <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
+    <provider
+      android:authorities="com.inke.childstudy.ipc.provider"
+      android:exported="false"
+      android:name="com.netease.nimlib.ipc.NIMContentProvider"
+      android:process=":core" />
 
-        <service android:name="com.inke.childstudy.service.LocationService" />
+    <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
+        如果 SDKOptions 中提供了，则取 SDKOptions 中的值。 -->
+    <provider
+      android:authorities="com.inke.childstudy.ipc.provider.preference"
+      android:exported="false"
+      android:name="com.netease.nimlib.ipc.cp.provider.PreferenceContentProvider" />
 
-        <provider
-            android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.inke.childstudy.BmobContentProvider" />
+    <!-- 云信后台服务，请使用独立进程。 -->
+    <receiver
+      android:enabled="true"
+      android:exported="false"
+      android:name="com.inke.childstudy.jiguang.MyJgReceiver">
+      <intent-filter>
+        <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+        <category android:name="com.inke.childstudy" />
+      </intent-filter>
+    </receiver>
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.inke.childstudy.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-            <meta-data
-                android:name="com.taobao.android.hotfix.IDSECRET"
-                android:value="333518348" />
-            <meta-data
-                android:name="com.taobao.android.hotfix.APPSECRET"
-                android:value="9f4ffbfa7f9d42ab9da3c9ea59c0465c" />
-            <meta-data
-                android:name="com.taobao.android.hotfix.RSASECRET"
-                android:value="MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCrz8j5wmVN3uAwtyk8PCQ7bYaAQJfA5TG1UrRJW1gW5HxAGHBbuPw4aI/A7c/NGFsI4+mo5+Gs8o2CSni9g3Ys8B2Gb6G2j5YDV7jLuKSfphfYqbq8zziov24PPfhS6gc9EJiUQHUE1x7XkVCOhL/l0t1c0rqlorDlCpSFZpP+IKIzSJzIWCthuT5/4suHYAi+4sB7FD/XDHixlioOa56Qm1LzgtN/Aer+57tjDSgvcHUd8KYYFUF4k/x5wSQDAVx4qXUlpL/Yd8zUrjr1zSE+UXZAC08UAdwnV8vvAu+W6oLjTfTK/H9DHcUIWq/TDuFhl+g+XmhuBCuxRZf/dUJ1AgMBAAECggEAIYJfIkdF1tA3TYkLo9HfBzAvYWg3sMmCzmiY/Q2xupVJnn6lu13y41WRZAF92/R6HNvGwMio/UA5VUYNEnlHXTBfsc6n7aFHktNTGXijsveEAx/nadfIpzDe2F4vxowaaVCJUbDYod8LBuQyn/lILBzaS7ZV7OQ0OBe+K9570r5cuAcWGV0zeToYBPXUMgRHJBXhl5h7717tF8EWz24xlk7rttXImJ2GcHTMPBnjLHsUUNetKgqHxJ+rTo603c7pmfODf5/hMYUzPZSn5xalbceuYzJaiA4K8f50YKpL3nNZnuzfhSXaFtm/lGvoVi0HkC3flQP9Cz0kC67jLBv7AQKBgQDdInPiEUEp93ZMzucVnKDr/VnL6m9qplJUPcgNfICMeA/dCwu4sSbKDBtMCbxQBg7vVPruP+KDLNSizgYkX5MHVvP6O4wZlgstQbfAyXoQUisZRlsr+Qahu+TIUQDawq3KLvlJg2ECkq6LiEHTmpAmw9SvqEn0ttr+uVNjGQC61QKBgQDG5okPdyJI3fPtlaC4NApGXgO8BBWuTG3JJn4l2kepGSKsOrYBKPtQGFi9Ckg/Ldy4TC89KFtngsGOBRiKqeJtd/fIzRujJafueCrNGEkKqkZnpx36Hp1vsaPV2bf3aam2nbBjnleG2XSVYt3DEEqKccCAgnX87IMdz4z3mBT5IQKBgG6xnlyd0obVbwyHzblNzGgVTGv9EITMeQ3eV1QY7KhkOVym+NkdJJOjd86aWP+d6L/5RBsbM6ICQPa2NvDiPtE/v6WVRU5Rg4rGCNuif03IM/bU9zKN17oCOkXj9o+LQD+jP/qCn38QOfty27C3AE3HXaIIley/0+QKlSlYDLt5AoGAe5wgB915ECHoC3oW9QNac1rQJVPAiZ70B7OFaE7chCmb0791BwmKDb/jvjAasDD3YA3wuahQDedEFNfz5ZEop/GLq15U07J+SASkTOvP0PH7aUWBqsTGAPk8IZX576faEiSzz2VDbgnMm15jBWwldx60jOkHHJV78tXe/KymNCECgYBpVYOjV6zU8ScJZlskkJ6Dqepvxn1zDeccCqYbkgSLrHA/JBxyJWeSJWyzldnevbU35R6r0LfKO2UUj0/8vc1nHt7GNrZFppV7G5YnkjUaNFZDsjJWnwFDBVC+qYRffWff9uNVshBT8gtvsSPix9T+R2FqD9ofEf5BtOHJ25HoGw==" />
-        </provider>
+    <!-- 云信后台辅助服务 -->
+    <receiver
+      android:exported="false"
+      android:name="com.netease.nimlib.service.NimReceiver"
+      android:process=":core">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+      </intent-filter>
+    </receiver>
 
-        <meta-data
-            android:name="channel"
-            android:value="${APP_CHANNEL_VALUE}" />
+    <!-- 云信后台辅助服务 -->
+    <receiver android:name="com.netease.nimlib.service.ResponseReceiver" />
 
-        <!-- Since JCore2.0.0 Required SDK核心功能-->
-        <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
-        <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
-        <service
-            android:name="com.inke.childstudy.jiguang.MyJgService"
-            android:enabled="true"
-            android:exported="false"
-            android:process=":pushcore">
-            <intent-filter>
-                <action android:name="cn.jiguang.user.service.action" />
-            </intent-filter>
-        </service>
-        <!-- Required since 3.0.7 -->
-        <!-- 新的 tag/alias 接口结果返回需要开发者配置一个自定的广播 -->
-        <!-- 3.3.0开始所有事件将通过该类回调 -->
-        <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
-        <receiver
-            android:name="com.inke.childstudy.jiguang.MyJgReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
-                <category android:name="com.inke.childstudy" />
-            </intent-filter>
-        </receiver>
+    <!-- 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 -->
+    <service android:name="com.inke.childstudy.service.LocationService" />
 
-        <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
-            如果 SDKOptions 中提供了，则取 SDKOptions 中的值。 -->
-        <meta-data
-            android:name="com.netease.nim.appKey"
-            android:value="f4481d270285a25163d1933600fe70b3" />
+    <!-- 云信进程间通信 Receiver -->
+    <service
+      android:enabled="true"
+      android:exported="false"
+      android:name="com.inke.childstudy.jiguang.MyJgService"
+      android:process=":pushcore">
+      <intent-filter>
+        <action android:name="cn.jiguang.user.service.action" />
+      </intent-filter>
+    </service>
 
-        <!-- 云信后台服务，请使用独立进程。 -->
-        <service
-            android:name="com.netease.nimlib.service.NimService"
-            android:process=":core" />
+    <!-- 云信进程间通信service -->
+    <service
+      android:name="com.netease.nimlib.service.NimService"
+      android:process=":core" />
 
-        <!-- 云信后台辅助服务 -->
-        <service
-            android:name="com.netease.nimlib.service.NimService$Aux"
-            android:process=":core" />
+    <!-- 云信进程间通信provider -->
+    <service
+      android:name="com.netease.nimlib.service.NimService$Aux"
+      android:process=":core" />
 
-        <!-- 云信后台辅助服务 -->
-        <service
-            android:name="com.netease.nimlib.job.NIMJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:process=":core" />
+    <!-- 云信内部使用的进程间通信provider -->
+    <!-- SDK启动时会强制检测该组件的声明是否配置正确，如果检测到该声明不正确，SDK会主动抛出异常引发崩溃 -->
+    <service
+      android:exported="true"
+      android:name="com.netease.nimlib.job.NIMJobService"
+      android:permission="android.permission.BIND_JOB_SERVICE"
+      android:process=":core" />
 
-        <!-- 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 -->
-        <receiver
-            android:name="com.netease.nimlib.service.NimReceiver"
-            android:exported="false"
-            android:process=":core">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
+    <service android:name="com.netease.nimlib.service.ResponseService" />
+    <!--定义百度地图的服务，用于定位-->
+    <service
+      android:enabled="true"
+      android:name="com.baidu.location.f"
+      android:process=":remote" />
+  </application>
+  <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
+  <permission
+    android:name="com.netease.nim.demo.permission.RECEIVE_MSG"
+    android:protectionLevel="signature" />
+  <!--获取wifi网络状态的信息 -->
+  <uses-feature android:name="android.hardware.camera2" />
 
-        <!-- 云信进程间通信 Receiver -->
-        <receiver android:name="com.netease.nimlib.service.ResponseReceiver" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <!-- 获取精确gps位置 -->
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <!-- 获取粗略位置 -->
+  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+  <!-- 允许程序访问额外的定位提供者指令获取模拟定位信息 -->
+  <uses-permission android:name="android.permission.ACCESS_GPS" />
+  <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <!--获取sd卡写的权限，用于文件上传和下载-->
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <!--允许读取手机状态 用于创建BmobInstallation-->
+  <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+  <!--    &lt;!&ndash; 外部存储读权限，调试工具从SD卡加载本地补丁需要。&ndash;&gt;-->
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-        <!-- 云信进程间通信service -->
-        <service android:name="com.netease.nimlib.service.ResponseService" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+  <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <uses-permission android:name="android.permission.FLASHLIGHT" />
+  <uses-permission android:name="android.permission.VIBRATE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-        <!-- 云信进程间通信provider -->
-        <provider
-            android:name="com.netease.nimlib.ipc.NIMContentProvider"
-            android:authorities="com.inke.childstudy.ipc.provider"
-            android:exported="false"
-            android:process=":core" />
+  <uses-permission
+    android:name="android.permission.WRITE_SETTINGS"
+    tools:ignore="ProtectedPermissions" />
+  <!-- 下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
+  <uses-permission
+    android:name="android.permission.READ_LOGS"
+    tools:ignore="ProtectedPermissions" />
 
-        <!-- 云信内部使用的进程间通信provider -->
-        <!-- SDK启动时会强制检测该组件的声明是否配置正确，如果检测到该声明不正确，SDK会主动抛出异常引发崩溃 -->
-        <provider
-            android:name="com.netease.nimlib.ipc.cp.provider.PreferenceContentProvider"
-            android:authorities="com.inke.childstudy.ipc.provider.preference"
-            android:exported="false" />
+  <uses-permission android:name="android.permission.CALL_PHONE" />
 
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="m8zUBffetZFq11CPwfeFC4KYiwtiOXFZ" />
-        <!--定义百度地图的服务，用于定位-->
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
-    </application>
+  <uses-permission android:name="com.netease.nim.demo.permission.RECEIVE_MSG" />
+
+  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
 </manifest>

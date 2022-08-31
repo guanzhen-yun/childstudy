@@ -3,40 +3,41 @@ package com.inke.childstudy.entity;
 import cn.bmob.v3.BmobObject;
 
 public class StudyColor extends BmobObject {
-    public String getColorStr() {
-        return colorStr;
-    }
 
-    public void setColorStr(String colorStr) {
-        this.colorStr = colorStr;
-    }
+  public String getColorStr() {
+    return colorStr;
+  }
 
-    public String getColorText() {
-        return colorText;
-    }
+  public void setColorStr(String colorStr) {
+    this.colorStr = colorStr;
+  }
 
-    public void setColorText(String colorText) {
-        this.colorText = colorText;
-    }
+  public String getColorText() {
+    return colorText;
+  }
 
-    private String colorStr;
-    private boolean isBgWhite;
-    private String colorText;
-    private String token;
+  public void setColorText(String colorText) {
+    this.colorText = colorText;
+  }
 
-    public boolean isBgWhite() {
-        return isBgWhite;
-    }
+  private String colorStr;
+  private boolean isBgWhite;
+  private String colorText;
+  private String token;
 
-    public void setBgWhite(boolean bgWhite) {
-        isBgWhite = bgWhite;
-    }
+  public boolean isBgWhite() {
+    return isBgWhite;
+  }
 
-    public String getToken() {
-        return token;
-    }
+  public void setBgWhite(boolean bgWhite) {
+    isBgWhite = bgWhite;
+  }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
 }

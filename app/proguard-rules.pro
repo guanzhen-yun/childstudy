@@ -226,7 +226,7 @@
 -keep class com.ta.utdid2.device.**{*;}
 #防止inline
 -dontoptimize
--keepclassmembers class com.inke.childstudy.App {
+-keepclassmembers class com.tantan.base.App {
     public <init>();
 }
 -keep class com.inke.childstudy.SophixStubApplication$RealApplicationStub

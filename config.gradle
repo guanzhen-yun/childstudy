@@ -1,0 +1,10 @@
+ext {
+
+    android = [
+            //sdk版本号
+            compileSdkVersion: 32,
+            buildToolsVersion: "30.0.3",
+            minSdkVersion    : 19,
+            targetSdkVersion : 33
+    ]
+}

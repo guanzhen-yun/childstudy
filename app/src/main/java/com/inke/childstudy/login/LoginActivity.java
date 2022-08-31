@@ -7,17 +7,17 @@ import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
-import com.inke.childstudy.entity.Child;
-import com.inke.childstudy.entity.LoginToken;
+import com.tantan.mydata.Child;
+import com.tantan.mydata.LoginToken;
 import com.inke.childstudy.entity.event.FinishMainEvent;
 import com.inke.childstudy.routers.RouterConstants;
-import com.inke.childstudy.utils.BmobUtils;
+import com.tantan.mydata.utils.BmobUtils;
 import com.inke.childstudy.utils.SharedPrefUtils;
-import com.inke.childstudy.utils.ToastUtils;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.tantan.base.utils.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
@@ -33,155 +33,156 @@ import butterknife.OnClick;
  */
 @Route(path = RouterConstants.App.Login)
 public class LoginActivity extends BaseActivity {
-    @BindView(R.id.et_username)
-    EditText etUsername;
-    @BindView(R.id.et_password)
-    EditText etPassword;
-    @BindView(R.id.cb_ismother)
-    CheckBox mCbIsmother;
 
-    private boolean mIsMother = false;
+  @BindView(R.id.et_username)
+  EditText etUsername;
+  @BindView(R.id.et_password)
+  EditText etPassword;
+  @BindView(R.id.cb_ismother)
+  CheckBox mCbIsmother;
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_login;
+  private boolean mIsMother = false;
+
+  @Override
+  public int getLayoutId() {
+    return R.layout.activity_login;
+  }
+
+  @Override
+  public void initViews() {
+    StatusBarUtil.setStatusFrontColorDark(this);
+    mCbIsmother.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        mIsMother = isChecked;
+      }
+    });
+  }
+
+  @OnClick(R.id.tv_login)
+  public void onClickView() {
+    login();
+  }
+
+  private void login() {
+    String userName = etUsername.getText().toString();
+    String password = etPassword.getText().toString();
+
+    if (TextUtils.isEmpty(userName)) {
+      ToastUtils.showToast("请输入账号");
+      return;
+    }
+    if (TextUtils.isEmpty(password)) {
+      ToastUtils.showToast("请输入密码");
+      return;
     }
 
-    @Override
-    public void initViews() {
-        StatusBarUtil.setStatusFrontColorDark(this);
-        mCbIsmother.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mIsMother = isChecked;
-            }
-        });
-    }
+    Child child = new Child();
+    child.setUsername(userName);
+    child.setPassword(password);
 
-    @OnClick(R.id.tv_login)
-    public void onClickView() {
-        login();
-    }
+    BmobUtils.getInstance().loginData(child, new BmobUtils.OnBmobListener() {
+      @Override
+      public void onSuccess(String objectId) {
+        saveLoginToken();
+      }
 
-    private void login() {
-        String userName = etUsername.getText().toString();
-        String password = etPassword.getText().toString();
+      @Override
+      public void onError(String err) {
+        ToastUtils.showToast("登录失败" + err);
+      }
+    });
+  }
 
-        if (TextUtils.isEmpty(userName)) {
-            ToastUtils.showToast("请输入账号");
-            return;
+  /**
+   * 保存登录Token
+   */
+  private void saveLoginToken() {
+    LoginToken token = new LoginToken();
+    if (BmobUtils.getInstance().getCurrentLoginChild() != null) {
+      String objectId = BmobUtils.getInstance().getCurrentLoginChild().getUsername();
+      token.setTokenId(objectId);
+      BmobUtils.getInstance().queryTokenData(objectId, new BmobUtils.OnBmobTokenListener() {
+        @Override
+        public void onSuccess(String objectId, boolean isLogin) {
+          if (TextUtils.isEmpty(objectId)) {
+            BmobUtils.getInstance().addData(token, new BmobUtils.OnBmobListener() {
+              @Override
+              public void onSuccess(String objectId) {
+                loginSuccess(objectId);
+              }
+
+              @Override
+              public void onError(String err) {
+                ToastUtils.showToast("登录失败" + err);
+              }
+            });
+          } else {
+            loginSuccess(objectId);
+          }
         }
-        if (TextUtils.isEmpty(password)) {
-            ToastUtils.showToast("请输入密码");
-            return;
-        }
 
-        Child child = new Child();
-        child.setUsername(userName);
-        child.setPassword(password);
-
-        BmobUtils.getInstance().loginData(child, new BmobUtils.OnBmobListener() {
+        @Override
+        public void onError(String err) {
+          BmobUtils.getInstance().addData(token, new BmobUtils.OnBmobListener() {
             @Override
             public void onSuccess(String objectId) {
-                saveLoginToken();
+              loginSuccess(objectId);
             }
 
             @Override
             public void onError(String err) {
-                ToastUtils.showToast("登录失败" + err);
+              ToastUtils.showToast("登录失败" + err);
             }
-        });
-    }
-
-    /**
-     * 保存登录Token
-     */
-    private void saveLoginToken() {
-        LoginToken token = new LoginToken();
-        if (BmobUtils.getInstance().getCurrentLoginChild() != null) {
-            String objectId = BmobUtils.getInstance().getCurrentLoginChild().getUsername();
-            token.setTokenId(objectId);
-            BmobUtils.getInstance().queryTokenData(objectId, new BmobUtils.OnBmobTokenListener() {
-                @Override
-                public void onSuccess(String objectId, boolean isLogin) {
-                    if (TextUtils.isEmpty(objectId)) {
-                        BmobUtils.getInstance().addData(token, new BmobUtils.OnBmobListener() {
-                            @Override
-                            public void onSuccess(String objectId) {
-                                loginSuccess(objectId);
-                            }
-
-                            @Override
-                            public void onError(String err) {
-                                ToastUtils.showToast("登录失败" + err);
-                            }
-                        });
-                    } else {
-                        loginSuccess(objectId);
-                    }
-                }
-
-                @Override
-                public void onError(String err) {
-                    BmobUtils.getInstance().addData(token, new BmobUtils.OnBmobListener() {
-                        @Override
-                        public void onSuccess(String objectId) {
-                            loginSuccess(objectId);
-                        }
-
-                        @Override
-                        public void onError(String err) {
-                            ToastUtils.showToast("登录失败" + err);
-                        }
-                    });
-                }
-            });
+          });
         }
+      });
     }
+  }
 
-    private void loginSuccess(String objectId) {
-        SharedPrefUtils.getInstance().saveLoginToken(objectId);
-        BmobUtils.getInstance().updateLoginState(true, new BmobUtils.OnBmobListener() {
-            @Override
-            public void onSuccess(String oId) {
-                loginIm();
+  private void loginSuccess(String objectId) {
+    SharedPrefUtils.getInstance().saveLoginToken(objectId);
+    BmobUtils.getInstance().updateLoginState(true, new BmobUtils.OnBmobListener() {
+      @Override
+      public void onSuccess(String oId) {
+        loginIm();
+      }
+
+      @Override
+      public void onError(String err) {
+        ToastUtils.showToast("登录失败" + err);
+      }
+    });
+  }
+
+  private void loginIm() {
+    LoginInfo info = new LoginInfo(etUsername.getText().toString(), "123456");
+    RequestCallback<LoginInfo> callback =
+        new RequestCallback<LoginInfo>() {
+          @Override
+          public void onSuccess(LoginInfo param) {
+            ToastUtils.showToast("登录成功");
+            MobclickAgent.onProfileSignIn(param.getAccount());
+            SharedPrefUtils.getInstance().saveMotherAccount(mIsMother);
+            SharedPrefUtils.getInstance().saveImToken(param.getToken());
+            EventBus.getDefault().post(new FinishMainEvent());
+            RouterUtils.jumpWithFinish(LoginActivity.this, RouterConstants.App.Home);
+          }
+
+          @Override
+          public void onFailed(int code) {
+            if (code == 302) {
+              ToastUtils.showToast("账号密码错误");
+            } else {
+              ToastUtils.showToast("登录失败");
             }
+          }
 
-            @Override
-            public void onError(String err) {
-                ToastUtils.showToast("登录失败" + err);
-            }
-        });
-    }
-
-    private void loginIm() {
-        LoginInfo info = new LoginInfo(etUsername.getText().toString(), "123456");
-        RequestCallback<LoginInfo> callback =
-                new RequestCallback<LoginInfo>() {
-                    @Override
-                    public void onSuccess(LoginInfo param) {
-                        ToastUtils.showToast("登录成功");
-                        MobclickAgent.onProfileSignIn(param.getAccount());
-                        SharedPrefUtils.getInstance().saveMotherAccount(mIsMother);
-                        SharedPrefUtils.getInstance().saveImToken(param.getToken());
-                        EventBus.getDefault().post(new FinishMainEvent());
-                        RouterUtils.jumpWithFinish(LoginActivity.this, RouterConstants.App.Home);
-                    }
-
-                    @Override
-                    public void onFailed(int code) {
-                        if (code == 302) {
-                            ToastUtils.showToast("账号密码错误");
-                        } else {
-                            ToastUtils.showToast("登录失败");
-                        }
-                    }
-
-                    @Override
-                    public void onException(Throwable exception) {
-                        ToastUtils.showToast(exception.getMessage());
-                    }
-                };
-        NIMClient.getService(AuthService.class).login(info).setCallback(callback);
-    }
+          @Override
+          public void onException(Throwable exception) {
+            ToastUtils.showToast(exception.getMessage());
+          }
+        };
+    NIMClient.getService(AuthService.class).login(info).setCallback(callback);
+  }
 }
