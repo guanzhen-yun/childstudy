@@ -17,7 +17,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.inke.childstudy.R;
 import com.inke.childstudy.adapter.ChatAdapter;
 import com.inke.childstudy.routers.RouterConstants;
-import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.SoftInputUtils;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
@@ -29,6 +28,7 @@ import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tantan.base.utils.ToastUtils;
+import com.tantan.mydata.utils.SharedPrefUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.StatusBarUtil;
 

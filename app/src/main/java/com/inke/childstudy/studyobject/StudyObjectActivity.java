@@ -14,9 +14,9 @@ import com.inke.childstudy.adapter.StudyObjectAdapter;
 import com.inke.childstudy.entity.StudyObject;
 import com.inke.childstudy.routers.RouterConstants;
 import com.tantan.mydata.utils.BmobUtils;
-import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.view.dialog.BottomAddObjectDialog;
 import com.tantan.base.utils.ToastUtils;
+import com.tantan.mydata.utils.SharedPrefUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 
@@ -158,34 +158,34 @@ public class StudyObjectActivity extends BaseActivity {
 
   private void deleteMyObject(int position) {
     StudyObject studyObject = mListObject.get(position);
-    studyObject.delete(studyObject.getObjectId(), new UpdateListener() {
-      @Override
-      public void done(BmobException e) {
-        if (e == null) {
-          queryObject();
-        } else {
-          ToastUtils.showToast(e.getMessage());
-        }
-      }
-    });
+//    studyObject.delete(studyObject.getObjectId(), new UpdateListener() {
+//      @Override
+//      public void done(BmobException e) {
+//        if (e == null) {
+//          queryObject();
+//        } else {
+//          ToastUtils.showToast(e.getMessage());
+//        }
+//      }
+//    });
   }
 
   private void queryObject() {
-    BmobQuery<StudyObject> bmobQuery = new BmobQuery<>();
-    bmobQuery.addWhereEqualTo("token", loginToken);
-    bmobQuery.addWhereEqualTo("type", type);
-    bmobQuery.findObjects(new FindListener<StudyObject>() {
-      @Override
-      public void done(List<StudyObject> list, BmobException e) {
-        if (e != null) {
-          ToastUtils.showToast(e.getMessage());
-        } else {
-          mListObject.clear();
-          mListObject.addAll(list);
-          studyObjectAdapter.notifyDataSetChanged();
-        }
-      }
-    });
+//    BmobQuery<StudyObject> bmobQuery = new BmobQuery<>();
+//    bmobQuery.addWhereEqualTo("token", loginToken);
+//    bmobQuery.addWhereEqualTo("type", type);
+//    bmobQuery.findObjects(new FindListener<StudyObject>() {
+//      @Override
+//      public void done(List<StudyObject> list, BmobException e) {
+//        if (e != null) {
+//          ToastUtils.showToast(e.getMessage());
+//        } else {
+//          mListObject.clear();
+//          mListObject.addAll(list);
+//          studyObjectAdapter.notifyDataSetChanged();
+//        }
+//      }
+//    });
   }
 
   private void isContainsObject(String objName, OnExistListener onExistListener) {
@@ -193,16 +193,16 @@ public class StudyObjectActivity extends BaseActivity {
     bmobQuery.addWhereEqualTo("token", loginToken);
     bmobQuery.addWhereEqualTo("objName", objName);
     bmobQuery.addWhereEqualTo("type", type);
-    bmobQuery.findObjects(new FindListener<StudyObject>() {
-      @Override
-      public void done(List<StudyObject> list, BmobException e) {
-        if (list != null && list.size() > 0) {
-          onExistListener.isExist(true);
-        } else {
-          onExistListener.isExist(false);
-        }
-      }
-    });
+//    bmobQuery.findObjects(new FindListener<StudyObject>() {
+//      @Override
+//      public void done(List<StudyObject> list, BmobException e) {
+//        if (list != null && list.size() > 0) {
+//          onExistListener.isExist(true);
+//        } else {
+//          onExistListener.isExist(false);
+//        }
+//      }
+//    });
   }
 
   private interface OnExistListener {

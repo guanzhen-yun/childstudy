@@ -9,17 +9,17 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.mapapi.SDKInitializer;
 import com.github.yuweiguocn.library.greendao.MigrationHelper;
-import com.tantan.mydata.Child;
-import com.inke.childstudy.greendao.DaoMaster;
-import com.inke.childstudy.greendao.DaoSession;
+import com.tantan.base.utils.greendao.DaoSessionUtils;
+import com.tantan.mydata.greendao.DaoMaster;
+import com.tantan.mydata.greendao.DaoSession;
 import com.tantan.mydata.utils.BmobUtils;
-import com.inke.childstudy.utils.greendao.MySqliteOpenHelper;
-import com.inke.childstudy.utils.SharedPrefUtils;
+import com.tantan.base.utils.greendao.MySqliteOpenHelper;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.tantan.base.utils.ToastUtils;
+import com.tantan.mydata.utils.SharedPrefUtils;
 import com.taobao.sophix.SophixManager;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.analytics.MobclickAgent;
@@ -33,30 +33,6 @@ public class App extends Application {
 
   private static App mApp;
 
-  /**
-   * 初始化GreenDao,直接在Application中进行初始化操作
-   */
-  private static DaoSession daoSession;
-
-  private void initGreenDao() {
-    // 初始化//如果你想查看日志信息，请将 DEBUG 设置为 true
-    MigrationHelper.DEBUG = BuildConfig.DEBUG;
-    //数据库名字
-    MySqliteOpenHelper mySqliteOpenHelper = new MySqliteOpenHelper(mApp, "greenDaoTest.db", null);
-
-    SQLiteDatabase db = mySqliteOpenHelper.getWritableDatabase();
-    DaoMaster daoMaster = new DaoMaster(db);
-
-    daoSession = daoMaster.newSession();
-  }
-
-  /**
-   * 提供一个全局的会话
-   */
-  public static DaoSession getDaoSession() {
-    return daoSession;
-  }
-
   public static App getApp() {
     return mApp;
   }
@@ -65,19 +41,28 @@ public class App extends Application {
   public void onCreate() {
     super.onCreate();
     mApp = this;
+    //Arouter初始化
     ARouter.init(this);
+    if (BuildConfig.DEBUG) {
+      ARouter.openLog();
+      ARouter.openDebug();
+    }
+    BmobUtils.getInstance().init(this);
     ToastUtils.init(this);
-    Bmob.initialize(this, "2b7ef1eda2b02905fa9334a15b60492a");
+    //bomb初始化
+    Bmob.initialize(this, "6449e49ab0f71abe4abdcf4175572956");
     SharedPrefUtils.getInstance().init(this);
     LogUtils.debug = BuildConfig.DEBUG;
     // queryAndLoadNewPatch为拉取控制台补丁
     //不可放在attachBaseContext 中，否则无网络权限，建议放在主进程任意时刻，如Application的onCreate中
+    //阿里sophix热更新
     SophixManager.getInstance().queryAndLoadNewPatch();
 
+    //极光推送初始化
     JPushInterface.setDebugMode(LogUtils.debug);
     JPushInterface.init(this);
 
-    // SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将进行自动登录）。不能对初始化语句添加进程判断逻辑。
+    // 网易云信SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将进行自动登录）。不能对初始化语句添加进程判断逻辑。
     NIMClient.init(this, loginInfo(), options());
     // 使用 `NIMUtil` 类可以进行主进程判断。
     // boolean mainProcess = NIMUtil.isMainProcess(context)
@@ -87,6 +72,7 @@ public class App extends Application {
       // 2、相关Service调用
     }
 
+    //友盟统计
     //设置LOG开关，默认为false
     UMConfigure.setLogEnabled(LogUtils.debug);
 
@@ -98,9 +84,12 @@ public class App extends Application {
       // 选用AUTO页面采集模式
       MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
     }).start();
+    //百度地图初始化
     SDKInitializer.initialize(getApplicationContext());
+    //bugly初始化
     CrashReport.initCrashReport(getApplicationContext(), "b2bbfcd40a", LogUtils.debug);
-    initGreenDao();
+    //greenDao初始化
+    DaoSessionUtils.getInstance().initGreenDao(this);
   }
 
   private String getMetaDataValue(String metaDataName) {
@@ -120,10 +109,10 @@ public class App extends Application {
 
   // 如果提供，将同时进行自动登录。如果当前还没有登录用户，请传入null。详见自动登录章节。
   private LoginInfo loginInfo() {
-    Child currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
-    if (currentLoginChild != null) {
-      return new LoginInfo(currentLoginChild.getUsername(), "123456");
-    }
+//    Person currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
+//    if (currentLoginChild != null) {
+//      return new LoginInfo(currentLoginChild.getUsername(), "123456");
+//    }
     return null;
   }
 

@@ -16,13 +16,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
-import com.tantan.mydata.Child;
+import com.tantan.mydata.Person;
 import com.inke.childstudy.entity.event.FinishHomeEvent;
 import com.inke.childstudy.routers.RouterConstants;
 import com.inke.childstudy.service.LocationService;
 import com.tantan.mydata.utils.BmobUtils;
-import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.utils.TrackUtils;
+import com.tantan.mydata.utils.SharedPrefUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 import com.ziroom.base.StatusBarUtil;
@@ -70,8 +70,8 @@ public class HomeActivity extends BaseActivity {
     }
     StatusBarUtil.setStatusFrontColorDark(this);
     if (BmobUtils.getInstance().getCurrentLoginChild() != null) {
-      Child child = BmobUtils.getInstance().getCurrentLoginChild();
-      tvNickname.setText("你好" + child.getNickname() + "小朋友");
+//      Person child = BmobUtils.getInstance().getCurrentLoginChild();
+//      tvNickname.setText("你好" + child.getNickname() + "小朋友");
     }
     mStudyNumFragment = StudyNumFragment.getInstance();
     mFragmentTransaction = getSupportFragmentManager().beginTransaction();

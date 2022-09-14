@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'org.greenrobot.greendao'
     id 'com.child.plugins.myplugin'
     id 'com.aliyun.ams.emas-services'
 }
@@ -31,12 +30,6 @@ android {
         versionName "1.0.1"
         multiDexEnabled true
 
-//        ndk {
-////            //选择要添加的对应cpu类型的.so库。
-////            //热修复支持五种 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
-//            abiFilters 'armeabi-v7a'
-//        }
-
         ndk {
             //模块名称，即编译的.so文件名
             moduleName "JniLibName"
@@ -44,18 +37,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY  : "2e953bb3a1655832ae4e22cd", //JPush 上注册的包名对应的 Appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
-                MEIZU_APPKEY  : "MZ-魅族的APPKEY",
-                MEIZU_APPID   : "MZ-魅族的APPID",
-                XIAOMI_APPID  : "MI-小米的APPID",
-                XIAOMI_APPKEY : "MI-小米的APPKEY",
-                OPPO_APPKEY   : "OP-oppo的APPKEY",
-                OPPO_APPID    : "OP-oppo的APPID",
-                OPPO_APPSECRET: "OP-oppo的APPSECRET",
-                VIVO_APPKEY   : "vivo的APPKEY",
-                VIVO_APPID    : "vivo的APPID"
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "2e953bb3a1655832ae4e22cd", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
 
         javaCompileOptions {
@@ -126,18 +110,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    greendao {
-        //数据库版本号
-        schemaVersion 2
-        // 设置DaoMaster、DaoSession、Dao 包名
-        daoPackage 'com.inke.childstudy.greendao'
-        //设置DaoMaster、DaoSession、Dao目录,请注意，这里路径用.不要用
-        targetGenDir 'src/main/java'
-        //设置为true以自动生成单元测试。
-        generateTests false
-        //应存储生成的单元测试的基本目录。默认为 src / androidTest / java。
-        targetGenDirTests 'src/main/java'
-    }
 
     sourceSets {
         main {
@@ -160,7 +132,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //注解处理器，会将注解编译成Java类
 
-
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
 
     // 基础功能 (必需)
@@ -170,39 +141,16 @@ dependencies {
     implementation 'me.samlss:broccoli:1.0.0' //骨架屏
     //wheelView
     implementation 'com.contrarywind:wheelview:4.1.0'
-
     implementation 'cn.jiguang.sdk:jcore:2.9.0'  // 此处以JCore 2.7.2 版本为例。
     implementation 'cn.jiguang.sdk:jpush:4.2.4'  // 此处以JPush 4.0.0 版本为例
-//    // 接入华为厂商
-//    implementation 'com.huawei.hms:push:4.0.2.300'
-//    implementation 'cn.jiguang.sdk.plugin:huawei:4.0.0'// 极光厂商插件版本与接入 JPush 版本保持一致，下同
-//    // 接入 FCM 厂商
-//    implementation 'com.google.firebase:firebase-messaging:21.0.1'
-//    implementation 'cn.jiguang.sdk.plugin:fcm:4.0.0'
-//    // 接入魅族厂商
-//    implementation 'cn.jiguang.sdk.plugin:meizu:4.0.0'
-//    // 接入 VIVO 厂商
-//    implementation 'cn.jiguang.sdk.plugin:vivo:4.0.0'
-//    // 接入 OPPO 厂商
-//    implementation 'cn.jiguang.sdk.plugin:oppo:4.0.0'
-//    // 接入小米厂商
-//    implementation 'cn.jiguang.sdk.plugin:xiaomi:4.0.0'
-
-
     // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
     implementation "com.umeng.umsdk:common:9.4.2" //（必选）
     implementation "com.umeng.umsdk:asms:1.4.1" // asms包依赖(必选)
-
     implementation(name: 'BaiduLBS_AndroidSDK_Lib', ext: 'aar')
-
     implementation 'com.tencent.bugly:crashreport:3.2.3'
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
     implementation 'com.tencent.bugly:nativecrashreport:3.7.47'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
-    //greendao
-    implementation 'org.greenrobot:greendao:3.3.0'
-    //数据库升级防止丢失数据
-    implementation 'io.github.yuweiguocn:GreenDaoUpgradeHelper:v2.2.1'
 
     if (playgameModuleType.toInteger() == 0) {
         implementation 'childstudy.inke.com:playgame:1.0.1'  //groupId:artifactId:version
@@ -217,6 +165,7 @@ dependencies {
     implementation 'me.jessyan:progressmanager:1.5.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation project(":main")
+    implementation project(":login")
 }
 
 repositories {

@@ -22,6 +22,7 @@ import com.tantan.mydata.utils.SharedPrefUtils;
 import com.tantan.base.utils.ToastUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
+import com.ziroom.net.LogUtils;
 
 //启动页
 public class SplashActivity extends BaseActivity implements OnClickListener {
@@ -161,7 +162,7 @@ public class SplashActivity extends BaseActivity implements OnClickListener {
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
       jumpPage();
     } else {
       ToastUtils.showToast("请开启权限");

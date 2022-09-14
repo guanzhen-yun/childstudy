@@ -4,3 +4,4 @@ rootProject.name = "ChildStudy"
 include ':base'
 include ':main'
 include ':mydata'
+include ':login'

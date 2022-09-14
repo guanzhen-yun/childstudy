@@ -5,7 +5,7 @@ import android.webkit.WebViewClient;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
-import com.tantan.mydata.Child;
+import com.tantan.mydata.Person;
 import com.inke.childstudy.routers.RouterConstants;
 import com.tantan.mydata.utils.BmobUtils;
 import com.ziroom.base.BaseActivity;
@@ -73,8 +73,8 @@ public class WebActivity extends BaseActivity {
       // 无参数调用
 //            webview.loadUrl("javascript:javacalljs()");
       // 传递参数调用
-      Child currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
-      webview.loadUrl("javascript:javacalljswithargs('" + currentLoginChild.getNickname() + "妈妈')");
+//      Person currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
+//      webview.loadUrl("javascript:javacalljswithargs('" + currentLoginChild.getNickname() + "妈妈')");
 
       // 这段js函数的功能就是，遍历所有的img节点，并添加onclick函数，函数的功能是在图片点击的时候调用本地java接口并传递url过去
 //            webview.loadUrl("javascript:(function(){" +

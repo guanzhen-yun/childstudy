@@ -1,4 +1,4 @@
-if(playgameModuleType.toInteger() == 2) {
+if (playgameModuleType.toInteger() == 2) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        if(playgameModuleType.toInteger() == 2) {
+        if (playgameModuleType.toInteger() == 2) {
             applicationId "com.inke.playgame"
         }
         minSdkVersion 16
@@ -26,13 +26,12 @@ android {
                 if (playgameModuleType.toInteger() == 2) {
                     manifest.srcFile 'src/main/module/AndroidManifest.xml'
                     // 配置组件模式下的java代码主文件
-                    java.srcDirs 'src/main/java','src/main/module/java'
+                    java.srcDirs 'src/main/java', 'src/main/module/java'
                 } else {//如果moudle为组件则配置 AndroidManifest
                     manifest.srcFile 'src/main/AndroidManifest.xml'
                 }
             }
         }
-
     }
 
     buildTypes {

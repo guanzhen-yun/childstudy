@@ -7,8 +7,6 @@
     <item name="colorOnPrimary">@color/white</item>
     <!-- Customize your theme here. -->
     <item name="windowNoTitle">true</item>
-    <item name="windowActionBar">false</item>
-
   </style>
 
   <!-- 自定义Dialog主题 -->
@@ -21,5 +19,9 @@
   <style name="BottomDialogAnimation">
     <item name="android:windowEnterAnimation">@anim/popu_show_from_bottom</item>
     <item name="android:windowExitAnimation">@anim/popu_hiden_from_top</item>
+  </style>
+
+  <style name="ActivityStyle" parent="Theme.ChildStudy">
+    <item name="android:screenOrientation">portrait</item>
   </style>
 </resources>

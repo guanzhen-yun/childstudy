@@ -4,28 +4,14 @@
   package="com.inke.childstudy">
   <!--允许联网 -->
   <application
+    android:name=".SophixStubApplication"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
-    android:name=".SophixStubApplication"
     android:networkSecurityConfig="@xml/network_security_config"
     android:requestLegacyExternalStorage="true"
     android:supportsRtl="true"
     android:theme="@style/Theme.ChildStudy">
-    <activity
-      android:exported="true"
-      android:name="com.inke.childstudy.SplashActivity"
-      android:screenOrientation="portrait"
-      android:theme="@style/Splash">
 
-    </activity>
-
-    <activity
-      android:name="com.inke.childstudy.MainActivity"
-      android:screenOrientation="portrait" />
-
-    <activity
-      android:name="com.inke.childstudy.regist.RegistActivity"
-      android:screenOrientation="portrait" />
     <activity
       android:name="com.inke.childstudy.home.HomeActivity"
       android:screenOrientation="portrait" />
@@ -91,18 +77,14 @@
       android:name="com.baidu.lbsapi.API_KEY"
       android:value="m8zUBffetZFq11CPwfeFC4KYiwtiOXFZ" />
 
-    <provider
-      android:authorities="com.inke.childstudy.BmobContentProvider"
-      android:name="cn.bmob.v3.util.BmobContentProvider" />
-
     <!-- Since JCore2.0.0 Required SDK核心功能-->
     <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
     <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
     <provider
+      android:name="androidx.core.content.FileProvider"
       android:authorities="com.inke.childstudy.fileprovider"
       android:exported="false"
-      android:grantUriPermissions="true"
-      android:name="androidx.core.content.FileProvider">
+      android:grantUriPermissions="true">
       <meta-data
         android:name="android.support.FILE_PROVIDER_PATHS"
         android:resource="@xml/file_paths" />
@@ -121,23 +103,23 @@
     <!-- 3.3.0开始所有事件将通过该类回调 -->
     <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
     <provider
+      android:name="com.netease.nimlib.ipc.NIMContentProvider"
       android:authorities="com.inke.childstudy.ipc.provider"
       android:exported="false"
-      android:name="com.netease.nimlib.ipc.NIMContentProvider"
       android:process=":core" />
 
     <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
         如果 SDKOptions 中提供了，则取 SDKOptions 中的值。 -->
     <provider
+      android:name="com.netease.nimlib.ipc.cp.provider.PreferenceContentProvider"
       android:authorities="com.inke.childstudy.ipc.provider.preference"
-      android:exported="false"
-      android:name="com.netease.nimlib.ipc.cp.provider.PreferenceContentProvider" />
+      android:exported="false" />
 
     <!-- 云信后台服务，请使用独立进程。 -->
     <receiver
+      android:name="com.inke.childstudy.jiguang.MyJgReceiver"
       android:enabled="true"
-      android:exported="false"
-      android:name="com.inke.childstudy.jiguang.MyJgReceiver">
+      android:exported="false">
       <intent-filter>
         <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
         <category android:name="com.inke.childstudy" />
@@ -146,8 +128,8 @@
 
     <!-- 云信后台辅助服务 -->
     <receiver
-      android:exported="false"
       android:name="com.netease.nimlib.service.NimReceiver"
+      android:exported="false"
       android:process=":core">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -163,9 +145,9 @@
 
     <!-- 云信进程间通信 Receiver -->
     <service
+      android:name="com.inke.childstudy.jiguang.MyJgService"
       android:enabled="true"
       android:exported="false"
-      android:name="com.inke.childstudy.jiguang.MyJgService"
       android:process=":pushcore">
       <intent-filter>
         <action android:name="cn.jiguang.user.service.action" />
@@ -185,16 +167,16 @@
     <!-- 云信内部使用的进程间通信provider -->
     <!-- SDK启动时会强制检测该组件的声明是否配置正确，如果检测到该声明不正确，SDK会主动抛出异常引发崩溃 -->
     <service
-      android:exported="true"
       android:name="com.netease.nimlib.job.NIMJobService"
+      android:exported="true"
       android:permission="android.permission.BIND_JOB_SERVICE"
       android:process=":core" />
 
     <service android:name="com.netease.nimlib.service.ResponseService" />
     <!--定义百度地图的服务，用于定位-->
     <service
-      android:enabled="true"
       android:name="com.baidu.location.f"
+      android:enabled="true"
       android:process=":remote" />
   </application>
   <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->

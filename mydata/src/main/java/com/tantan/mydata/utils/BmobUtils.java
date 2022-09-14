@@ -1,5 +1,6 @@
 package com.tantan.mydata.utils;
 
+import android.content.Context;
 import android.text.TextUtils;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
@@ -8,7 +9,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-import com.tantan.mydata.Child;
+import com.tantan.mydata.Person;
 import com.tantan.mydata.LoginToken;
 import com.ziroom.net.LogUtils;
 import java.util.List;
@@ -19,6 +20,11 @@ import java.util.List;
 public class BmobUtils<T extends BmobObject> {
 
   private static final String TAG = "Bomb";
+  private Context context;
+
+  public void init(Context context) {
+    this.context = context;
+  }
 
   private BmobUtils() {
   }
@@ -37,17 +43,15 @@ public class BmobUtils<T extends BmobObject> {
   }
 
   public void addData(T t, OnBmobListener onBmobListener) {
-    t.save(new SaveListener<String>() {
+    t.save(context, new SaveListener() {
       @Override
-      public void done(String objectId, BmobException e) {
-        if (onBmobListener != null) {
-          if (e == null) {
-            LogUtils.d(TAG, objectId);
-            onBmobListener.onSuccess(objectId);
-          } else {
-            onBmobListener.onError(e.getMessage());
-          }
-        }
+      public void onSuccess() {
+        onBmobListener.onSuccess("");
+      }
+
+      @Override
+      public void onFailure(int i, String s) {
+        onBmobListener.onError(s);
       }
     });
   }
@@ -58,16 +62,19 @@ public class BmobUtils<T extends BmobObject> {
   public void queryTokenData(String token, OnBmobTokenListener onBmobTokenListener) {
     BmobQuery<LoginToken> query = new BmobQuery<>();
     query.addWhereEqualTo("tokenId", token);
-    query.findObjects(new FindListener<LoginToken>() {
+    query.findObjects(context, new FindListener<LoginToken>() {
       @Override
-      public void done(List<LoginToken> object, BmobException e) {
-        if (e == null && object != null && object.size() > 0) {
-          onBmobTokenListener.onSuccess(object.get(0).getObjectId(), object.get(0).isLogin());
-        } else if (e == null) {
-          onBmobTokenListener.onSuccess("", false);
+      public void onSuccess(List<LoginToken> list) {
+        if (list != null && list.size() > 0) {
+          onBmobTokenListener.onSuccess(list.get(0).getObjectId(), list.get(0).isLogin());
         } else {
-          onBmobTokenListener.onError(e.getMessage());
+          onBmobTokenListener.onSuccess("", false);
         }
+      }
+
+      @Override
+      public void onError(int i, String s) {
+        onBmobTokenListener.onError(s);
       }
     });
   }
@@ -80,14 +87,15 @@ public class BmobUtils<T extends BmobObject> {
     if (!TextUtils.isEmpty(loginToken)) {
       LoginToken login = new LoginToken();
       login.setLogin(isLogin);
-      login.update(loginToken, new UpdateListener() {
+      login.update(context, loginToken, new UpdateListener() {
         @Override
-        public void done(BmobException e) {
-          if (e == null) {
-            onBmobListener.onSuccess("");
-          } else {
-            onBmobListener.onError(e.getMessage());
-          }
+        public void onSuccess() {
+          onBmobListener.onSuccess("");
+        }
+
+        @Override
+        public void onFailure(int i, String s) {
+          onBmobListener.onError(s);
         }
       });
     }
@@ -98,14 +106,15 @@ public class BmobUtils<T extends BmobObject> {
    */
   public void updateBmobDate(String objectId, BmobObject bmobObject,
       OnBmobListener onBmobListener) {
-    bmobObject.update(objectId, new UpdateListener() {
+    bmobObject.update(context, objectId, new UpdateListener() {
       @Override
-      public void done(BmobException e) {
-        if (e == null) {
-          onBmobListener.onSuccess("");
-        } else {
-          onBmobListener.onError(e.getMessage());
-        }
+      public void onSuccess() {
+        onBmobListener.onSuccess("");
+      }
+
+      @Override
+      public void onFailure(int i, String s) {
+        onBmobListener.onError(s);
       }
     });
   }
@@ -113,16 +122,17 @@ public class BmobUtils<T extends BmobObject> {
   /**
    * 注册
    */
-  public void registData(Child child, OnBmobListener onBmobListener) {
-    child.signUp(new SaveListener<Child>() {
+  public void registData(Person child, OnBmobListener onBmobListener) {
+    child.signUp(context, new SaveListener() {
 
       @Override
-      public void done(Child child, BmobException e) {
-        if (e == null) {
-          onBmobListener.onSuccess("");
-        } else {
-          onBmobListener.onError(e.getMessage());
-        }
+      public void onSuccess() {
+        onBmobListener.onSuccess("");
+      }
+
+      @Override
+      public void onFailure(int i, String s) {
+        onBmobListener.onError(s);
       }
     });
   }
@@ -130,16 +140,17 @@ public class BmobUtils<T extends BmobObject> {
   /**
    * 登录
    */
-  public void loginData(Child child, OnBmobListener onBmobListener) {
-    child.login(new SaveListener<Child>() {
+  public void loginData(Person child, OnBmobListener onBmobListener) {
+    child.login(context, new SaveListener() {
 
       @Override
-      public void done(Child child, BmobException e) {
-        if (e == null) {
-          onBmobListener.onSuccess("");
-        } else {
-          onBmobListener.onError(e.getMessage());
-        }
+      public void onSuccess() {
+        onBmobListener.onSuccess("");
+      }
+
+      @Override
+      public void onFailure(int i, String s) {
+        onBmobListener.onError(s);
       }
     });
   }
@@ -147,12 +158,8 @@ public class BmobUtils<T extends BmobObject> {
   /**
    * 获取当前登录的用户
    */
-  public Child getCurrentLoginChild() {
-    if (BmobUser.isLogin()) {
-      return BmobUser.getCurrentUser(Child.class);
-    } else {
-      return null;
-    }
+  public BmobObject getCurrentLoginChild() {
+    return BmobUser.getCurrentUser(context);
   }
 
   public interface OnBmobListener {

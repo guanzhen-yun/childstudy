@@ -12,6 +12,12 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -20,6 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -27,5 +34,6 @@ android {
 }
 
 dependencies {
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //注解处理器，会将注解编译成Java类
     api project(":base")
 }

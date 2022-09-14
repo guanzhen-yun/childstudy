@@ -12,9 +12,9 @@ import com.inke.childstudy.adapter.StudyColorAdapter;
 import com.inke.childstudy.entity.StudyColor;
 import com.inke.childstudy.routers.RouterConstants;
 import com.tantan.mydata.utils.BmobUtils;
-import com.inke.childstudy.utils.SharedPrefUtils;
 import com.inke.childstudy.view.dialog.BottomAddColorDialog;
 import com.tantan.base.utils.ToastUtils;
+import com.tantan.mydata.utils.SharedPrefUtils;
 import com.ziroom.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -94,34 +94,34 @@ public class StudyColorActivity extends BaseActivity {
   private void queryColor() {
     BmobQuery<StudyColor> bmobQuery = new BmobQuery<>();
     bmobQuery.addWhereEqualTo("token", loginToken);
-    bmobQuery.findObjects(new FindListener<StudyColor>() {
-      @Override
-      public void done(List<StudyColor> list, BmobException e) {
-        if (e != null) {
-          ToastUtils.showToast(e.getMessage());
-        } else {
-          mListColor.clear();
-          mListColor.addAll(list);
-          studyColorAdapter.notifyDataSetChanged();
-        }
-      }
-    });
+//    bmobQuery.findObjects(new FindListener<StudyColor>() {
+//      @Override
+//      public void done(List<StudyColor> list, BmobException e) {
+//        if (e != null) {
+//          ToastUtils.showToast(e.getMessage());
+//        } else {
+//          mListColor.clear();
+//          mListColor.addAll(list);
+//          studyColorAdapter.notifyDataSetChanged();
+//        }
+//      }
+//    });
   }
 
   private void isContainsColor(String colorText, OnExistListener onExistListener) {
-    BmobQuery<StudyColor> bmobQuery = new BmobQuery<>();
-    bmobQuery.addWhereEqualTo("token", loginToken);
-    bmobQuery.addWhereEqualTo("colorText", colorText);
-    bmobQuery.findObjects(new FindListener<StudyColor>() {
-      @Override
-      public void done(List<StudyColor> list, BmobException e) {
-        if (list != null && list.size() > 0) {
-          onExistListener.isExist(true);
-        } else {
-          onExistListener.isExist(false);
-        }
-      }
-    });
+//    BmobQuery<StudyColor> bmobQuery = new BmobQuery<>();
+//    bmobQuery.addWhereEqualTo("token", loginToken);
+//    bmobQuery.addWhereEqualTo("colorText", colorText);
+//    bmobQuery.findObjects(new FindListener<StudyColor>() {
+//      @Override
+//      public void done(List<StudyColor> list, BmobException e) {
+//        if (list != null && list.size() > 0) {
+//          onExistListener.isExist(true);
+//        } else {
+//          onExistListener.isExist(false);
+//        }
+//      }
+//    });
   }
 
   private interface OnExistListener {
@@ -160,15 +160,15 @@ public class StudyColorActivity extends BaseActivity {
 
   private void deleteColorObject(int position) {
     StudyColor studyColor = mListColor.get(position);
-    studyColor.delete(studyColor.getObjectId(), new UpdateListener() {
-      @Override
-      public void done(BmobException e) {
-        if (e == null) {
-          queryColor();
-        } else {
-          ToastUtils.showToast(e.getMessage());
-        }
-      }
-    });
+//    studyColor.delete(studyColor.getObjectId(), new UpdateListener() {
+//      @Override
+//      public void done(BmobException e) {
+//        if (e == null) {
+//          queryColor();
+//        } else {
+//          ToastUtils.showToast(e.getMessage());
+//        }
+//      }
+//    });
   }
 }

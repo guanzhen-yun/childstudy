@@ -3,7 +3,6 @@ package com.inke.childstudy.userinfo;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -25,17 +24,16 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
 import com.inke.childstudy.adapter.SexAdapter;
 import com.inke.childstudy.entity.UserInfo;
-import com.inke.childstudy.greendao.DbBean;
-import com.inke.childstudy.greendao.UserInfoEntity;
-import com.inke.childstudy.greendao.UserInfoEntityDao;
+import com.tantan.mydata.greendao.DbBean;
+import com.tantan.mydata.greendao.UserInfoEntity;
 import com.inke.childstudy.routers.RouterConstants;
 import com.tantan.mydata.utils.BmobUtils;
-import com.inke.childstudy.utils.SharedPrefUtils;
-import com.inke.childstudy.utils.greendao.DaoSessionUtils;
+import com.tantan.base.utils.greendao.DaoSessionUtils;
 import com.inke.childstudy.view.dialog.BottomAgeDialog;
 import com.inke.childstudy.view.dialog.BottomDialog;
 import com.inke.childstudy.view.pop.MyPopView;
 import com.tantan.base.utils.ToastUtils;
+import com.tantan.mydata.utils.SharedPrefUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 
@@ -48,8 +46,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
 import me.samlss.broccoli.Broccoli;
 import me.samlss.broccoli.BroccoliGradientDrawable;
 import me.samlss.broccoli.PlaceholderParameter;
@@ -116,97 +112,98 @@ public class UserInfoActivity extends BaseActivity {
     BmobQuery<UserInfo> bmobQuery = new BmobQuery<>();
     String loginToken = SharedPrefUtils.getInstance().getLoginToken();
     bmobQuery.addWhereEqualTo("token", loginToken);
-    bmobQuery.findObjects(new FindListener<UserInfo>() {
-      @Override
-      public void done(List<UserInfo> list, BmobException e) {
-        if (e != null) {
-          if (e.getErrorCode() == 101 && !TextUtils.isEmpty(loginToken)) {
-            mIvHead.setVisibility(View.GONE);
-            mUserInfo = new UserInfo();
-            mUserInfo.setToken(loginToken);
-            mUserInfo.setHeadPath("");
-            mUserInfo.setSex("");
-            mUserInfo.setNick("");
-            BmobUtils.getInstance().addData(mUserInfo, new BmobUtils.OnBmobListener() {
-              @Override
-              public void onSuccess(String objectId) {
-                mObjectId = objectId;
-                broccoli.clearAllPlaceholders();
-              }
-
-              @Override
-              public void onError(String err) {
-                ToastUtils.showToast(err);
-                broccoli.clearAllPlaceholders();
-              }
-            });
-          } else {
-            ToastUtils.showToast(e.getMessage());
-          }
-        } else if (list != null && list.size() > 0) {
-          mUserInfo = list.get(0);
-          mObjectId = mUserInfo.getObjectId();
-          String head = mUserInfo.getHeadPath();
-          if (!TextUtils.isEmpty(head)) {
-            mTAddphoto.setText("修改头像");
-            mPath = head;
-            mIvHead.setVisibility(View.VISIBLE);
-            Bitmap bitmap = BitmapFactory.decodeFile(head);
-            if (bitmap != null) {
-              mIvHead.setImageBitmap(bitmap);
-            }
-          } else {
-            mIvHead.setVisibility(View.GONE);
-          }
-          mSelectSex = mUserInfo.getSex();
-          if (!TextUtils.isEmpty(mSelectSex)) {
-            mSexAdapter.setSelectSex(mSelectSex);
-            mSexAdapter.notifyDataSetChanged();
-          }
-          if (!TextUtils.isEmpty(mUserInfo.getNick())) {
-            mTvNickname.setText(mUserInfo.getNick());
-          }
-          if (mUserInfo.getAge() != 0) {
-            mTvAgeValue.setText(mUserInfo.getAge() + "岁");
-          }
-          broccoli.clearAllPlaceholders();
-          saveData();
-        } else if (!TextUtils.isEmpty(loginToken)) {
-          mIvHead.setVisibility(View.GONE);
-          mUserInfo = new UserInfo();
-          mUserInfo.setToken(loginToken);
-          mUserInfo.setHeadPath("");
-          mUserInfo.setSex("");
-          mUserInfo.setNick("");
-          BmobUtils.getInstance().addData(mUserInfo, new BmobUtils.OnBmobListener() {
-            @Override
-            public void onSuccess(String objectId) {
-              mObjectId = objectId;
-              broccoli.clearAllPlaceholders();
-            }
-
-            @Override
-            public void onError(String err) {
-              ToastUtils.showToast(err);
-              broccoli.clearAllPlaceholders();
-            }
-          });
-        }
-      }
-    });
+//    bmobQuery.findObjects(new FindListener<UserInfo>() {
+//      @Override
+//      public void done(List<UserInfo> list, BmobException e) {
+//        if (e != null) {
+//          if (e.getErrorCode() == 101 && !TextUtils.isEmpty(loginToken)) {
+//            mIvHead.setVisibility(View.GONE);
+//            mUserInfo = new UserInfo();
+//            mUserInfo.setToken(loginToken);
+//            mUserInfo.setHeadPath("");
+//            mUserInfo.setSex("");
+//            mUserInfo.setNick("");
+//            BmobUtils.getInstance().addData(mUserInfo, new BmobUtils.OnBmobListener() {
+//              @Override
+//              public void onSuccess(String objectId) {
+//                mObjectId = objectId;
+//                broccoli.clearAllPlaceholders();
+//              }
+//
+//              @Override
+//              public void onError(String err) {
+//                ToastUtils.showToast(err);
+//                broccoli.clearAllPlaceholders();
+//              }
+//            });
+//          } else {
+//            ToastUtils.showToast(e.getMessage());
+//          }
+//        } else if (list != null && list.size() > 0) {
+//          mUserInfo = list.get(0);
+//          mObjectId = mUserInfo.getObjectId();
+//          String head = mUserInfo.getHeadPath();
+//          if (!TextUtils.isEmpty(head)) {
+//            mTAddphoto.setText("修改头像");
+//            mPath = head;
+//            mIvHead.setVisibility(View.VISIBLE);
+//            Bitmap bitmap = BitmapFactory.decodeFile(head);
+//            if (bitmap != null) {
+//              mIvHead.setImageBitmap(bitmap);
+//            }
+//          } else {
+//            mIvHead.setVisibility(View.GONE);
+//          }
+//          mSelectSex = mUserInfo.getSex();
+//          if (!TextUtils.isEmpty(mSelectSex)) {
+//            mSexAdapter.setSelectSex(mSelectSex);
+//            mSexAdapter.notifyDataSetChanged();
+//          }
+//          if (!TextUtils.isEmpty(mUserInfo.getNick())) {
+//            mTvNickname.setText(mUserInfo.getNick());
+//          }
+//          if (mUserInfo.getAge() != 0) {
+//            mTvAgeValue.setText(mUserInfo.getAge() + "岁");
+//          }
+//          broccoli.clearAllPlaceholders();
+//          saveData();
+//        } else if (!TextUtils.isEmpty(loginToken)) {
+//          mIvHead.setVisibility(View.GONE);
+//          mUserInfo = new UserInfo();
+//          mUserInfo.setToken(loginToken);
+//          mUserInfo.setHeadPath("");
+//          mUserInfo.setSex("");
+//          mUserInfo.setNick("");
+//          BmobUtils.getInstance().addData(mUserInfo, new BmobUtils.OnBmobListener() {
+//            @Override
+//            public void onSuccess(String objectId) {
+//              mObjectId = objectId;
+//              broccoli.clearAllPlaceholders();
+//            }
+//
+//            @Override
+//            public void onError(String err) {
+//              ToastUtils.showToast(err);
+//              broccoli.clearAllPlaceholders();
+//            }
+//          });
+//        }
+//      }
+//    });
   }
 
   private void queryLocalUserInfo() {
     String loginToken = SharedPrefUtils.getInstance().getLoginToken();
     UserInfoEntity entity = new UserInfoEntity();
     List<WhereCondition> whereConditions = new ArrayList<>();
-    whereConditions.add(UserInfoEntityDao.Properties.Token.eq(loginToken));
-    List<? extends DbBean> dbBeans = DaoSessionUtils.queryConditionAll(entity, whereConditions);
+//    whereConditions.add(UserInfoEntityDao.Properties.Token.eq(loginToken));
+    List<? extends DbBean> dbBeans = DaoSessionUtils.getInstance()
+        .queryConditionAll(entity, whereConditions);
     if (dbBeans != null && dbBeans.size() > 0) {
       DbBean dbBean = dbBeans.get(0);
       if (dbBean instanceof UserInfoEntity) {
         UserInfoEntity userInfoEntity = (UserInfoEntity) dbBean;
-        mObjectId = userInfoEntity.getObjectId();
+//        mObjectId = userInfoEntity.getObjectId();
         String head = userInfoEntity.getHeadPath();
         if (!TextUtils.isEmpty(head)) {
           mTAddphoto.setText("修改头像");
@@ -238,22 +235,23 @@ public class UserInfoActivity extends BaseActivity {
   private void saveData() {
     UserInfoEntity entity = new UserInfoEntity();
     entity.setAge(mUserInfo.getAge());
-    entity.setToken(mUserInfo.getToken());
+//    entity.setToken(mUserInfo.getToken());
     entity.setHeadPath(mUserInfo.getHeadPath());
     entity.setNick(mUserInfo.getNick());
     entity.setSex(mUserInfo.getSex());
-    entity.setObjectId(mUserInfo.getObjectId());
+//    entity.setObjectId(mUserInfo.getObjectId());
     List<WhereCondition> whereConditions = new ArrayList<>();
-    whereConditions.add(UserInfoEntityDao.Properties.Token.eq(mUserInfo.getToken()));
-    List<? extends DbBean> dbBeans = DaoSessionUtils.queryConditionAll(entity, whereConditions);
+//    whereConditions.add(UserInfoEntityDao.Properties.Token.eq(mUserInfo.getToken()));
+    List<? extends DbBean> dbBeans = DaoSessionUtils.getInstance()
+        .queryConditionAll(entity, whereConditions);
     if (dbBeans == null || dbBeans.size() == 0) {
-      DaoSessionUtils.insertDbBean(entity);
+      DaoSessionUtils.getInstance().insertDbBean(entity, null);
     } else {
       DbBean dbBean = dbBeans.get(0);
       if (dbBean instanceof UserInfoEntity) {
         entity.setId(((UserInfoEntity) dbBean).getId());
       }
-      DaoSessionUtils.updateDbBean(entity);
+      DaoSessionUtils.getInstance().updateDbBean(entity);
     }
   }
 
@@ -370,14 +368,14 @@ public class UserInfoActivity extends BaseActivity {
 
   private String getImagePath(Uri uri, String selection) {
     String path = null;
-    // 通过Uri和selection来获取真实的图片路径
-    Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
-    if (cursor != null) {
-      if (cursor.moveToFirst()) {
-        path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-      }
-      cursor.close();
-    }
+//    // 通过Uri和selection来获取真实的图片路径
+//    Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
+//    if (cursor != null) {
+//      if (cursor.moveToFirst()) {
+//        path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+//      }
+//      cursor.close();
+//    }
     return path;
   }
 
