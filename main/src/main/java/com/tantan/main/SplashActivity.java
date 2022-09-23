@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import com.tantan.base.RouterConstants.Child;
+import com.tantan.base.RouterConstants.Parent;
 import com.tantan.base.dialog.BottomTwoButtonDialog;
 //import com.tantan.mydata.utils.BmobUtils;
 import com.tantan.base.utils.NotificationUtils;
@@ -155,7 +157,14 @@ public class SplashActivity extends BaseActivity implements OnClickListener {
 
   //跳转首页 可以注册和登录
   private void toMainPage() {
-    RouterUtils.jumpWithFinish(SplashActivity.this, RouterConstants.Main.Main);
+    String lastedMobile = SharedPrefUtils.getInstance().getLastedMobile();
+    if (TextUtils.isEmpty(lastedMobile)) {
+      RouterUtils.jumpWithFinish(SplashActivity.this, RouterConstants.Main.Main);
+    } else if (SharedPrefUtils.getInstance().isParent()) {
+      RouterUtils.jumpWithFinish(SplashActivity.this, Parent.Home);
+    } else {
+      RouterUtils.jumpWithFinish(SplashActivity.this, Child.Home);
+    }
   }
 
   @Override

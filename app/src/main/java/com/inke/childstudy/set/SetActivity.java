@@ -89,7 +89,7 @@ public class SetActivity extends BaseActivity {
 
   @Override
   public void initViews() {
-    boolean isMother = SharedPrefUtils.getInstance().isMother();
+    boolean isMother = SharedPrefUtils.getInstance().isParent();
     if (isMother) {
       ViewUtils.setViewsGone(mTvBack, mTvChange, mViewInfo, mTvChangeinfo, mTvColor, mViewColor,
           mTvAnimal, mViewAnimal, mTvWord, mViewWord, mTvTool, mViewTool, mTvFruit, mViewFruit,

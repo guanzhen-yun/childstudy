@@ -18,7 +18,7 @@ import java.util.List;
 import org.greenrobot.greendao.query.WhereCondition;
 
 public class LoginPresenter extends BaseMvpPresenter<LoginContract.IView> implements
-    LoginContract.IPresenter {
+    LoginContract.IPresenter, RequestCallback {
 
   public LoginPresenter(IView view) {
     super(view);
@@ -43,29 +43,28 @@ public class LoginPresenter extends BaseMvpPresenter<LoginContract.IView> implem
   //登录网易云信
   private void loginIm(String mobile) {
     LoginInfo info = new LoginInfo(mobile, Utils.getDefaultToken());
-    RequestCallback<LoginInfo> callback =
-        new RequestCallback<LoginInfo>() {
-          @Override
-          public void onSuccess(LoginInfo param) {
-            ToastUtils.showToast("登录成功");
-            LoginUtils.saveLoginInfo(mobile);
-            mView.loginSuccess();
-          }
+    NIMClient.getService(AuthService.class).login(info).setCallback(this);
+  }
 
-          @Override
-          public void onFailed(int code) {
-            if (code == 302) {
-              ToastUtils.showToast("账号密码错误");
-            } else {
-              ToastUtils.showToast("登录失败");
-            }
-          }
+  @Override
+  public void onSuccess(Object param) {
+    LoginInfo loginInfo = (LoginInfo) param;
+    ToastUtils.showToast("登录成功");
+    LoginUtils.saveLoginInfo(loginInfo.getAccount());
+    mView.loginSuccess();
+  }
 
-          @Override
-          public void onException(Throwable exception) {
-            ToastUtils.showToast(exception.getMessage());
-          }
-        };
-    NIMClient.getService(AuthService.class).login(info).setCallback(callback);
+  @Override
+  public void onFailed(int code) {
+    if (code == 302) {
+      ToastUtils.showToast("账号密码错误");
+    } else {
+      ToastUtils.showToast("登录失败");
+    }
+  }
+
+  @Override
+  public void onException(Throwable exception) {
+    ToastUtils.showToast(exception.getMessage());
   }
 }

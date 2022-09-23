@@ -35,6 +35,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     etPassword = findViewById(R.id.et_password);
     TextView tvLogin = findViewById(R.id.tv_login);
     tvLogin.setOnClickListener(this);
+    useTestData();
+  }
+
+  //测试数据
+  private void useTestData() {
+    etUsername.setText("15711175963");
+    etPassword.setText("123456");
   }
 
   @Override

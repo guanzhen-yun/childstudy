@@ -123,4 +123,8 @@ public class UserInfoEntity extends DbBean {
     this.password = password;
   }
 
+  public UserInfoEntity(String userName) {
+    this.accountNum = userName;
+  }
+
 }

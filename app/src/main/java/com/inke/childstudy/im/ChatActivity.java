@@ -67,7 +67,7 @@ public class ChatActivity extends BaseActivity {
   @Override
   public void initViews() {
     StatusBarUtil.with(this).setColor(Color.parseColor("#eeeeee")).init();
-    boolean isMother = SharedPrefUtils.getInstance().isMother();
+    boolean isMother = SharedPrefUtils.getInstance().isParent();
     WindowManager mWindow = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
     WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
     View titleView = View.inflate(this, R.layout.view_title, null);

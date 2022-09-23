@@ -18,7 +18,7 @@ public class ChatAdapter extends BaseQuickAdapter<IMMessage, BaseViewHolder> {
 
   public ChatAdapter(@Nullable List<IMMessage> data) {
     super(R.layout.item_im, data);
-    isMother = SharedPrefUtils.getInstance().isMother();
+    isMother = SharedPrefUtils.getInstance().isParent();
   }
 
   @Override

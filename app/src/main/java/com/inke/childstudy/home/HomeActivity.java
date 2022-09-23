@@ -64,7 +64,7 @@ public class HomeActivity extends BaseActivity {
 
   @Override
   public void initViews() {
-    if (SharedPrefUtils.getInstance().isMother()) {
+    if (SharedPrefUtils.getInstance().isParent()) {
       RouterUtils.jumpWithFinish(this, RouterConstants.App.Set);
       return;
     }

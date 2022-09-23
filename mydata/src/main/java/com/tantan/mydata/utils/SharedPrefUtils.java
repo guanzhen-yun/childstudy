@@ -15,7 +15,7 @@ public class SharedPrefUtils {
   private static final String LOGIN_TOKEN = "login-token";
   private static final String IM_TOKEN = "im-token";
 
-  private static final String ISMOTHER = "ismother";
+  private static final String ISPARENT = "is_parent";
   private SharedPreferences mSharedPreferences;
 
   private SharedPrefUtils() {
@@ -88,12 +88,12 @@ public class SharedPrefUtils {
     return mSharedPreferences.getString(key, "");
   }
 
-  public void saveMotherAccount(boolean isMother) {
-    mSharedPreferences.edit().putBoolean(ISMOTHER, isMother).apply();
+  public void saveParentAccount(boolean isParent) {
+    mSharedPreferences.edit().putBoolean(ISPARENT, isParent).apply();
   }
 
-  public boolean isMother() {
-    return mSharedPreferences.getBoolean(ISMOTHER, false);
+  public boolean isParent() {
+    return mSharedPreferences.getBoolean(ISPARENT, false);
   }
 
   public void saveLastedMobile(String accountNum) {
