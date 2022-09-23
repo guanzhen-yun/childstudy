@@ -29,5 +29,10 @@ dependencies {
     api 'com.google.android.material:material:1.6.1'
     api 'androidx.constraintlayout:constraintlayout:2.1.4'
     api 'com.jaeger.statusbarutil:library:1.5.1'
+    // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
+    api "com.umeng.umsdk:common:9.4.2" //（必选）
+    api "com.umeng.umsdk:asms:1.4.1" // asms包依赖(必选)
+    // 基础功能 (必需)
+    api 'com.netease.nimlib:basesdk:8.7.0'
     api project(":mydata")
 }

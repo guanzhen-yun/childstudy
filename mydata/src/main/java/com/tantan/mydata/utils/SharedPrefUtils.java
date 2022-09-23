@@ -9,9 +9,12 @@ import android.content.SharedPreferences;
 public class SharedPrefUtils {
 
   private static final String SPFILE = "sp-file";
+  private static final String LASTEST_MOBILE = "lasted-mobile";
+
   private static final String SP_ISFIRSTLOGIN = "sp-firstlogin";
   private static final String LOGIN_TOKEN = "login-token";
   private static final String IM_TOKEN = "im-token";
+
   private static final String ISMOTHER = "ismother";
   private SharedPreferences mSharedPreferences;
 
@@ -93,4 +96,11 @@ public class SharedPrefUtils {
     return mSharedPreferences.getBoolean(ISMOTHER, false);
   }
 
+  public void saveLastedMobile(String accountNum) {
+    mSharedPreferences.edit().putString(LASTEST_MOBILE, accountNum).apply();
+  }
+
+  public String getLastedMobile() {
+    return mSharedPreferences.getString(LASTEST_MOBILE, "");
+  }
 }

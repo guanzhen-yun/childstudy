@@ -29,16 +29,17 @@ public class UserInfoEntity extends DbBean {
   String password;
 
   @Generated(hash = 1111537556)
-  public UserInfoEntity(Long id, String headPath, String nick, String sex, int age, String accountNum,
-          boolean isParent, String password) {
-      this.id = id;
-      this.headPath = headPath;
-      this.nick = nick;
-      this.sex = sex;
-      this.age = age;
-      this.accountNum = accountNum;
-      this.isParent = isParent;
-      this.password = password;
+  public UserInfoEntity(Long id, String headPath, String nick, String sex, int age,
+      String accountNum,
+      boolean isParent, String password) {
+    this.id = id;
+    this.headPath = headPath;
+    this.nick = nick;
+    this.sex = sex;
+    this.age = age;
+    this.accountNum = accountNum;
+    this.isParent = isParent;
+    this.password = password;
   }
 
   @Generated(hash = 2042969639)
@@ -102,11 +103,11 @@ public class UserInfoEntity extends DbBean {
   }
 
   public String getPassword() {
-      return this.password;
+    return this.password;
   }
 
   public void setPassword(String password) {
-      this.password = password;
+    this.password = password;
   }
 
   public UserInfoEntity(String userName, String password, String name, int age, boolean isParent) {
@@ -115,6 +116,11 @@ public class UserInfoEntity extends DbBean {
     this.nick = name;
     this.password = password;
     this.isParent = isParent;
+  }
+
+  public UserInfoEntity(String userName, String password) {
+    this.accountNum = userName;
+    this.password = password;
   }
 
 }

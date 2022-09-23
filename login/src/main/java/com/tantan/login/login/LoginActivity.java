@@ -4,13 +4,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import butterknife.BindView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.tantan.base.RouterConstants;
 import com.tantan.base.utils.StatusBarUtils;
 import com.tantan.base.utils.ToastUtils;
 import com.tantan.login.R;
+import com.tantan.mydata.greendao.UserInfoEntity;
 import com.ziroom.base.BaseActivity;
+import com.ziroom.base.RouterUtils;
 
 /**
  * 登录页
@@ -53,6 +54,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
       ToastUtils.showToast("请输入密码");
       return;
     }
-    
+    UserInfoEntity userInfo = new UserInfoEntity(userName, password);
+    mPresenter.login(userInfo);
+  }
+
+  @Override
+  public void loginSuccess() {
+    RouterUtils.jumpWithFinish(LoginActivity.this, RouterConstants.App.Home);
   }
 }

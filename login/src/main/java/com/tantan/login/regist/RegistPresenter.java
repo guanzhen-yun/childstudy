@@ -3,6 +3,7 @@ package com.tantan.login.regist;
 import com.tantan.base.utils.ToastUtils;
 import com.tantan.base.utils.greendao.DaoSessionUtils;
 import com.tantan.base.utils.greendao.DaoSessionUtils.OnDaoListener;
+import com.tantan.login.LoginUtils;
 import com.tantan.login.regist.RegistContract.IView;
 import com.tantan.mydata.greendao.DbBean;
 import com.tantan.mydata.greendao.UserInfoEntity;
@@ -26,12 +27,14 @@ public class RegistPresenter extends BaseMvpPresenter<RegistContract.IView> impl
     if (dbBeans.size() > 0) {
       String nickName = ((UserInfoEntity) dbBeans.get(0)).getNick();
       ToastUtils.showToast("该用户:" + nickName + "已注册，自动登录...");
+      LoginUtils.saveLoginInfo(userInfo.getAccountNum());
       mView.registSuccess();
     } else {
       //没有注册过
       DaoSessionUtils.getInstance().insertDbBean(userInfo, new OnDaoListener() {
         @Override
         public void onSuccess() {
+          LoginUtils.saveLoginInfo(userInfo.getAccountNum());
           ToastUtils.showToast("注册成功, 将自动登录...");
           mView.registSuccess();
         }
