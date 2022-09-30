@@ -1,5 +1,6 @@
 package com.tantan.login;
 
+import com.tantan.base.utils.DataUtils;
 import com.tantan.base.utils.greendao.DaoSessionUtils;
 import com.tantan.mydata.event.FinishMainEvent;
 import com.tantan.mydata.greendao.DbBean;
@@ -20,31 +21,7 @@ public class LoginUtils {
     MobclickAgent.onProfileSignIn(accountNum);
     EventBus.getDefault().post(new FinishMainEvent());
     SharedPrefUtils.getInstance().saveLastedMobile(accountNum);
-    boolean isParent = LoginUtils.isParent(new UserInfoEntity(accountNum));
+    boolean isParent = DataUtils.isParent(new UserInfoEntity(accountNum));
     SharedPrefUtils.getInstance().saveParentAccount(isParent);
-  }
-
-  //查询数据库里是否有该用户
-  public static UserInfoEntity getContainsUser(UserInfoEntity userInfo) {
-    List<WhereCondition> whereConditions = new ArrayList<>();
-    whereConditions.add(UserInfoEntityDao.Properties.AccountNum.eq(userInfo.getAccountNum()));
-    List<? extends DbBean> dbBeans = DaoSessionUtils.getInstance()
-        .queryConditionAll(userInfo, whereConditions);
-    if (dbBeans.size() > 0) {
-      return (UserInfoEntity) dbBeans.get(0);
-    }
-    return null;
-  }
-
-  //查询数据库里该用户是否是父母
-  public static boolean isParent(UserInfoEntity userInfo) {
-    List<WhereCondition> whereConditions = new ArrayList<>();
-    whereConditions.add(UserInfoEntityDao.Properties.AccountNum.eq(userInfo.getAccountNum()));
-    List<? extends DbBean> dbBeans = DaoSessionUtils.getInstance()
-        .queryConditionAll(userInfo, whereConditions);
-    if (dbBeans.size() > 0) {
-      return ((UserInfoEntity) dbBeans.get(0)).getIsParent();
-    }
-    return false;
   }
 }

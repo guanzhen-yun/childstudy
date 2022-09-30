@@ -13,20 +13,20 @@ public interface RouterConstants {
 
   interface Child {
 
-    String Root = "/child";
-    String Home = Root + "home";
+    String Root = "/child/";
+    String Home = Root + "ChildHomeActivity";
   }
 
   interface Parent {
 
     String Root = "/parent/";
-    String Home = Root + "home";
+    String Home = Root + "ParentHomeActivity";
   }
 
   interface Login {
 
     String Root = "/login/";
-    String Login = Root + "login";
+    String Login = Root + "LoginActivity";
     String Regist = Root + "RegistActivity";
   }
 
@@ -34,8 +34,6 @@ public interface RouterConstants {
 
     String Root = "/app/";
     String Main = Root + "main";
-    String Regist = Root + "regist";
-    String Login = Root + "login";
     String Home = Root + "home";
     String Set = Root + "set";
     String UserInfo = Root + "userinfo";

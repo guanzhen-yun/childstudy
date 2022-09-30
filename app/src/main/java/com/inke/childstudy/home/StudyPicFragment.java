@@ -3,7 +3,7 @@ package com.inke.childstudy.home;
 import android.view.View;
 
 import com.inke.childstudy.R;
-import com.inke.childstudy.view.picview.PicParentView;
+import com.tantan.child.view.tuxing.PicParentView;
 import com.umeng.analytics.MobclickAgent;
 import com.ziroom.base.BaseFragment;
 
@@ -14,39 +14,40 @@ import butterknife.OnClick;
  * 学习图片
  */
 public class StudyPicFragment extends BaseFragment {
-    @BindView(R.id.pic_parent)
-    PicParentView mPicParent;
 
-    public static StudyPicFragment getInstance() {
-        return new StudyPicFragment();
-    }
+  @BindView(R.id.pic_parent)
+  PicParentView mPicParent;
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_study_pic;
-    }
+  public static StudyPicFragment getInstance() {
+    return new StudyPicFragment();
+  }
 
-    @OnClick({R.id.tv_change_pic})
-    public void onClickView(View v) {
-        changePic();
-    }
+  @Override
+  public int getLayoutId() {
+    return R.layout.fragment_study_pic;
+  }
 
-    /**
-     * 切换图形
-     */
-    private void changePic() {
-        mPicParent.setRandomView();
-    }
+  @OnClick({R.id.tv_change_pic})
+  public void onClickView(View v) {
+    changePic();
+  }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onPageStart("StudyPic"); //统计页面
-    }
+  /**
+   * 切换图形
+   */
+  private void changePic() {
+    mPicParent.setRandomView();
+  }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPageEnd("StudyPic");
-    }
+  @Override
+  public void onResume() {
+    super.onResume();
+    MobclickAgent.onPageStart("StudyPic"); //统计页面
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    MobclickAgent.onPageEnd("StudyPic");
+  }
 }

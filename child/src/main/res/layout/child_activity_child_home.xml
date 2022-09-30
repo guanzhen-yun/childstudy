@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <TextView
+    android:id="@+id/tv_title"
+    style="@style/style_title"
+    android:text="宝宝首页"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/tv_set"
+    style="@style/style_right_top_title"
+    android:text="设置"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <View
+    android:id="@+id/view_title"
+    style="@style/style_view_line"
+    android:layout_marginTop="15dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+  <TextView
+    android:id="@+id/tv_hello"
+    style="@style/style_tv_toptext"
+    android:text="您好"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/view_title" />
+
+  <FrameLayout
+    android:id="@+id/fl_body"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="20dp"
+    app:layout_constraintBottom_toTopOf="@+id/view_bottom"
+    app:layout_constraintTop_toBottomOf="@id/tv_hello" />
+
+  <View
+    android:id="@+id/view_bottom"
+    style="@style/style_view_line"
+    app:layout_constraintBottom_toTopOf="@+id/tv_studynum"
+    app:layout_constraintLeft_toLeftOf="parent" />
+
+  <TextView
+    android:id="@+id/tv_studynum"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_ripper"
+    android:gravity="center_horizontal"
+    android:padding="20dp"
+    android:text="学习数字"
+    android:textColor="@color/black"
+    android:textSize="26sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@+id/view_middle_line" />
+
+  <View
+    android:id="@+id/view_middle_line"
+    android:layout_width="1dp"
+    android:layout_height="30dp"
+    android:background="#999999"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toRightOf="@id/tv_studynum"
+    app:layout_constraintRight_toLeftOf="@+id/tv_studypic"
+    app:layout_constraintTop_toBottomOf="@id/view_bottom" />
+
+  <TextView
+    android:id="@+id/tv_studypic"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_ripper"
+    android:gravity="center_horizontal"
+    android:padding="20dp"
+    android:text="学习图形"
+    android:textColor="#999999"
+    android:textSize="26sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toRightOf="@id/view_middle_line"
+    app:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

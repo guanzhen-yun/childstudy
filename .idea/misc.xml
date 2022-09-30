@@ -3,20 +3,32 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.16197916666666667" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.421875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11277173913043478" />
         <entry key="app/src/main/res/layout/activity_regist.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layout/activity_set.xml" value="0.12222222222222222" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.11730072463768115" />
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.1890625" />
+        <entry key="app/src/main/res/layout/fragment_study_num.xml" value="0.421875" />
+        <entry key="app/src/main/res/layout/fragment_study_pic.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/view_exitdialog.xml" value="0.1403985507246377" />
         <entry key="app/src/main/res/layout/view_title.xml" value="0.16197916666666667" />
         <entry key="app/src/main/res/layout/view_twobutton_dialog.xml" value="0.12409420289855072" />
+        <entry key="base/src/main/res/drawable/bg_common.xml" value="0.1315" />
+        <entry key="base/src/main/res/drawable/bg_ripper.xml" value="0.1315" />
         <entry key="base/src/main/res/layout/view_twobutton_dialog.xml" value="0.10511651469098278" />
+        <entry key="child/src/main/res/layout/activity_child_home.xml" value="0.165" />
+        <entry key="child/src/main/res/layout/child_fragment_study_num.xml" value="0.15729166666666666" />
+        <entry key="child/src/main/res/layout/child_fragment_study_pic.xml" value="0.15520833333333334" />
+        <entry key="child/src/main/res/layout/fragment_study_num.xml" value="0.21510416666666668" />
         <entry key="login/src/main/res/layout/activity_login.xml" value="0.15416666666666667" />
         <entry key="login/src/main/res/layout/activity_regist.xml" value="0.165" />
         <entry key="main/src/main/res/layout/activity_main.xml" value="0.12545289855072464" />
         <entry key="main/src/main/res/layout/activity_splash.xml" value="0.11730072463768115" />
+        <entry key="parent/src/main/res/layout/activity_parent_home.xml" value="0.165" />
         <entry key="playgame/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>

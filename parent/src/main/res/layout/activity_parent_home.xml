@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <TextView
+    android:id="@+id/tv_title"
+    style="@style/style_title"
+    android:text="家长首页"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <View
+    android:id="@+id/view_title"
+    style="@style/style_view_line"
+    android:layout_marginTop="15dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+  <TextView
+    android:id="@+id/tv_hello"
+    style="@style/style_tv_toptext"
+    android:text="您好"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/view_title" />
+
+  <View
+    android:id="@+id/view_address"
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    android:background="#eeeeee"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_hello" />
+
+  <TextView
+    android:id="@+id/tv_address"
+    style="@style/style_set"
+    android:background="@drawable/bg_ripper"
+    android:text="定位追踪"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/view_address" />
+
+  <com.tantan.base.view.ArrowView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="20dp"
+    app:layout_constraintBottom_toBottomOf="@id/tv_address"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="@id/tv_address" />
+
+  <View
+    android:id="@+id/view_info"
+    style="@style/style_view_line"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_address" />
+
+  <TextView
+    android:id="@+id/tv_info"
+    style="@style/style_set"
+    android:background="@drawable/bg_ripper"
+    android:text="使用说明"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/view_info" />
+
+  <com.tantan.base.view.ArrowView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="20dp"
+    app:layout_constraintBottom_toBottomOf="@id/tv_info"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="@id/tv_info" />
+
+  <View
+    android:id="@+id/view_study"
+    style="@style/style_view_line"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_info" />
+
+  <TextView
+    android:id="@+id/tv_tostudy"
+    style="@style/style_set"
+    android:background="@drawable/bg_ripper"
+    android:text="学习课程"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/view_study" />
+
+  <com.tantan.base.view.ArrowView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="20dp"
+    app:layout_constraintBottom_toBottomOf="@id/tv_tostudy"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="@id/tv_tostudy" />
+
+  <View
+    android:id="@+id/view_a"
+    style="@style/style_view_line"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_tostudy" />
+
+  <View
+    style="@style/style_view_line"
+    app:layout_constraintBottom_toTopOf="@+id/tv_loginout"
+    app:layout_constraintLeft_toLeftOf="parent" />
+
+  <TextView
+    android:id="@+id/tv_loginout"
+    style="@style/style_bottom_button"
+    android:text="退出登录"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

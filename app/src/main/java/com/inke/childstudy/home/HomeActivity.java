@@ -16,12 +16,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
-import com.tantan.mydata.Person;
 import com.inke.childstudy.entity.event.FinishHomeEvent;
 import com.inke.childstudy.routers.RouterConstants;
 import com.inke.childstudy.service.LocationService;
+import com.tantan.base.utils.TrackUtils;
 import com.tantan.mydata.utils.BmobUtils;
-import com.inke.childstudy.utils.TrackUtils;
 import com.tantan.mydata.utils.SharedPrefUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;

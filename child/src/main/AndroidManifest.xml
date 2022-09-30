@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.tantan.child">
+
+  <application>
+
+    <activity
+      android:name=".ChildHomeActivity"
+      android:theme="@style/ActivityStyle" />
+  </application>
+
+</manifest>

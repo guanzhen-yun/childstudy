@@ -4,7 +4,7 @@ ext {
             //sdk版本号
             compileSdkVersion: 32,
             buildToolsVersion: "30.0.3",
-            minSdkVersion    : 19,
+            minSdkVersion    : 21,
             targetSdkVersion : 33
     ]
 }

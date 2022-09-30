@@ -4,6 +4,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.tantan.base.utils.DataUtils;
 import com.tantan.base.utils.ToastUtils;
 import com.tantan.base.utils.Utils;
 import com.tantan.base.utils.greendao.DaoSessionUtils;
@@ -27,7 +28,7 @@ public class LoginPresenter extends BaseMvpPresenter<LoginContract.IView> implem
   @Override
   public void login(UserInfoEntity userInfo) {
     //查询该用户是否已经注册过
-    UserInfoEntity entity = LoginUtils.getContainsUser(userInfo);
+    UserInfoEntity entity = DataUtils.getContainsUser(userInfo);
     if (entity == null) {
       ToastUtils.showToast("该用户不存在，请先注册...");
     } else {

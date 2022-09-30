@@ -1,6 +1,5 @@
 package com.tantan.login.regist;
 
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +16,6 @@ import com.tantan.login.R;
 import com.tantan.mydata.greendao.UserInfoEntity;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
-import com.ziroom.base.StatusBarUtil;
 
 //注册页面
 @Route(path = RouterConstants.Login.Regist)
@@ -47,7 +45,7 @@ public class RegistActivity extends BaseActivity<RegistPresenter> implements OnC
     cbIsparent = findViewById(R.id.cb_isparent);
     TextView tvRegist = findViewById(R.id.tv_regist);
     tvRegist.setOnClickListener(this);
-//    setTestData();
+    setTestData();
   }
 
   @Override
@@ -95,10 +93,10 @@ public class RegistActivity extends BaseActivity<RegistPresenter> implements OnC
 
   //测试数据
   private void setTestData() {
-    etUsername.setText("15711175963");
+    etUsername.setText("18324602696");
     etPassword.setText("123456");
-    etName.setText("关震");
-    etAge.setText("32");
-    cbIsparent.setChecked(true);
+    etName.setText("淼淼");
+    etAge.setText("3");
+    cbIsparent.setChecked(false);
   }
 }

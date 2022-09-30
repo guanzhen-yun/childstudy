@@ -1,69 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="tv_login">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">19sp</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:paddingTop">20dp</item>
-        <item name="android:paddingBottom">20dp</item>
-    </style>
+  <style name="tv_login">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">19sp</item>
+    <item name="android:textColor">@color/black</item>
+    <item name="android:gravity">center_horizontal</item>
+    <item name="android:paddingTop">20dp</item>
+    <item name="android:paddingBottom">20dp</item>
+  </style>
 
-    <style name="tv_normal">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">20dp</item>
-        <item name="android:layout_marginLeft">20dp</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
+  <style name="tv_normal">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginTop">20dp</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">@color/black</item>
+  </style>
 
-    <style name="et_normal">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">20dp</item>
-        <item name="android:layout_marginRight">20dp</item>
-        <item name="android:background">@null</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColorHint">#888888</item>
-    </style>
+  <style name="et_normal">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:background">@null</item>
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColorHint">#888888</item>
+  </style>
 
-    <style name="style_line_ver">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">@color/black</item>
-    </style>
+  <style name="style_line_ver">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">0.5dp</item>
+    <item name="android:background">@color/black</item>
+  </style>
 
-    <style name="style_set">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">18sp</item>
-    </style>
+  <style name="popuwindow_from_bottom">
+    <item name="android:windowEnterAnimation">@anim/popu_show_from_bottom</item>
+    <item name="android:windowExitAnimation">@anim/popu_hiden_from_top</item>
 
-    <style name="popuwindow_from_bottom">
-        <item name="android:windowEnterAnimation">@anim/popu_show_from_bottom</item>
-        <item name="android:windowExitAnimation">@anim/popu_hiden_from_top</item>
+  </style>
 
-    </style>
-
-    <style name="Theme_Circle_Dialog" parent="@android:style/Theme.Dialog">
-        <!-- Dialog的windowFrame框为无 -->
-        <!-- <item name="android:windowFrame">@null</item> -->
-        <!-- 边框 -->
-        <item name="android:windowIsFloating">true</item>
-        <!-- 是否浮现在activity之上 -->
-        <item name="android:windowIsTranslucent">true</item>
-        <!-- 半透明 -->
-        <item name="android:windowNoTitle">true</item>
-        <!-- 设置dialog的背景 -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <!-- 背景是否模糊显示 -->
-        <item name="android:backgroundDimEnabled">true</item>
-        <!-- 模糊 -->
-        <item name="android:textColorPrimaryInverse">@android:color/black</item>
-    </style>
+  <style name="Theme_Circle_Dialog" parent="@android:style/Theme.Dialog">
+    <!-- Dialog的windowFrame框为无 -->
+    <!-- <item name="android:windowFrame">@null</item> -->
+    <!-- 边框 -->
+    <item name="android:windowIsFloating">true</item>
+    <!-- 是否浮现在activity之上 -->
+    <item name="android:windowIsTranslucent">true</item>
+    <!-- 半透明 -->
+    <item name="android:windowNoTitle">true</item>
+    <!-- 设置dialog的背景 -->
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <!-- 背景是否模糊显示 -->
+    <item name="android:backgroundDimEnabled">true</item>
+    <!-- 模糊 -->
+    <item name="android:textColorPrimaryInverse">@android:color/black</item>
+  </style>
 </resources>

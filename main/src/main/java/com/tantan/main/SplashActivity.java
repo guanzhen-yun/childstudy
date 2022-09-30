@@ -1,6 +1,7 @@
 package com.tantan.main;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -52,8 +53,8 @@ public class SplashActivity extends BaseActivity implements OnClickListener {
   //请求权限
   private void requestPermissions() {
     String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        "android.permission.CAMERA", Manifest.permission.WRITE_SETTINGS,
-        "android.permission.CALL_PHONE"};
+        permission.CAMERA, Manifest.permission.WRITE_SETTINGS,
+        permission.CALL_PHONE};
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       requestPermissions(permissions, 100);
     } else {

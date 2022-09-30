@@ -133,7 +133,7 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //注解处理器，会将注解编译成Java类
 
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
-    
+
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
     implementation 'me.samlss:broccoli:1.0.0' //骨架屏
     //wheelView
@@ -161,6 +161,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation project(":main")
     implementation project(":login")
+    implementation project(":child")
+    implementation project(":parent")
 }
 
 repositories {

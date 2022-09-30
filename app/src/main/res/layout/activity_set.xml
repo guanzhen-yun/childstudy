@@ -1,236 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/white">
+
+  <RelativeLayout
+    android:id="@+id/rl_top"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
-
-    <RelativeLayout
-        android:id="@+id/rl_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:text="返回"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:padding="20dp"
-            android:text="设置"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tv_change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:padding="20dp"
-            android:text="切换修改"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@id/rl_top"
-        android:background="@color/black" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/tv_loginout"
-        android:layout_below="@id/rl_top">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_changeinfo"
-                android:text="个人资料"
-                style="@style/style_set" />
-
-            <View
-                android:id="@+id/view_info"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_changeinfo"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_color"
-                android:layout_below="@id/tv_changeinfo"
-                android:text="识别颜色"
-                style="@style/style_set"
-                />
-
-            <View
-                android:id="@+id/view_color"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_color"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_animal"
-                android:layout_below="@id/tv_color"
-                android:text="看看小动物"
-                style="@style/style_set"
-                />
-
-            <View
-                android:id="@+id/view_animal"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_animal"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_word"
-                android:layout_below="@id/tv_animal"
-                android:text="英语单词"
-                style="@style/style_set"
-                />
-
-            <View
-                android:id="@+id/view_word"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_word"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_tool"
-                android:layout_below="@id/tv_word"
-                android:text="交通工具"
-                style="@style/style_set"
-                />
-
-            <View
-                android:id="@+id/view_tool"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_tool"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_fruit"
-                android:layout_below="@id/tv_tool"
-                android:text="蔬菜水果"
-                style="@style/style_set"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:id="@+id/view_fruit"
-                android:layout_below="@id/tv_fruit"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_im"
-                android:layout_below="@id/view_fruit"
-                android:text="和妈妈聊天"
-                style="@style/style_set"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_im"
-                android:id="@+id/view_im"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_below="@id/view_im"
-                android:text="定位追踪"
-                style="@style/style_set"
-                android:visibility="gone"
-                />
-
-            <View
-                android:id="@+id/view_address"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_address"
-                android:visibility="gone"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_address_toplay"
-                android:layout_below="@id/view_address"
-                android:text="去哪玩"
-                style="@style/style_set"
-                />
-
-            <View
-                android:id="@+id/view_address_toplay"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_address_toplay"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_info"
-                android:layout_below="@id/view_address_toplay"
-                android:text="使用说明"
-                style="@style/style_set"
-                android:visibility="gone"
-                />
-
-            <View
-                android:id="@+id/view_useinfo"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_info"
-                android:visibility="gone"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_tostudy"
-                android:layout_below="@id/view_useinfo"
-                android:text="学习课程"
-                style="@style/style_set"
-                android:visibility="gone"
-                />
-
-            <View
-                android:id="@+id/view_study"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/tv_tostudy"
-                android:visibility="gone"
-                android:background="@color/black" />
-        </RelativeLayout>
-    </ScrollView>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_above="@id/tv_loginout"
-        android:background="@color/black" />
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tv_loginout"
+      android:id="@+id/tv_back"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:padding="20dp"
+      android:text="返回"
+      android:textColor="@color/black"
+      android:textSize="18sp"
+      android:textStyle="bold" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:padding="20dp"
+      android:text="设置"
+      android:textColor="@color/black"
+      android:textSize="18sp" />
+
+    <TextView
+      android:id="@+id/tv_change"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:padding="20dp"
+      android:text="切换修改"
+      android:textColor="@color/black"
+      android:textSize="18sp" />
+  </RelativeLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:layout_below="@id/rl_top"
+    android:background="@color/black" />
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/tv_loginout"
+    android:layout_below="@id/rl_top">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:id="@+id/tv_changeinfo"
+        style="@style/style_set"
+        android:text="个人资料" />
+
+      <View
+        android:id="@+id/view_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="退出登录"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_changeinfo"
+        android:background="@color/black" />
+
+      <TextView
+        android:id="@+id/tv_color"
+        style="@style/style_set"
+        android:layout_below="@id/tv_changeinfo"
+        android:text="识别颜色" />
+
+      <View
+        android:id="@+id/view_color"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_color"
+        android:background="@color/black" />
+
+      <TextView
+        android:id="@+id/tv_animal"
+        style="@style/style_set"
+        android:layout_below="@id/tv_color"
+        android:text="看看小动物" />
+
+      <View
+        android:id="@+id/view_animal"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_animal"
+        android:background="@color/black" />
+
+      <TextView
+        android:id="@+id/tv_word"
+        style="@style/style_set"
+        android:layout_below="@id/tv_animal"
+        android:text="英语单词" />
+
+      <View
+        android:id="@+id/view_word"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_word"
+        android:background="@color/black" />
+
+      <TextView
+        android:id="@+id/tv_tool"
+        style="@style/style_set"
+        android:layout_below="@id/tv_word"
+        android:text="交通工具" />
+
+      <View
+        android:id="@+id/view_tool"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_tool"
+        android:background="@color/black" />
+
+      <TextView
+        android:id="@+id/tv_fruit"
+        style="@style/style_set"
+        android:layout_below="@id/tv_tool"
+        android:text="蔬菜水果" />
+
+      <View
+        android:id="@+id/view_fruit"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_fruit"
+        android:background="@color/black" />
+
+      <TextView
+        android:id="@+id/tv_im"
+        style="@style/style_set"
+        android:layout_below="@id/view_fruit"
+        android:text="和妈妈聊天" />
+
+      <View
+        android:id="@+id/view_im"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_im"
+        android:background="@color/black" />
+
+      <TextView
+        android:id="@+id/tv_address"
+        style="@style/style_set"
+        android:layout_below="@id/view_im"
+        android:text="定位追踪"
+        android:visibility="gone" />
+
+      <View
+        android:id="@+id/view_address"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_address"
+        android:background="@color/black"
+        android:visibility="gone" />
+
+      <TextView
+        android:id="@+id/tv_address_toplay"
+        style="@style/style_set"
+        android:layout_below="@id/view_address"
+        android:text="去哪玩" />
+
+      <View
+        android:id="@+id/view_address_toplay"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_address_toplay"
+        android:background="@color/black" />
+
+      <TextView
+        android:id="@+id/tv_info"
+        style="@style/style_set"
+        android:layout_below="@id/view_address_toplay"
+        android:text="使用说明"
+        android:visibility="gone" />
+
+      <View
+        android:id="@+id/view_useinfo"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_info"
+        android:background="@color/black"
+        android:visibility="gone" />
+
+      <TextView
+        android:id="@+id/tv_tostudy"
+        style="@style/style_set"
+        android:layout_below="@id/view_useinfo"
+        android:text="学习课程"
+        android:visibility="gone" />
+
+      <View
+        android:id="@+id/view_study"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_tostudy"
+        android:background="@color/black"
+        android:visibility="gone" />
+    </RelativeLayout>
+  </ScrollView>
+
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:layout_above="@id/tv_loginout"
+    android:background="@color/black" />
+
+  <TextView
+    android:id="@+id/tv_loginout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:gravity="center"
+    android:padding="20dp"
+    android:text="退出登录"
+    android:textColor="@color/black"
+    android:textSize="18sp"
+    android:textStyle="bold" />
 </RelativeLayout>
