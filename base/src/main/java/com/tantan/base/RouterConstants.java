@@ -1,5 +1,8 @@
 package com.tantan.base;
 
+import android.provider.DocumentsContract;
+import android.provider.DocumentsContract.Root;
+
 /**
  * Author:关震 Date:2020/5/29 11:01 Description:RouterConstants 路由常量类
  **/
@@ -28,6 +31,12 @@ public interface RouterConstants {
     String Root = "/login/";
     String Login = Root + "LoginActivity";
     String Regist = Root + "RegistActivity";
+  }
+
+  interface Setting {
+
+    String Root = "/setting/";
+    String Main = Root + "SettingActivity";
   }
 
   interface App {

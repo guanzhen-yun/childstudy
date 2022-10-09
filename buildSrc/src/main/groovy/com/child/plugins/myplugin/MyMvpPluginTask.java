@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.List;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
@@ -34,6 +36,9 @@ public class MyMvpPluginTask extends DefaultTask {
     buildSrcBuildDir = getProject().getProjectDir().getParent();
     if (!"".equals(mvpInfo.preName)) {
       buildSrcBuildDir = buildSrcBuildDir + File.separator + mvpInfo.preName;
+    }
+    if ("".equals(mvpInfo.className) || "".equals(mvpInfo.moduleName)) {
+      return;
     }
     createActivity();
     if (mvpInfo.isCreateMvpFuncture) {
@@ -288,7 +293,42 @@ public class MyMvpPluginTask extends DefaultTask {
     String mvpInfoPath =
         getProject().getProjectDir().getParent() + File.separator + extraPath + File.separator
             + packagePath;
-    RandomAccessFile rafFile = new RandomAccessFile(mvpInfoPath + "MyMvpInfo.java", "rw");
-    
+    RandomAccessFile rafFile = new RandomAccessFile(mvpInfoPath + File.separator + "MyMvpInfo.java",
+        "rw");
+    String line = null;
+    int i = 0;
+    List<String> headList = new ArrayList<>();
+    List<String> mainList = new ArrayList<>();
+    mainList.add("  public String preName = \"\";//前缀文件名");
+    mainList.add("  public String moduleName = \"\";//模块名");
+    mainList.add("  public String className = \"\";//类名");
+    mainList.add("\n");
+    mainList.add("  public boolean isCreateNewPackage = false;//是否新建包");
+    mainList.add("  public boolean isCreateMvpFuncture = false;//是否创建mvp架构");
+    mainList.add("\n");
+    mainList.add("}");
+    while ((line = rafFile.readLine()) != null) {
+      if (i <= 6) {
+        headList.add(new String(line.getBytes("ISO8859-1"), "UTF-8"));
+      } else {
+        break;
+      }
+      i++;
+    }
+    rafFile.close();
+    File file = new File(mvpInfoPath, "MyMvpInfo.java");
+    if (file.exists()) {
+      file.delete();
+    }
+    file.createNewFile();
+    FileWriter writer = new FileWriter(file.getPath());
+    for (String s : headList) {
+      MvpUtils.addNewStrWithNewLine(writer, s, true);
+    }
+    for (int j = 0; j < mainList.size(); j++) {
+      MvpUtils.addNewStrWithNewLine(writer, mainList.get(j),
+          j != mainList.size() - 1 && j != 3 && j != mainList.size() - 2);
+    }
+    writer.close();
   }
 }
