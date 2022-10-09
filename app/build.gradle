@@ -159,10 +159,11 @@ dependencies {
 
     implementation 'me.jessyan:progressmanager:1.5.0'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation project(":main")
-    implementation project(":login")
-    implementation project(":child")
-    implementation project(":parent")
+    implementation project(":business:main")
+    implementation project(":business:login")
+    implementation project(":business:child")
+    implementation project(":business:parent")
+    implementation project(":business:setting")
 }
 
 repositories {

@@ -32,6 +32,9 @@ public class MyMvpPluginTask extends DefaultTask {
   @TaskAction
   void doAction() throws Exception {
     buildSrcBuildDir = getProject().getProjectDir().getParent();
+    if (!"".equals(mvpInfo.preName)) {
+      buildSrcBuildDir = buildSrcBuildDir + File.separator + mvpInfo.preName;
+    }
     createActivity();
     if (mvpInfo.isCreateMvpFuncture) {
       createContract();
@@ -39,6 +42,7 @@ public class MyMvpPluginTask extends DefaultTask {
     }
     createLayout();
     registerActivity();
+    resetInfo();
   }
 
   //创建Activity
@@ -194,6 +198,11 @@ public class MyMvpPluginTask extends DefaultTask {
     String preXmlPath = "/src/main/res/layout/";
     String xmlPath = buildSrcBuildDir + File.separator + mvpInfo.moduleName + preXmlPath;
     String xmlName = "activity" + MvpUtils.humpToLine(classShortName) + ".xml";
+    File filePath = new File(xmlPath);
+    if (!filePath.exists()) {
+      filePath.mkdirs();
+    }
+
     File file = new File(xmlPath, xmlName);
     if (file.exists()) {
       file.delete();
@@ -219,10 +228,30 @@ public class MyMvpPluginTask extends DefaultTask {
     String preManifestPath = "/src/main/";
     String manifestFilePath =
         buildSrcBuildDir + File.separator + mvpInfo.moduleName + preManifestPath;
-    RandomAccessFile raf = new RandomAccessFile(manifestFilePath + "AndroidManifest.xml", "rw");
+    RandomAccessFile raf1 = new RandomAccessFile(manifestFilePath + "AndroidManifest.xml", "rw");
     String line = null;
     long lastPoint = 0;
+    boolean isContainsApplication = false;
+    boolean isRegistedClass = false;
+
+    while ((line = raf1.readLine()) != null) {
+      if (line.contains("</application>")) {
+        isContainsApplication = true;
+      }
+      if (line.contains(mvpInfo.className)) {
+        isRegistedClass = true;
+      }
+    }
+    raf1.close();
+
+    if (isRegistedClass) {//已经注册过
+      return;
+    }
+
     StringBuilder sb = new StringBuilder();
+    if (!isContainsApplication) {
+      sb.append("  <application>\n");
+    }
     sb.append("\n");
     sb.append(
         "    <activity android:name=" + "\"" + extraPath + "." + mvpInfo.className + "\"");
@@ -233,9 +262,14 @@ public class MyMvpPluginTask extends DefaultTask {
     sb.append("\n");
     sb.append("\n");
     sb.append("</manifest>");
+    RandomAccessFile raf = new RandomAccessFile(manifestFilePath + "AndroidManifest.xml", "rw");
     while ((line = raf.readLine()) != null) {
       final long point = raf.getFilePointer();
-      if (line.contains("</application>")) {
+      if (!isContainsApplication && line.contains("</manifest>")) {
+        String str = line.replace("</manifest>", sb.toString());
+        raf.seek(lastPoint);
+        raf.writeBytes(str);
+      } else if (isContainsApplication && line.contains("</application>")) {
         String str = line.replace("</application>", sb.toString());
         raf.seek(lastPoint);
         raf.writeBytes(str);
@@ -243,5 +277,18 @@ public class MyMvpPluginTask extends DefaultTask {
       lastPoint = point;
     }
     raf.close();
+  }
+
+  //重置mvpInfo信息
+  private void resetInfo() throws Exception {
+    String extraPath = "buildSrc" + File.separator + "src" + File.separator + "main" +
+        File.separator + "groovy";
+    String packagePath =
+        "com" + File.separator + "child" + File.separator + "plugins" + File.separator + "myplugin";
+    String mvpInfoPath =
+        getProject().getProjectDir().getParent() + File.separator + extraPath + File.separator
+            + packagePath;
+    RandomAccessFile rafFile = new RandomAccessFile(mvpInfoPath + "MyMvpInfo.java", "rw");
+    
   }
 }

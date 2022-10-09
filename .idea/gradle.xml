@@ -15,11 +15,13 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/child" />
-            <option value="$PROJECT_DIR$/login" />
-            <option value="$PROJECT_DIR$/main" />
+            <option value="$PROJECT_DIR$/business" />
+            <option value="$PROJECT_DIR$/business/child" />
+            <option value="$PROJECT_DIR$/business/login" />
+            <option value="$PROJECT_DIR$/business/main" />
+            <option value="$PROJECT_DIR$/business/parent" />
+            <option value="$PROJECT_DIR$/business/setting" />
             <option value="$PROJECT_DIR$/mydata" />
-            <option value="$PROJECT_DIR$/parent" />
             <option value="$PROJECT_DIR$/playgame" />
           </set>
         </option>

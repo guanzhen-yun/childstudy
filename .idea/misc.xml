@@ -20,6 +20,8 @@
         <entry key="base/src/main/res/drawable/bg_common.xml" value="0.1315" />
         <entry key="base/src/main/res/drawable/bg_ripper.xml" value="0.1315" />
         <entry key="base/src/main/res/layout/view_twobutton_dialog.xml" value="0.10511651469098278" />
+        <entry key="business/parent/src/main/res/layout/activity_parent_home.xml" value="0.1" />
+        <entry key="business/setting/src/main/res/layout/activity_setting.xml" value="0.15052083333333333" />
         <entry key="child/src/main/res/layout/activity_child_home.xml" value="0.165" />
         <entry key="child/src/main/res/layout/child_fragment_study_num.xml" value="0.15729166666666666" />
         <entry key="child/src/main/res/layout/child_fragment_study_pic.xml" value="0.15520833333333334" />
