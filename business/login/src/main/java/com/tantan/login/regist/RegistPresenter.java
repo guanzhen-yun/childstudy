@@ -3,7 +3,7 @@ package com.tantan.login.regist;
 import com.tantan.base.utils.ToastUtils;
 import com.tantan.base.utils.greendao.DaoSessionUtils;
 import com.tantan.base.utils.greendao.DaoSessionUtils.OnDaoListener;
-import com.tantan.login.LoginUtils;
+import com.tantan.base.utils.LoginUtils;
 import com.tantan.login.regist.RegistContract.IView;
 import com.tantan.mydata.greendao.DbBean;
 import com.tantan.mydata.greendao.UserInfoEntity;

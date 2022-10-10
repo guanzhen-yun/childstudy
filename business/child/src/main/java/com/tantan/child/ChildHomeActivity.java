@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.tantan.base.RouterConstants;
 import com.tantan.base.RouterConstants.Child;
+import com.tantan.base.RouterConstants.Setting;
 import com.tantan.base.utils.DataUtils;
 import com.tantan.base.utils.TrackUtils;
 import com.tantan.child.fragment.StudyNumFragment;
@@ -76,7 +77,7 @@ public class ChildHomeActivity extends BaseActivity implements OnClickListener {
     int id = view.getId();
     if (id == R.id.tv_set) {
       TrackUtils.track(this, "toSet", null);
-      RouterUtils.jump(RouterConstants.App.Set);
+      RouterUtils.jump(Setting.Main);
     } else {
       mFragmentTransaction = getSupportFragmentManager().beginTransaction();
       if (id == R.id.tv_studynum) {

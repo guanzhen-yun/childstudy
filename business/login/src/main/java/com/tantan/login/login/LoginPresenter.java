@@ -7,7 +7,7 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.tantan.base.utils.DataUtils;
 import com.tantan.base.utils.ToastUtils;
 import com.tantan.base.utils.Utils;
-import com.tantan.login.LoginUtils;
+import com.tantan.base.utils.LoginUtils;
 import com.tantan.login.login.LoginContract.IView;
 import com.tantan.mydata.greendao.UserInfoEntity;
 import com.ziroom.mvp.base.BaseMvpPresenter;

@@ -1,17 +1,12 @@
-package com.tantan.login;
+package com.tantan.base.utils;
 
-import com.tantan.base.utils.DataUtils;
-import com.tantan.base.utils.greendao.DaoSessionUtils;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.tantan.mydata.event.FinishMainEvent;
-import com.tantan.mydata.greendao.DbBean;
 import com.tantan.mydata.greendao.UserInfoEntity;
-import com.tantan.mydata.greendao.UserInfoEntityDao;
 import com.tantan.mydata.utils.SharedPrefUtils;
 import com.umeng.analytics.MobclickAgent;
-import java.util.ArrayList;
-import java.util.List;
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.greendao.query.WhereCondition;
 
 //登录工具类
 public class LoginUtils {
@@ -23,5 +18,13 @@ public class LoginUtils {
     SharedPrefUtils.getInstance().saveLastedMobile(accountNum);
     boolean isParent = DataUtils.isParent(new UserInfoEntity(accountNum));
     SharedPrefUtils.getInstance().saveParentAccount(isParent);
+  }
+
+  //注销登录
+  public static void loginout() {
+    MobclickAgent.onProfileSignOff();
+    NIMClient.getService(AuthService.class).logout();
+    SharedPrefUtils.getInstance().saveParentAccount(false);
+    SharedPrefUtils.getInstance().saveLastedMobile("");
   }
 }

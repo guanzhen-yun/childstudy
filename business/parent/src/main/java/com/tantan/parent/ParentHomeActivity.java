@@ -4,14 +4,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.auth.AuthService;
 import com.tantan.base.RouterConstants;
 import com.tantan.base.RouterConstants.Parent;
 import com.tantan.base.utils.DataUtils;
+import com.tantan.base.utils.LoginUtils;
+import com.tantan.base.view.dialog.ExitDialog;
 import com.tantan.mydata.greendao.UserInfoEntity;
 import com.tantan.mydata.utils.SharedPrefUtils;
-import com.tantan.parent.R;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 import com.ziroom.base.StatusBarUtil;
@@ -58,13 +57,14 @@ public class ParentHomeActivity extends BaseActivity implements OnClickListener 
   public void onClick(View view) {
     int viewId = view.getId();
     if (viewId == R.id.tv_loginout) { //注销账号
-      loginout();
+      ExitDialog exitDialog = new ExitDialog(this);
+      exitDialog.setOnExitListener(this::loginOut);
+      exitDialog.show();
     }
   }
 
-  private void loginout() {
-    NIMClient.getService(AuthService.class).logout();
-    SharedPrefUtils.getInstance().saveLastedMobile("");
-    RouterUtils.jumpWithFinish(ParentHomeActivity.this, RouterConstants.Main.Main);
+  private void loginOut() {
+    LoginUtils.loginout();
+    RouterUtils.jumpWithFinish(this, RouterConstants.Main.Main);
   }
 }

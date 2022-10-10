@@ -13,20 +13,20 @@ import androidx.annotation.Nullable;
 /**
  * 自定义箭头
  */
-public class ArrowView extends View {
+public class ArrowLeftView extends View {
 
   private Paint mPaint;
   private Path mPath;
 
-  public ArrowView(Context context) {
+  public ArrowLeftView(Context context) {
     this(context, null);
   }
 
-  public ArrowView(Context context, @Nullable AttributeSet attrs) {
+  public ArrowLeftView(Context context, @Nullable AttributeSet attrs) {
     this(context, attrs, 0);
   }
 
-  public ArrowView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+  public ArrowLeftView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     init();
   }
@@ -42,13 +42,14 @@ public class ArrowView extends View {
   @Override
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
-    mPath.moveTo(0, 15);
-    mPath.lineTo(30, 15);
-    mPath.lineTo(30, 0);
-    mPath.lineTo(65, 35);
-    mPath.lineTo(30, 65);
-    mPath.lineTo(30, 55);
-    mPath.lineTo(0, 55);
+    mPath.moveTo(65, 15);
+    mPath.lineTo(65, 55);
+    mPath.lineTo(35, 55);
+    mPath.lineTo(35, 65);
+    mPath.lineTo(0, 35);
+    mPath.lineTo(35, 0);
+    mPath.lineTo(35, 10);
+    mPath.lineTo(65, 10);
     mPath.close();
     canvas.drawPath(mPath, mPaint);
   }

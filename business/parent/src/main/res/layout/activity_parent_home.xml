@@ -41,7 +41,7 @@
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toBottomOf="@id/view_address" />
 
-  <com.tantan.base.view.ArrowView
+  <com.tantan.base.view.ArrowRightView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginRight="20dp"
@@ -63,7 +63,7 @@
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toBottomOf="@id/view_info" />
 
-  <com.tantan.base.view.ArrowView
+  <com.tantan.base.view.ArrowRightView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginRight="20dp"
@@ -85,7 +85,7 @@
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toBottomOf="@id/view_study" />
 
-  <com.tantan.base.view.ArrowView
+  <com.tantan.base.view.ArrowRightView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginRight="20dp"
