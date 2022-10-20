@@ -118,12 +118,13 @@ public class DaoSessionUtils {
   /**
    * update()修改本地数据
    */
-  public void updateDbBean(DbBean bean) {
+  public void updateDbBean(DbBean bean, OnDaoListener daoListener) {
     try {
       getDaoInstance().update(bean);
+      daoListener.onSuccess();
     } catch (Exception e) {
       e.printStackTrace();
-      LogUtils.d("修改本地所有数据失败：" + e.getMessage());
+      daoListener.onError("修改本地所有数据失败：" + e.getMessage());
     }
 
   }

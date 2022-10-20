@@ -5,7 +5,6 @@ import android.content.ContentUris;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
-import com.inke.childstudy.adapter.SexAdapter;
+import com.tantan.base.adapter.SexAdapter;
 import com.inke.childstudy.entity.UserInfo;
 import com.tantan.mydata.greendao.DbBean;
 import com.tantan.mydata.greendao.UserInfoEntity;
@@ -46,9 +44,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
-import me.samlss.broccoli.Broccoli;
-import me.samlss.broccoli.BroccoliGradientDrawable;
-import me.samlss.broccoli.PlaceholderParameter;
 
 /**
  * 个人信息页
@@ -77,7 +72,6 @@ public class UserInfoActivity extends BaseActivity {
   private String mPath;
   private SexAdapter mSexAdapter;
   private String mSelectSex;
-  private Broccoli broccoli;
 
   @Override
   public int getLayoutId() {
@@ -86,12 +80,6 @@ public class UserInfoActivity extends BaseActivity {
 
   @Override
   public void initViews() {
-    broccoli = new Broccoli();
-    broccoli.addPlaceholders(new PlaceholderParameter.Builder().setView(mTvNickname)
-        .setDrawable(new BroccoliGradientDrawable(Color.parseColor("#ffffff"),
-            Color.parseColor("#ffffff"), 0, 2000, new LinearInterpolator())
-        ).build());
-    broccoli.show();
     List<String> sexList = new ArrayList<>();
     sexList.add("男");
     sexList.add("女");
@@ -227,31 +215,7 @@ public class UserInfoActivity extends BaseActivity {
         if (userInfoEntity.getAge() != 0) {
           mTvAgeValue.setText(userInfoEntity.getAge() + "岁");
         }
-        broccoli.clearAllPlaceholders();
       }
-    }
-  }
-
-  private void saveData() {
-    UserInfoEntity entity = new UserInfoEntity();
-    entity.setAge(mUserInfo.getAge());
-//    entity.setToken(mUserInfo.getToken());
-    entity.setHeadPath(mUserInfo.getHeadPath());
-    entity.setNick(mUserInfo.getNick());
-    entity.setSex(mUserInfo.getSex());
-//    entity.setObjectId(mUserInfo.getObjectId());
-    List<WhereCondition> whereConditions = new ArrayList<>();
-//    whereConditions.add(UserInfoEntityDao.Properties.Token.eq(mUserInfo.getToken()));
-    List<? extends DbBean> dbBeans = DaoSessionUtils.getInstance()
-        .queryConditionAll(entity, whereConditions);
-    if (dbBeans == null || dbBeans.size() == 0) {
-      DaoSessionUtils.getInstance().insertDbBean(entity, null);
-    } else {
-      DbBean dbBean = dbBeans.get(0);
-      if (dbBean instanceof UserInfoEntity) {
-        entity.setId(((UserInfoEntity) dbBean).getId());
-      }
-      DaoSessionUtils.getInstance().updateDbBean(entity);
     }
   }
 
@@ -453,11 +417,5 @@ public class UserInfoActivity extends BaseActivity {
         ToastUtils.showToast(err + "修改失败");
       }
     });
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    broccoli.removeAllPlaceholders();
   }
 }

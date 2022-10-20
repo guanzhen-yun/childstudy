@@ -1,6 +1,7 @@
 package com.tantan.setting;
 
 import android.view.View;
+import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -31,6 +32,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
   @Override
   public void initViews() {
     StatusBarUtil.setStatusFrontColorDark(this);
+    TextView tvTitle = findViewById(R.id.tv_title);
+    tvTitle.setText("设置");
     findViewById(R.id.view_left).setOnClickListener(this);
     findViewById(R.id.tv_loginout).setOnClickListener(this);
     RecyclerView rvList = findViewById(R.id.rv_list);

@@ -36,5 +36,6 @@ dependencies {
     api 'com.netease.nimlib:basesdk:8.7.0'
     //列表万能适配器
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    implementation 'me.samlss:broccoli:1.0.0' //骨架屏 必须和RecyclerView使用
     api project(":mydata")
 }

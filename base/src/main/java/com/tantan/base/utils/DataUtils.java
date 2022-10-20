@@ -1,6 +1,7 @@
 package com.tantan.base.utils;
 
 import com.tantan.base.utils.greendao.DaoSessionUtils;
+import com.tantan.base.utils.greendao.DaoSessionUtils.OnDaoListener;
 import com.tantan.mydata.greendao.DbBean;
 import com.tantan.mydata.greendao.UserInfoEntity;
 import com.tantan.mydata.greendao.UserInfoEntityDao;
@@ -35,5 +36,27 @@ public class DataUtils {
       return ((UserInfoEntity) dbBeans.get(0)).getIsParent();
     }
     return false;
+  }
+
+  /**
+   * 查询当前用户
+   */
+  public static UserInfoEntity getCurrentUser(String userAccount) {
+    UserInfoEntity userInfoEntity = new UserInfoEntity(userAccount);
+    List<WhereCondition> whereConditions = new ArrayList<>();
+    whereConditions.add(UserInfoEntityDao.Properties.AccountNum.eq(userAccount));
+    List<? extends DbBean> dbBeans = DaoSessionUtils.getInstance()
+        .queryConditionAll(userInfoEntity, whereConditions);
+    if (dbBeans.size() > 0) {
+      return (UserInfoEntity) dbBeans.get(0);
+    }
+    return null;
+  }
+
+  /**
+   * 修改用户信息
+   */
+  public static void updateUserInfo(UserInfoEntity userInfo, OnDaoListener onDaoListener) {
+    DaoSessionUtils.getInstance().updateDbBean(userInfo, onDaoListener);
   }
 }

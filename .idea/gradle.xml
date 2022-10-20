@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/business/main" />
             <option value="$PROJECT_DIR$/business/parent" />
             <option value="$PROJECT_DIR$/business/setting" />
+            <option value="$PROJECT_DIR$/business/userinfo" />
             <option value="$PROJECT_DIR$/mydata" />
             <option value="$PROJECT_DIR$/playgame" />
           </set>

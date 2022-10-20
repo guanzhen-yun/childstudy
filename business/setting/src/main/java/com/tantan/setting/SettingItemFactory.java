@@ -1,8 +1,10 @@
 package com.tantan.setting;
 
 import android.app.Activity;
+import com.tantan.base.RouterConstants.UserInfo;
 import com.tantan.mydata.utils.SharedPrefUtils;
 import com.tantan.setting.bean.SettingItem;
+import com.ziroom.base.RouterUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +68,7 @@ public class SettingItemFactory {
   public void jumpToPage(Activity activity, int itemType) {
     switch (itemType) {
       case SettingItem.ITEMTYPE_USERINFO://个人资料
+        RouterUtils.jump(UserInfo.Main);
         break;
       case SettingItem.ITEMTYPE_COLOR://识别颜色
         break;
