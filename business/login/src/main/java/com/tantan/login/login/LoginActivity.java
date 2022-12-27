@@ -6,6 +6,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.tantan.base.RouterConstants;
+import com.tantan.base.RouterConstants.Child;
+import com.tantan.base.RouterConstants.Parent;
 import com.tantan.base.utils.StatusBarUtils;
 import com.tantan.base.utils.ToastUtils;
 import com.tantan.login.R;
@@ -66,7 +68,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
   }
 
   @Override
-  public void loginSuccess() {
-    RouterUtils.jumpWithFinish(LoginActivity.this, RouterConstants.App.Home);
+  public void loginSuccess(boolean isParent) {
+    //自动跳转主页
+    if (isParent) {
+      RouterUtils.jumpWithFinish(this, Parent.Home);
+    } else {
+      RouterUtils.jumpWithFinish(this, Child.Home);
+    }
   }
 }

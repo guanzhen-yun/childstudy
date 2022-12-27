@@ -7,7 +7,7 @@ public interface LoginContract {
 
   interface IView extends IMvpView {
 
-    void loginSuccess();
+    void loginSuccess(boolean isParent);
   }
 
   interface IPresenter {

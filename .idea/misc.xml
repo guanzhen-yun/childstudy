@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.335" />
+        <entry key="app/src/main/res/drawable/bg_color_rect.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/bg_msg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_sex.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.16197916666666667" />
@@ -17,13 +18,16 @@
         <entry key="app/src/main/res/layout/activity_userinfo.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/fragment_study_num.xml" value="0.421875" />
         <entry key="app/src/main/res/layout/fragment_study_pic.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/item_object.xml" value="0.15052083333333333" />
         <entry key="app/src/main/res/layout/item_sex.xml" value="0.21614583333333334" />
+        <entry key="app/src/main/res/layout/view_dialog.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/layout/view_exitdialog.xml" value="0.1403985507246377" />
         <entry key="app/src/main/res/layout/view_title.xml" value="0.16197916666666667" />
         <entry key="app/src/main/res/layout/view_twobutton_dialog.xml" value="0.12409420289855072" />
         <entry key="base/src/main/res/drawable/bg_common.xml" value="0.1315" />
         <entry key="base/src/main/res/drawable/bg_ripper.xml" value="0.1315" />
         <entry key="base/src/main/res/drawable/bg_sex.xml" value="0.1" />
+        <entry key="base/src/main/res/layout/item_setting.xml" value="0.15052083333333333" />
         <entry key="base/src/main/res/layout/item_sex.xml" value="0.1" />
         <entry key="base/src/main/res/layout/layout_title_view.xml" value="0.15260416666666668" />
         <entry key="base/src/main/res/layout/view_exitdialog.xml" value="0.21614583333333334" />
@@ -31,12 +35,26 @@
         <entry key="business/child/src/main/res/layout/child_activity_child_home.xml" value="0.15052083333333333" />
         <entry key="business/login/src/main/res/layout/activity_regist.xml" value="0.1" />
         <entry key="business/main/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="business/parent/src/main/res/layout/activity_parent_home.xml" value="0.1" />
+        <entry key="business/parent/src/main/res/layout/activity_parent_home.xml" value="0.165" />
         <entry key="business/setting/src/main/res/layout/activity_setting.xml" value="0.165" />
         <entry key="business/setting/src/main/res/layout/item_setting.xml" value="0.14947916666666666" />
+        <entry key="business/study/src/main/res/drawable/bg_color_rect.xml" value="0.1095" />
+        <entry key="business/study/src/main/res/layout/activity_studycolor.xml" value="0.15052083333333333" />
+        <entry key="business/study/src/main/res/layout/item_color.xml" value="0.15052083333333333" />
+        <entry key="business/study/src/main/res/layout/item_isornot.xml" value="0.15052083333333333" />
+        <entry key="business/study/src/main/res/layout/view_add_color_dialog.xml" value="0.15052083333333333" />
+        <entry key="business/userinfo/src/main/res/drawable/bg_pop_back.xml" value="0.113" />
+        <entry key="business/userinfo/src/main/res/drawable/bg_pop_common_bottom.xml" value="0.1" />
+        <entry key="business/userinfo/src/main/res/drawable/bg_pop_common_top.xml" value="0.1" />
+        <entry key="business/userinfo/src/main/res/drawable/bg_ripper_pop_bottom.xml" value="0.1" />
+        <entry key="business/userinfo/src/main/res/drawable/bg_ripper_pop_top.xml" value="0.11" />
         <entry key="business/userinfo/src/main/res/drawable/bg_sex.xml" value="0.1675" />
-        <entry key="business/userinfo/src/main/res/layout/activity_user_info.xml" value="0.25" />
+        <entry key="business/userinfo/src/main/res/layout/activity_bighead.xml" value="0.21614583333333334" />
+        <entry key="business/userinfo/src/main/res/layout/activity_user_info.xml" value="0.1" />
         <entry key="business/userinfo/src/main/res/layout/item_sex.xml" value="0.21614583333333334" />
+        <entry key="business/userinfo/src/main/res/layout/view_age_dialog.xml" value="0.15052083333333333" />
+        <entry key="business/userinfo/src/main/res/layout/view_bottom_edit_dialog.xml" value="0.21614583333333334" />
+        <entry key="business/userinfo/src/main/res/layout/view_popu.xml" value="0.25" />
         <entry key="child/src/main/res/layout/activity_child_home.xml" value="0.165" />
         <entry key="child/src/main/res/layout/child_fragment_study_num.xml" value="0.15729166666666666" />
         <entry key="child/src/main/res/layout/child_fragment_study_pic.xml" value="0.15520833333333334" />

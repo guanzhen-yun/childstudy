@@ -46,7 +46,8 @@ public class LoginPresenter extends BaseMvpPresenter<LoginContract.IView> implem
     LoginInfo loginInfo = (LoginInfo) param;
     ToastUtils.showToast("登录成功");
     LoginUtils.saveLoginInfo(loginInfo.getAccount());
-    mView.loginSuccess();
+    UserInfoEntity entity = DataUtils.getContainsUser(new UserInfoEntity(loginInfo.getAccount()));
+    mView.loginSuccess(entity.getIsParent());
   }
 
   @Override

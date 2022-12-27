@@ -3,30 +3,24 @@ package com.inke.childstudy;
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
+import android.text.TextUtils;
+import cn.bmob.v3.Bmob;
+import cn.jpush.android.api.JPushInterface;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.mapapi.SDKInitializer;
-import com.github.yuweiguocn.library.greendao.MigrationHelper;
-import com.tantan.base.utils.greendao.DaoSessionUtils;
-import com.tantan.mydata.greendao.DaoMaster;
-import com.tantan.mydata.greendao.DaoSession;
-import com.tantan.mydata.utils.BmobUtils;
-import com.tantan.base.utils.greendao.MySqliteOpenHelper;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.tantan.base.utils.ToastUtils;
+import com.tantan.base.utils.greendao.DaoSessionUtils;
+import com.tantan.mydata.utils.BmobUtils;
 import com.tantan.mydata.utils.SharedPrefUtils;
 import com.taobao.sophix.SophixManager;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
-
-import cn.bmob.v3.Bmob;
-import cn.jpush.android.api.JPushInterface;
 import com.ziroom.net.LogUtils;
 
 public class App extends Application {
@@ -109,10 +103,10 @@ public class App extends Application {
 
   // 如果提供，将同时进行自动登录。如果当前还没有登录用户，请传入null。详见自动登录章节。
   private LoginInfo loginInfo() {
-//    Person currentLoginChild = BmobUtils.getInstance().getCurrentLoginChild();
-//    if (currentLoginChild != null) {
-//      return new LoginInfo(currentLoginChild.getUsername(), "123456");
-//    }
+    String mobile = SharedPrefUtils.getInstance().getLastedMobile();
+    if (!TextUtils.isEmpty(mobile)) {
+      return new LoginInfo(mobile, "123456");
+    }
     return null;
   }
 

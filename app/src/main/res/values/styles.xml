@@ -36,11 +36,6 @@
     <item name="android:background">@color/black</item>
   </style>
 
-  <style name="popuwindow_from_bottom">
-    <item name="android:windowEnterAnimation">@anim/popu_show_from_bottom</item>
-    <item name="android:windowExitAnimation">@anim/popu_hiden_from_top</item>
-
-  </style>
 
   <style name="Theme_Circle_Dialog" parent="@android:style/Theme.Dialog">
     <!-- Dialog的windowFrame框为无 -->

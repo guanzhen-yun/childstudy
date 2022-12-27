@@ -38,6 +38,10 @@ public class SexAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     this.mSelectSex = selectSex;
   }
 
+  public String getSelectSex() {
+    return mSelectSex;
+  }
+
   public void destroyAdapter() {
     broccoli.removeAllPlaceholders();
   }

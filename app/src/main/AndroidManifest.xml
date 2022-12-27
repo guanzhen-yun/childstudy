@@ -13,22 +13,7 @@
     android:theme="@style/Theme.ChildStudy">
 
     <activity
-      android:name="com.inke.childstudy.home.HomeActivity"
-      android:screenOrientation="portrait" />
-    <activity
-      android:name="com.inke.childstudy.login.LoginActivity"
-      android:screenOrientation="portrait" />
-    <activity
       android:name="com.inke.childstudy.set.SetActivity"
-      android:screenOrientation="portrait" />
-    <activity
-      android:name="com.inke.childstudy.userinfo.UserInfoActivity"
-      android:screenOrientation="portrait" />
-    <activity
-      android:name="com.inke.childstudy.userinfo.BigHeadActivity"
-      android:screenOrientation="portrait" />
-    <activity
-      android:name="com.inke.childstudy.studycolor.StudyColorActivity"
       android:screenOrientation="portrait" />
     <activity
       android:name="com.inke.childstudy.word.StudyWordActivity"

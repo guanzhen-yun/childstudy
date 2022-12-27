@@ -31,7 +31,5 @@ android {
 
 dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //注解处理器，会将注解编译成Java类
-    //wheelView
-    implementation 'com.contrarywind:wheelview:4.1.0'
     api project(":base")
 }

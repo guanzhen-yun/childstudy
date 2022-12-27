@@ -3,27 +3,33 @@ package com.tantan.parent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tantan.base.RouterConstants;
 import com.tantan.base.RouterConstants.Parent;
+import com.tantan.base.adapter.SettingAdapter;
 import com.tantan.base.utils.DataUtils;
 import com.tantan.base.utils.LoginUtils;
+import com.tantan.base.utils.SettingItemFactory;
 import com.tantan.base.view.dialog.ExitDialog;
+import com.tantan.mydata.SettingItem;
 import com.tantan.mydata.greendao.UserInfoEntity;
 import com.tantan.mydata.utils.SharedPrefUtils;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
 import com.ziroom.base.StatusBarUtil;
+import java.util.List;
 
 /**
  * 父母首页
  */
 @Route(path = Parent.Home)
-public class ParentHomeActivity extends BaseActivity implements OnClickListener {
+public class ParentHomeActivity extends BaseActivity implements OnClickListener,
+    BaseQuickAdapter.OnItemClickListener {
 
   private TextView mTvHello;
-
-  private UserInfoEntity mContainsUser;
+  private List<SettingItem> itemList;
 
   @Override
   public int getLayoutId() {
@@ -34,23 +40,20 @@ public class ParentHomeActivity extends BaseActivity implements OnClickListener 
   public void initViews() {
     StatusBarUtil.setStatusFrontColorDark(this);
     mTvHello = findViewById(R.id.tv_hello);
-    TextView tvAddress = findViewById(R.id.tv_address);
-    tvAddress.setOnClickListener(this);
-    TextView tvInfo = findViewById(R.id.tv_info);
-    tvInfo.setOnClickListener(this);
-    TextView tvTostudy = findViewById(R.id.tv_tostudy);
-    tvTostudy.setOnClickListener(this);
-    TextView tvLoginout = findViewById(R.id.tv_loginout);
-    tvLoginout.setOnClickListener(this);
-
+    RecyclerView rvList = findViewById(R.id.rv_list);
+    itemList = SettingItemFactory.getInstance()
+        .getSettingItemList();
+    SettingAdapter adapter = new SettingAdapter(itemList);
+    adapter.setOnItemClickListener(this);
+    rvList.setAdapter(adapter);
   }
 
   @Override
   public void initDatas() {
     String lastedMobile = SharedPrefUtils.getInstance().getLastedMobile();
     UserInfoEntity userInfo = new UserInfoEntity(lastedMobile);
-    mContainsUser = DataUtils.getContainsUser(userInfo);
-    mTvHello.setText("您好," + mContainsUser.getNick() + ", 可以和宝宝互动啦!");
+    UserInfoEntity containsUser = DataUtils.getContainsUser(userInfo);
+    mTvHello.setText("您好," + containsUser.getNick() + ", 可以和宝宝互动啦!");
   }
 
   @Override
@@ -66,5 +69,11 @@ public class ParentHomeActivity extends BaseActivity implements OnClickListener 
   private void loginOut() {
     LoginUtils.loginout();
     RouterUtils.jumpWithFinish(this, RouterConstants.Main.Main);
+  }
+
+  @Override
+  public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+    SettingItem settingItem = itemList.get(position);
+    SettingItemFactory.getInstance().jumpToPage(this, settingItem.itemType);
   }
 }

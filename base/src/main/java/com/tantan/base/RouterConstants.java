@@ -40,6 +40,13 @@ public interface RouterConstants {
 
     String Root = "/userinfo/";
     String Main = Root + "UserInfoActivity";
+    String BigHead = Root + "BigHeadActivity";
+  }
+
+  interface Study {
+
+    String Root = "/study/";
+    String StudyColor = Root + "StudyColorActivity";
   }
 
   interface App {

@@ -10,4 +10,21 @@
     <item name="android:textColorHint">#999999</item>
     <item name="android:padding">20dp</item>
   </style>
+
+  <style name="popuwindow_from_bottom">
+    <item name="android:windowEnterAnimation">@anim/popu_show_from_bottom</item>
+    <item name="android:windowExitAnimation">@anim/popu_hiden_from_top</item>
+  </style>
+
+  <style name="style_tv_pop_text">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:gravity">center_horizontal</item>
+    <item name="android:background">@drawable/bg_ripper</item>
+    <item name="android:padding">15dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:textColor">@color/black</item>
+    <item name="android:textSize">18sp</item>
+  </style>
 </resources>

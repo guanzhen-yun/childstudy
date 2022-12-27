@@ -133,9 +133,7 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //注解处理器，会将注解编译成Java类
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
-    
-    //wheelView
-    implementation 'com.contrarywind:wheelview:4.1.0'
+
     implementation 'cn.jiguang.sdk:jcore:2.9.0'  // 此处以JCore 2.7.2 版本为例。
     implementation 'cn.jiguang.sdk:jpush:4.2.4'  // 此处以JPush 4.0.0 版本为例
 
@@ -163,6 +161,7 @@ dependencies {
     implementation project(":business:parent")
     implementation project(":business:setting")
     implementation project(":business:userinfo")
+    implementation project(":business:study")
 }
 
 repositories {
