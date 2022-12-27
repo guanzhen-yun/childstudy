@@ -46,6 +46,7 @@ public class ParentHomeActivity extends BaseActivity implements OnClickListener,
     SettingAdapter adapter = new SettingAdapter(itemList);
     adapter.setOnItemClickListener(this);
     rvList.setAdapter(adapter);
+    findViewById(R.id.tv_loginout).setOnClickListener(this);
   }
 
   @Override

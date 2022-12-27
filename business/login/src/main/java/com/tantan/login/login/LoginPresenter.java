@@ -13,7 +13,7 @@ import com.tantan.mydata.greendao.UserInfoEntity;
 import com.ziroom.mvp.base.BaseMvpPresenter;
 
 public class LoginPresenter extends BaseMvpPresenter<LoginContract.IView> implements
-    LoginContract.IPresenter, RequestCallback {
+    LoginContract.IPresenter, RequestCallback<LoginInfo> {
 
   public LoginPresenter(IView view) {
     super(view);
@@ -42,12 +42,13 @@ public class LoginPresenter extends BaseMvpPresenter<LoginContract.IView> implem
   }
 
   @Override
-  public void onSuccess(Object param) {
-    LoginInfo loginInfo = (LoginInfo) param;
+  public void onSuccess(LoginInfo loginInfo) {
     ToastUtils.showToast("登录成功");
     LoginUtils.saveLoginInfo(loginInfo.getAccount());
     UserInfoEntity entity = DataUtils.getContainsUser(new UserInfoEntity(loginInfo.getAccount()));
-    mView.loginSuccess(entity.getIsParent());
+    if (entity != null) {
+      mView.loginSuccess(entity.getIsParent());
+    }
   }
 
   @Override

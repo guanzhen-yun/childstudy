@@ -3,6 +3,8 @@ package com.tantan.base.utils;
 import com.tantan.base.utils.greendao.DaoSessionUtils;
 import com.tantan.base.utils.greendao.DaoSessionUtils.OnDaoListener;
 import com.tantan.mydata.greendao.DbBean;
+import com.tantan.mydata.greendao.StudyColor;
+import com.tantan.mydata.greendao.StudyColorDao.Properties;
 import com.tantan.mydata.greendao.UserInfoEntity;
 import com.tantan.mydata.greendao.UserInfoEntityDao;
 import java.util.ArrayList;
@@ -58,5 +60,14 @@ public class DataUtils {
    */
   public static void updateUserInfo(UserInfoEntity userInfo, OnDaoListener onDaoListener) {
     DaoSessionUtils.getInstance().updateDbBean(userInfo, onDaoListener);
+  }
+
+  //查询数据库里是否有该用户
+  public static boolean isContainsColor(StudyColor studyColor) {
+    List<WhereCondition> whereConditions = new ArrayList<>();
+    whereConditions.add(Properties.ColorStr.eq(studyColor.getColorStr()));
+    List<? extends DbBean> dbBeans = DaoSessionUtils.getInstance()
+        .queryConditionAll(studyColor, whereConditions);
+    return (dbBeans.size() > 0);
   }
 }

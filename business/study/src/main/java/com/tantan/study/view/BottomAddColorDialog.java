@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tantan.study.R;
 import com.tantan.study.adapter.IsOrNotAdapter;
 import java.util.ArrayList;
@@ -50,12 +49,9 @@ public class BottomAddColorDialog extends Dialog implements View.OnClickListener
     list.add("否");
     IsOrNotAdapter isOrNotAdapter = new IsOrNotAdapter(list);
     isOrNotAdapter.setSelected("是");
-    isOrNotAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-      @Override
-      public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        isOrNotAdapter.setSelected(list.get(position));
-        isBgWhite = position == 0;
-      }
+    isOrNotAdapter.setOnItemClickListener((adapter, view, position) -> {
+      isOrNotAdapter.setSelected(list.get(position));
+      isBgWhite = position == 0;
     });
     rv_color_isnot.setAdapter(isOrNotAdapter);
     findViewById(R.id.tv_cancel).setOnClickListener(this);

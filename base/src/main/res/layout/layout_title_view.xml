@@ -36,4 +36,13 @@
     style="@style/style_line_ver"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+  <TextView
+    android:id="@+id/tv_right"
+    style="@style/style_right"
+    android:paddingBottom="10dp"
+    android:text="添加"
+    android:visibility="gone"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -88,15 +88,18 @@ public class DaoSessionUtils {
   /**
    * delete()删除单个数据
    */
-  public void deleteDbBean(DbBean bean) {
+  public void deleteDbBean(DbBean bean, OnDaoListener daoListener) {
     try {
       getDaoInstance().delete(bean);
-
+      if (daoListener != null) {
+        daoListener.onSuccess();
+      }
     } catch (Exception e) {
       e.printStackTrace();
-      LogUtils.d("删除本地数据失败：" + e.getMessage());
+      if (daoListener != null) {
+        daoListener.onError("删除本地数据失败：" + e.getMessage());
+      }
     }
-
   }
 
 

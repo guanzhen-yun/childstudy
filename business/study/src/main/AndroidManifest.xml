@@ -5,7 +5,7 @@
   <application>
 
     <activity
-      android:name=".StudyColorActivity"
+      android:name=".studycolor.StudyColorActivity"
       android:theme="@style/ActivityStyle" />
   </application>
 </manifest>

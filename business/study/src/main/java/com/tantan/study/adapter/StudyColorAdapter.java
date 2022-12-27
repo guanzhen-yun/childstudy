@@ -1,12 +1,11 @@
 package com.tantan.study.adapter;
 
 import android.graphics.Color;
-import android.view.View;
 import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.tantan.mydata.greendao.StudyColor;
 import com.tantan.study.R;
-import com.tantan.study.entity.StudyColor;
 import java.util.List;
 
 public class StudyColorAdapter extends BaseQuickAdapter<StudyColor, BaseViewHolder> {
@@ -29,11 +28,7 @@ public class StudyColorAdapter extends BaseQuickAdapter<StudyColor, BaseViewHold
 
   @Override
   protected void convert(BaseViewHolder helper, StudyColor item) {
-    if (isEdit) {
-      helper.setGone(R.id.tv_delete, true);
-    } else {
-      helper.setGone(R.id.tv_delete, false);
-    }
+    helper.setGone(R.id.tv_delete, isEdit);
     if (item.isBgWhite()) {
       helper.setBackgroundRes(R.id.ll_color, R.drawable.bg_color_rect);
     } else {
@@ -45,12 +40,9 @@ public class StudyColorAdapter extends BaseQuickAdapter<StudyColor, BaseViewHold
     helper.setText(R.id.tv_color, item.getColorText());
     helper.setTextColor(R.id.tv_color, Color.parseColor(item.getColorStr()));
 
-    helper.getView(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        if (onDeleteColorListener != null) {
-          onDeleteColorListener.deleteColor(helper.getAdapterPosition());
-        }
+    helper.getView(R.id.tv_delete).setOnClickListener(v -> {
+      if (onDeleteColorListener != null) {
+        onDeleteColorListener.deleteColor(helper.getAdapterPosition());
       }
     });
   }
