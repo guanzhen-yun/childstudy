@@ -39,10 +39,13 @@
         <entry key="business/setting/src/main/res/layout/activity_setting.xml" value="0.165" />
         <entry key="business/setting/src/main/res/layout/item_setting.xml" value="0.14947916666666666" />
         <entry key="business/study/src/main/res/drawable/bg_color_rect.xml" value="0.1095" />
+        <entry key="business/study/src/main/res/layout/activity_study_object.xml" value="0.15052083333333333" />
         <entry key="business/study/src/main/res/layout/activity_studycolor.xml" value="0.15052083333333333" />
         <entry key="business/study/src/main/res/layout/item_color.xml" value="0.25" />
         <entry key="business/study/src/main/res/layout/item_isornot.xml" value="0.15052083333333333" />
+        <entry key="business/study/src/main/res/layout/item_object.xml" value="0.15052083333333333" />
         <entry key="business/study/src/main/res/layout/view_add_color_dialog.xml" value="0.15052083333333333" />
+        <entry key="business/study/src/main/res/layout/view_add_object_dialog.xml" value="0.15052083333333333" />
         <entry key="business/userinfo/src/main/res/drawable/bg_pop_back.xml" value="0.113" />
         <entry key="business/userinfo/src/main/res/drawable/bg_pop_common_bottom.xml" value="0.1" />
         <entry key="business/userinfo/src/main/res/drawable/bg_pop_common_top.xml" value="0.1" />

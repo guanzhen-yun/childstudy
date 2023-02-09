@@ -13,6 +13,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
+import com.tantan.base.BuildConfig;
 import com.tantan.base.utils.ToastUtils;
 import com.tantan.base.utils.greendao.DaoSessionUtils;
 import com.tantan.mydata.utils.BmobUtils;
@@ -37,7 +38,7 @@ public class App extends Application {
     mApp = this;
     //Arouter初始化
     ARouter.init(this);
-    if (BuildConfig.DEBUG) {
+    if (com.tantan.base.BuildConfig.DEBUG) {
       ARouter.openLog();
       ARouter.openDebug();
     }

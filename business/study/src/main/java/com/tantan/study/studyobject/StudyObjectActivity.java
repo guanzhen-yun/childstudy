@@ -1,55 +1,33 @@
-package com.inke.childstudy.studyobject;
+package com.tantan.study.studyobject;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.inke.childstudy.R;
-import com.inke.childstudy.adapter.StudyObjectAdapter;
-import com.inke.childstudy.entity.StudyObject;
-import com.inke.childstudy.routers.RouterConstants;
-import com.tantan.mydata.utils.BmobUtils;
-import com.inke.childstudy.view.dialog.BottomAddObjectDialog;
+import com.tantan.base.RouterConstants;
 import com.tantan.base.utils.ToastUtils;
-import com.tantan.mydata.utils.SharedPrefUtils;
+import com.tantan.mydata.SettingItem;
+import com.tantan.mydata.greendao.StudyObject;
+import com.tantan.study.R;
+import com.tantan.study.adapter.StudyObjectAdapter;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.UpdateListener;
-
-@Route(path = RouterConstants.App.StudyObject)
-public class StudyObjectActivity extends BaseActivity {
-
-  public static final int TYPE_ANIMAL = 0;//动物
-  public static final int TYPE_TOOL = 1;//交通工具
-  public static final int TYPE_FRUIT = 2;//蔬菜水果
+@Route(path = RouterConstants.Study.StudyObject)
+public class StudyObjectActivity extends BaseActivity implements View.OnClickListener {
 
   @Autowired(name = "isEdit")
   boolean isEdit;
   @Autowired(name = "type")
   int type;
 
-  @BindView(R.id.tv_title)
-  TextView mTvTitle;
-  @BindView(R.id.tv_insert)
-  TextView mTvInsert;
-  @BindView(R.id.rv_object)
-  RecyclerView mRvObject;
-
-  private String loginToken;
+  private TextView mTvTitle;
+  private TextView mTvInsert;
+  private RecyclerView mRvObject;
 
   private List<StudyObject> mListObject = new ArrayList<>();
   private StudyObjectAdapter studyObjectAdapter;
@@ -65,13 +43,13 @@ public class StudyObjectActivity extends BaseActivity {
       mTvInsert.setVisibility(View.VISIBLE);
     }
     switch (type) {
-      case TYPE_ANIMAL:
+      case SettingItem.TYPE_ANIMAL:
         mTvTitle.setText("识别动物");
         break;
-      case TYPE_TOOL:
+      case SettingItem.TYPE_TOOL:
         mTvTitle.setText("学习交通工具");
         break;
-      case TYPE_FRUIT:
+      case SettingItem.TYPE_FRUIT:
         mTvTitle.setText("学习蔬菜水果");
         break;
       default:
@@ -79,50 +57,31 @@ public class StudyObjectActivity extends BaseActivity {
     }
     studyObjectAdapter = new StudyObjectAdapter(mListObject);
     studyObjectAdapter.setEdit(isEdit);
-    studyObjectAdapter.setOnDeleteObjectListener(new StudyObjectAdapter.OnDeleteObjectListener() {
-      @Override
-      public void deleteObject(int position) {
-        deleteMyObject(position);
-      }
-    });
-    studyObjectAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-      @Override
-      public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        Bundle bundle = new Bundle();
-        bundle.putString("imagePath", mListObject.get(position).getObjUrl());
-        RouterUtils.jump(RouterConstants.App.BigPic, bundle);
-      }
+    studyObjectAdapter.setOnDeleteObjectListener(this::deleteMyObject);
+    studyObjectAdapter.setOnItemClickListener((adapter, view, position) -> {
+      Bundle bundle = new Bundle();
+      bundle.putString("imagePath", mListObject.get(position).getObjUrl());
+      RouterUtils.jump(RouterConstants.App.BigPic, bundle);
     });
     mRvObject.setAdapter(studyObjectAdapter);
   }
 
   @Override
   public void initDatas() {
-    loginToken = SharedPrefUtils.getInstance().getLoginToken();
     queryObject();
   }
 
-  @OnClick({R.id.tv_back, R.id.tv_insert})
-  public void onClickView(View v) {
-    switch (v.getId()) {
-      case R.id.tv_back:
-        finish();
-        break;
-      case R.id.tv_insert:
-        BottomAddObjectDialog bottomAddObjectDialog = new BottomAddObjectDialog(
-            StudyObjectActivity.this);
-        bottomAddObjectDialog.setType(type);
-        bottomAddObjectDialog.setOnAddObjectListener(
-            new BottomAddObjectDialog.OnAddObjectListener() {
-              @Override
-              public void onAdd(String objectName, String objectUrl, String objectWord) {
-                addObject(objectName, objectUrl, objectWord);
-              }
-            });
-        bottomAddObjectDialog.show();
-        break;
-      default:
-        break;
+  @Override
+  public void onClick(View view) {
+    if (view.getId() == R.id.tv_back) {
+      finish();
+    } else if (view.getId() == R.id.tv_insert) {
+      BottomAddObjectDialog bottomAddObjectDialog = new BottomAddObjectDialog(
+          StudyObjectActivity.this);
+      bottomAddObjectDialog.setType(type);
+      bottomAddObjectDialog.setOnAddObjectListener(
+          this::addObject);
+      bottomAddObjectDialog.show();
     }
   }
 
@@ -133,22 +92,21 @@ public class StudyObjectActivity extends BaseActivity {
       public void isExist(boolean isExist) {
         if (!isExist) {
           StudyObject studyObject = new StudyObject();
-          studyObject.setToken(loginToken);
           studyObject.setObjName(objectName);
           studyObject.setObjUrl(objectUrl);
           studyObject.setType(type);
           studyObject.setObjWord(objectWord);
-          BmobUtils.getInstance().addData(studyObject, new BmobUtils.OnBmobListener() {
-            @Override
-            public void onSuccess(String objectId) {
-              queryObject();
-            }
-
-            @Override
-            public void onError(String err) {
-              ToastUtils.showToast(err);
-            }
-          });
+//          BmobUtils.getInstance().addData(studyObject, new BmobUtils.OnBmobListener() {
+//            @Override
+//            public void onSuccess(String objectId) {
+//              queryObject();
+//            }
+//
+//            @Override
+//            public void onError(String err) {
+//              ToastUtils.showToast(err);
+//            }
+//          });
         } else {
           ToastUtils.showToast("该对象已存在!");
         }
@@ -189,10 +147,10 @@ public class StudyObjectActivity extends BaseActivity {
   }
 
   private void isContainsObject(String objName, OnExistListener onExistListener) {
-    BmobQuery<StudyObject> bmobQuery = new BmobQuery<>();
-    bmobQuery.addWhereEqualTo("token", loginToken);
-    bmobQuery.addWhereEqualTo("objName", objName);
-    bmobQuery.addWhereEqualTo("type", type);
+//    BmobQuery<StudyObject> bmobQuery = new BmobQuery<>();
+//    bmobQuery.addWhereEqualTo("token", loginToken);
+//    bmobQuery.addWhereEqualTo("objName", objName);
+//    bmobQuery.addWhereEqualTo("type", type);
 //    bmobQuery.findObjects(new FindListener<StudyObject>() {
 //      @Override
 //      public void done(List<StudyObject> list, BmobException e) {

@@ -79,7 +79,7 @@ public class SettingItemFactory {
         RouterUtils.jump(RouterConstants.Study.StudyColor, bundle);
         break;
       case SettingItem.ITEMTYPE_ANIMAL://看看小动物
-
+        jumpObject(SettingItem.TYPE_ANIMAL);
         break;
       case SettingItem.ITEMTYPE_WORDS://英语单词
         break;
@@ -102,5 +102,13 @@ public class SettingItemFactory {
       default:
         break;
     }
+  }
+
+  private void jumpObject(int type) {
+    boolean isParent = SharedPrefUtils.getInstance().isParent();
+    Bundle bundle = new Bundle();
+    bundle.putBoolean("isEdit", isParent);
+    bundle.putInt("type", type);
+    RouterUtils.jump(RouterConstants.App.StudyObject, bundle);
   }
 }

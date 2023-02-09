@@ -19,7 +19,7 @@
       android:name="com.inke.childstudy.word.StudyWordActivity"
       android:screenOrientation="portrait" />
     <activity
-      android:name="com.inke.childstudy.studyobject.StudyObjectActivity"
+      android:name="com.inke.childstudy.com.tantan.study.studyobject.StudyObjectActivity"
       android:screenOrientation="portrait" />
     <activity
       android:name="com.inke.childstudy.studyobject.BigPicActivity"

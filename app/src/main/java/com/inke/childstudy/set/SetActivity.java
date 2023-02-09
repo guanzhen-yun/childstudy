@@ -3,29 +3,25 @@ package com.inke.childstudy.set;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.core.app.ActivityCompat;
-
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.inke.childstudy.R;
 import com.inke.childstudy.entity.event.FinishHomeEvent;
 import com.inke.childstudy.routers.RouterConstants;
-import com.inke.childstudy.studyobject.StudyObjectActivity;
-import com.tantan.mydata.utils.BmobUtils;
-import com.tantan.base.utils.ViewUtils;
-import com.tantan.base.view.dialog.ExitDialog;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.tantan.base.utils.ToastUtils;
+import com.tantan.base.utils.ViewUtils;
+import com.tantan.base.view.dialog.ExitDialog;
+import com.tantan.mydata.SettingItem;
+import com.tantan.mydata.utils.BmobUtils;
 import com.tantan.mydata.utils.SharedPrefUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.ziroom.base.BaseActivity;
 import com.ziroom.base.RouterUtils;
-
 import org.greenrobot.eventbus.EventBus;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 设置
@@ -134,13 +130,13 @@ public class SetActivity extends BaseActivity {
         RouterUtils.jump(RouterConstants.App.StudyWord);
         break;
       case R.id.tv_animal:
-        jumpObject(StudyObjectActivity.TYPE_ANIMAL);
+        jumpObject(SettingItem.TYPE_ANIMAL);
         break;
       case R.id.tv_tool:
-        jumpObject(StudyObjectActivity.TYPE_TOOL);
+        jumpObject(SettingItem.TYPE_TOOL);
         break;
       case R.id.tv_fruit:
-        jumpObject(StudyObjectActivity.TYPE_FRUIT);
+        jumpObject(SettingItem.TYPE_FRUIT);
         break;
       case R.id.tv_im:
         RouterUtils.jump(RouterConstants.App.Chat);

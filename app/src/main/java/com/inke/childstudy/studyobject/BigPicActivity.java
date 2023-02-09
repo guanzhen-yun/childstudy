@@ -1,44 +1,43 @@
 package com.inke.childstudy.studyobject;
 
 import android.widget.ImageView;
-
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.inke.childstudy.GlideApp;
+import com.bumptech.glide.Glide;
 import com.inke.childstudy.R;
 import com.inke.childstudy.routers.RouterConstants;
 import com.ziroom.base.BaseActivity;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 查看大图页
  */
 @Route(path = RouterConstants.App.BigPic)
 public class BigPicActivity extends BaseActivity {
-    @BindView(R.id.iv_pic)
-    ImageView mIvPic;
 
-    @Autowired(name = "imagePath")
-    String imagePath;
+  @BindView(R.id.iv_pic)
+  ImageView mIvPic;
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_bighead;
-    }
+  @Autowired(name = "imagePath")
+  String imagePath;
 
-    @Override
-    public void initViews() {
-        displayImage(imagePath);
-    }
+  @Override
+  public int getLayoutId() {
+    return R.layout.activity_bighead;
+  }
 
-    private void displayImage(String imagePath) {
-        GlideApp.with(BigPicActivity.this).load(imagePath).into(mIvPic);
-    }
+  @Override
+  public void initViews() {
+    displayImage(imagePath);
+  }
 
-    @OnClick(R.id.iv_pic)
-    public void onClickView() {
-        finish();
-    }
+  private void displayImage(String imagePath) {
+    Glide.with(BigPicActivity.this).load(imagePath).into(mIvPic);
+  }
+
+  @OnClick(R.id.iv_pic)
+  public void onClickView() {
+    finish();
+  }
 }

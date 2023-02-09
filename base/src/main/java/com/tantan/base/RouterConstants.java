@@ -47,6 +47,7 @@ public interface RouterConstants {
 
     String Root = "/study/";
     String StudyColor = Root + "StudyColorActivity";
+    String StudyObject = Root + "StudyObjectActivity";
   }
 
   interface App {

@@ -18,6 +18,10 @@ public class SettingItem {
   public static final int ITEMTYPE_CHAT_MOTHER = 11;//和妈妈聊天
   public static final int ITEMTYPE_ADDRESS_TOPLAY = 12;//去哪玩
 
+  public static final int TYPE_ANIMAL = 0;//动物
+  public static final int TYPE_TOOL = 1;//交通工具
+  public static final int TYPE_FRUIT = 2;//蔬菜水果
+
   public SettingItem(int itemType, String title) {
     this.itemType = itemType;
     this.title = title;

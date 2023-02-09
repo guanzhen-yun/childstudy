@@ -129,7 +129,6 @@ repositories {
 dependencies {
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //注解处理器，会将注解编译成Java类
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
